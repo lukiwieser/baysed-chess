@@ -73,6 +73,16 @@ king_eval = [
     -30, -40, -40, -50, -50, -40, -40, -30,
     -30, -40, -40, -50, -50, -40, -40, -30
 ]
+king_endgame_eval = [
+    50, -30, -30, -30, -30, -30, -30, -50,
+    -30, -30,  0,  0,  0,  0, -30, -30,
+    -30, -10, 20, 30, 30, 20, -10, -30,
+    -30, -10, 30, 40, 40, 30, -10, -30,
+    -30, -10, 30, 40, 40, 30, -10, -30,
+    -30, -10, 20, 30, 30, 20, -10, -30,
+    -30, -20, -10,  0,  0, -10, -20, -30,
+    -50, -40, -30, -20, -20, -30, -40, -50
+]
 
 PIECE_TABLES = {
     chess.WHITE: {
@@ -81,7 +91,8 @@ PIECE_TABLES = {
         chess.BISHOP: bishop_eval,
         chess.ROOK: rook_eval,
         chess.QUEEN: queen_eval,
-        chess.KING: king_eval
+        chess.KING: king_eval,
+        'end_game_king': king_endgame_eval
     },
     chess.BLACK: {
         chess.PAWN: list(reversed(pawn_eval)),
@@ -89,9 +100,42 @@ PIECE_TABLES = {
         chess.BISHOP: list(reversed(bishop_eval)),
         chess.ROOK: list(reversed(rook_eval)),
         chess.QUEEN: list(reversed(queen_eval)),
-        chess.KING: list(reversed(king_eval))
+        chess.KING: list(reversed(king_eval)),
+        'end_game_king': list(reversed(king_endgame_eval))
     }
 }
+
+
+def check_endgame(board: chess.Board) -> bool:
+    """
+    Endgame according to Tomasz Michniewski:
+        1. Both sides have no queens or
+        2. Every side which has a queen has additionally no other pieces or one minorpiece maximum.
+    """
+    queens_white = 0
+    minors_white = 0
+    queens_black = 0
+    minors_black = 0
+    for s in chess.Square:
+        piece = board.piece_at(s)
+        if piece is None:
+            continue
+
+        if piece.piece_type == chess.QUEEN:
+            if piece.color == chess.WHITE:
+                queens_white += 1 
+            else:
+                queens_black += 1
+
+        if piece.piece_type == chess.BISHOP or piece.piece_type == chess.KNIGHT:
+            if piece.color == chess.WHITE:
+                minors_white += 1 
+            else:
+                minors_black += 1
+
+    return (queens_black == 0 and queens_white == 0) or ((queens_black >= 1 and minors_black <= 1) or (queens_white >= 1 and minors_white <= 1))
+
+
 
 
 def score_game(board: chess.Board) -> float:
@@ -114,9 +158,15 @@ def score_game(board: chess.Board) -> float:
             continue
 
         if piece.color == chess.WHITE:
-            score += PIECE_VALUES[piece.piece_type] * PIECE_TABLES[chess.WHITE][piece.piece_type][s]
+            if piece.piece_type == chess.KING and check_endgame(board):
+                score += PIECE_VALUES[piece.piece_type] * PIECE_TABLES[chess.WHITE]['end_game_king'][s]
+            else:
+                score += PIECE_VALUES[piece.piece_type] * PIECE_TABLES[chess.WHITE][piece.piece_type][s]
         else:
-            score -= PIECE_VALUES[piece.piece_type] * PIECE_TABLES[chess.BLACK][piece.piece_type][s]
+            if piece.piece_type == chess.KING and check_endgame(board):
+                score -= PIECE_VALUES[piece.piece_type] * PIECE_TABLES[chess.BLACK]['end_game_king'][s]
+            else:
+                score -= PIECE_VALUES[piece.piece_type] * PIECE_TABLES[chess.BLACK][piece.piece_type][s]
 
     return score
 
