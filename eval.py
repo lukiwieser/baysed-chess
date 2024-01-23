@@ -116,7 +116,7 @@ def check_endgame(board: chess.Board) -> bool:
     minors_white = 0
     queens_black = 0
     minors_black = 0
-    for s in chess.Square:
+    for s in chess.SQUARES:
         piece = board.piece_at(s)
         if piece is None:
             continue
