@@ -177,6 +177,6 @@ def score_stockfish(board: chess.Board) -> chess.engine.PovScore:
     :return:
     """
     engine = chess.engine.SimpleEngine.popen_uci("./stockfish/stockfish-ubuntu-x86-64-avx2")
-    info = engine.analyse(board, chess.engine.Limit(depth=20))
+    info = engine.analyse(board, chess.engine.Limit(depth=2))
     engine.quit()
     return info["score"]

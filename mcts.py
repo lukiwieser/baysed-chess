@@ -30,21 +30,23 @@ class MCTSNode:
         self.children.append(child_node)
         return child_node
 
-    def _rollout(self, rollout_depth: int = 100) -> float:
+    def _rollout(self, rollout_depth: int = 20) -> int:
         """
         Rolls out the node by simulating a game for a given depth.
         Sometimes this step is called 'simulation' or 'playout'.
         :return: the score of the rolled out game
         """
         copied_board = self.board.copy()
+        steps = 1
         for i in range(rollout_depth):
             if copied_board.is_game_over():
                 break
 
             m = engine.pick_move(copied_board)
             copied_board.push(m)
+            steps += 1
 
-        return eval.score_manual(copied_board)
+        return eval.score_manual(copied_board) // steps
 
     def _backpropagate(self, score: float) -> None:
         """

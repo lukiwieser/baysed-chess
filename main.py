@@ -5,7 +5,7 @@ import engine
 import eval
 
 
-def test_mcts(seed):
+def test_mcts():
     fools_mate = "rnbqkbnr/pppp1ppp/4p3/8/5PP1/8/PPPPP2P/RNBQKBNR b KQkq f3 0 2"
     board = chess.Board(fools_mate)
     mcts_root = MCTSNode(board)
@@ -15,7 +15,7 @@ def test_mcts(seed):
         print("move (mcts):", c.move, " with score:", c.score)
 
 
-def test_stockfish(seed):
+def test_stockfish():
     fools_mate = "rnbqkbnr/pppp1ppp/4p3/8/5PP1/8/PPPPP2P/RNBQKBNR b KQkq f3 0 2"
     board = chess.Board(fools_mate)
     moves = {}
@@ -37,8 +37,8 @@ def analyze_results(moves: dict):
 
 
 def main():
-    test_mcts(0)
-    test_stockfish(0)
+    test_mcts()
+    test_stockfish()
 
 
 if __name__ == '__main__':
