@@ -29,6 +29,21 @@ def test_stockfish():
     analyze_results(sorted_moves)
 
 
+def test_stockfish_prob():
+    fools_mate = "rnbqkbnr/pppp1ppp/4p3/8/5PP1/8/PPPPP2P/RNBQKBNR b KQkq f3 0 2"
+    board = chess.Board(fools_mate)
+    moves = {}
+    untried_moves = list(board.legal_moves)
+    for move in untried_moves:
+        mean, std = engine.simulate_stockfish_prob(board, move, 10, 4)
+        moves[move] = (mean, std)
+        board = chess.Board(fools_mate)
+
+    sorted_moves = dict(sorted(moves.items(), key=lambda x: x[0].uci()))
+    for m, s in sorted_moves.items():
+        print(f"move '{m.uci()}' (prob_stockfish): mean={s[0]}, std={s[1]}")
+
+
 def analyze_results(moves: dict):
     for m, b in moves.items():
         manual_score = eval.score_manual(b)
@@ -39,6 +54,7 @@ def analyze_results(moves: dict):
 def main():
     test_mcts()
     test_stockfish()
+    test_stockfish_prob()
 
 
 if __name__ == '__main__':
