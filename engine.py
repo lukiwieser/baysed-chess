@@ -2,30 +2,8 @@ import chess
 import chess.engine
 import random
 import eval
-
-
-def main():
-    fools_mate = "rnbqkbnr/pppp1ppp/4p3/8/5PP1/8/PPPPP2P/RNBQKBNR b KQkq f3 0 2"
-    board = chess.Board(fools_mate)
-    print(board, '\n')
-    moves = {}
-    for i in range(10):
-        move = pick_move(board)
-        if move is None:
-            break
-
-        simulate_game(board, move, 100)
-        moves[move] = board
-        board = chess.Board(fools_mate)
-
-    analyze_results(moves)
-
-
-def analyze_results(moves: dict):
-    for m, b in moves.items():
-        manual_score = eval.score_game(b)
-        engine_score = eval.analyze_with_stockfish(b)
-        print(f"score for move {m}: manual_score={manual_score}, engine_score={engine_score}")
+import numpy as np
+from stockfish import Stockfish
 
 
 def pick_move(board: chess.Board) -> chess.Move | None:
@@ -49,19 +27,54 @@ def simulate_game(board: chess.Board, move: chess.Move, depth: int):
     """
     engine = chess.engine.SimpleEngine.popen_uci("./stockfish/stockfish-ubuntu-x86-64-avx2")
     board.push(move)
-    print(move)
-    print(board, '\n')
     for i in range(depth):
         if board.is_game_over():
             engine.quit()
             return
         r = engine.play(board, chess.engine.Limit(depth=2))
-        print(r)
         board.push(r.move)
-        print(board, '\n')
 
     engine.quit()
 
 
-if __name__ == '__main__':
-    main()
+def simulate_stockfish_prob(board: chess.Board, move: chess.Move, games: int = 10, depth: int = 10) -> (float, float):
+    """
+    Simulate a game using
+    :param board: chess board
+    :param move: chosen move
+    :param games: number of games that should be simulated after playing the move
+    :param depth: simulation depth per game
+    :return:
+    """
+    board.push(move)
+    copied_board = board.copy()
+    scores = []
+
+    stockfish = Stockfish("./stockfish/stockfish-ubuntu-x86-64-avx2", depth=2, parameters={"Threads": 8, "Hash": 2048})
+    stockfish.set_elo_rating(1200)
+    stockfish.set_fen_position(board.fen())
+
+    def reset_game():
+        nonlocal scores, copied_board, board
+        score = eval.score_stockfish(copied_board).white().score(mate_score=100_000)
+        scores.append(score)
+        copied_board = board.copy()
+        stockfish.set_fen_position(board.fen())
+
+    for _ in range(games):
+        for d in range(depth):
+            if copied_board.is_game_over() or d == depth - 1:
+                reset_game()
+                break
+
+            if d == depth - 1:
+                reset_game()
+
+            top_moves = stockfish.get_top_moves(3)
+            chosen_move = random.choice(top_moves)['Move']
+            stockfish.make_moves_from_current_position([chosen_move])
+            copied_board.push(chess.Move.from_uci(chosen_move))
+
+    print(scores)
+    # TODO: return distribution here?
+    return np.array(scores).mean(), np.array(scores).std()

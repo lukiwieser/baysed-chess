@@ -1,5 +1,6 @@
 import chess
 import chess.engine
+import sys
 
 # Eval constants for scoring chess boards
 # Evaluation metric inspired by Tomasz Michniewski: https://www.chessprogramming.org/Simplified_Evaluation_Function
@@ -136,9 +137,7 @@ def check_endgame(board: chess.Board) -> bool:
     return (queens_black == 0 and queens_white == 0) or ((queens_black >= 1 and minors_black <= 1) or (queens_white >= 1 and minors_white <= 1))
 
 
-
-
-def score_game(board: chess.Board) -> float:
+def score_manual(board: chess.Board) -> int:
     """
     Calculate the score of the given board regarding the given color
     :param board: the chess board
@@ -147,7 +146,7 @@ def score_game(board: chess.Board) -> float:
     outcome = board.outcome()
     if outcome is not None:
         if outcome.termination == chess.Termination.CHECKMATE:
-            return float('inf') if outcome.winner == chess.WHITE else float('-inf')
+            return sys.maxsize if outcome.winner == chess.WHITE else -sys.maxsize
         else:  # draw
             return 0
 
@@ -171,13 +170,13 @@ def score_game(board: chess.Board) -> float:
     return score
 
 
-def analyze_with_stockfish(board: chess.Board) -> chess.engine.PovScore:
+def score_stockfish(board: chess.Board) -> chess.engine.PovScore:
     """
     Calculate the score of the given board using stockfish
     :param board:
     :return:
     """
     engine = chess.engine.SimpleEngine.popen_uci("./stockfish/stockfish-ubuntu-x86-64-avx2")
-    info = engine.analyse(board, chess.engine.Limit(depth=20))
+    info = engine.analyse(board, chess.engine.Limit(depth=2))
     engine.quit()
     return info["score"]
