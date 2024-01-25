@@ -1,3 +1,4 @@
 /stockfish/
 .idea
 .venv
+__pycache__
