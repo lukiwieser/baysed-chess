@@ -9,7 +9,7 @@ class ProbStockfish(MinimalEngine):
         moves = {}
         untried_moves = list(board.legal_moves)
         for move in untried_moves:
-            mean, std = engine.simulate_stockfish_prob(board, move, 10, 4)
+            mean, std = engine.simulate_game(board, move, 10)
             moves[move] = (mean, std)
 
         return self.get_best_move(moves)

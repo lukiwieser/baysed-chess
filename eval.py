@@ -134,7 +134,8 @@ def check_endgame(board: chess.Board) -> bool:
             else:
                 minors_black += 1
 
-    return (queens_black == 0 and queens_white == 0) or ((queens_black >= 1 and minors_black <= 1) or (queens_white >= 1 and minors_white <= 1))
+    return (queens_black == 0 and queens_white == 0) or ((queens_black >= 1 >= minors_black) or (
+                queens_white >= 1 >= minors_white))
 
 
 def score_manual(board: chess.Board) -> int:
@@ -177,6 +178,6 @@ def score_stockfish(board: chess.Board) -> chess.engine.PovScore:
     :return:
     """
     engine = chess.engine.SimpleEngine.popen_uci("./stockfish/stockfish-ubuntu-x86-64-avx2")
-    info = engine.analyse(board, chess.engine.Limit(depth=2))
+    info = engine.analyse(board, chess.engine.Limit(depth=0))
     engine.quit()
     return info["score"]

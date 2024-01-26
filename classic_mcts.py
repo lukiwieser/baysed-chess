@@ -2,32 +2,13 @@ import chess
 import random
 import eval
 import engine
-import IStrategy
 import numpy as np
-from abc import ABC, abstractmethod
 
 
-class IMcts(ABC):
+class ClassicMcts:
 
-    def __init__(self, board: chess.Board, strategy: IStrategy):
-        self.board = board
-
-    @abstractmethod
-    def sample(self, runs: int = 1000) -> None:
-        pass
-
-    @abstractmethod
-    def apply_move(self, move: chess.Move) -> None:
-        pass
-
-    @abstractmethod
-    def get_children(self) -> list['Mcts']:
-        pass
-
-
-class MCTSNode:
-
-    def __init__(self, board: chess.Board, parent = None, move: chess.Move | None = None, random_state: int | None = None):
+    def __init__(self, board: chess.Board, parent=None, move: chess.Move | None = None,
+                 random_state: int | None = None):
         self.random = random.Random(random_state)
         self.board = board
         self.parent = parent
@@ -38,7 +19,7 @@ class MCTSNode:
         self.untried_actions = self.legal_moves
         self.score = 0
 
-    def _expand(self) -> 'MCTSNode':
+    def _expand(self) -> 'ClassicMcts':
         """
         Expands the node, i.e., choose an action and apply it to the board
         :return:
@@ -47,7 +28,7 @@ class MCTSNode:
         self.untried_actions.remove(move)
         next_board = self.board.copy()
         next_board.push(move)
-        child_node = MCTSNode(next_board, parent=self, move=move)
+        child_node = ClassicMcts(next_board, parent=self, move=move)
         self.children.append(child_node)
         return child_node
 
@@ -84,7 +65,7 @@ class MCTSNode:
     def is_fully_expanded(self) -> bool:
         return len(self.untried_actions) == 0
 
-    def _best_child(self) -> 'MCTSNode':
+    def _best_child(self) -> 'ClassicMcts':
         """
         Picks the best child according to our policy
         :return: the best child
@@ -94,7 +75,7 @@ class MCTSNode:
                            for c in self.children]
         return self.children[np.argmax(choices_weights)]
 
-    def _select_leaf(self) -> 'MCTSNode':
+    def _select_leaf(self) -> 'ClassicMcts':
         """
         Selects a leaf node.
         If the node is not expanded is will be expanded.
@@ -109,7 +90,7 @@ class MCTSNode:
 
         return current_node
 
-    def build_tree(self, samples: int = 1000) -> 'MCTSNode':
+    def build_tree(self, samples: int = 1000) -> 'ClassicMcts':
         """
         Runs the MCTS with the given number of samples
         :param samples: number of simulations

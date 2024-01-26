@@ -1,6 +1,6 @@
 import chess
 import chess.engine
-from mcts import MCTSNode
+from classic_mcts import ClassicMcts
 import engine
 import eval
 
@@ -8,7 +8,7 @@ import eval
 def test_mcts():
     fools_mate = "rnbqkbnr/pppp1ppp/4p3/8/5PP1/8/PPPPP2P/RNBQKBNR b KQkq f3 0 2"
     board = chess.Board(fools_mate)
-    mcts_root = MCTSNode(board)
+    mcts_root = ClassicMcts(board)
     mcts_root.build_tree()
     sorted_moves = sorted(mcts_root.children, key=lambda x: x.move.uci())
     for c in sorted_moves:
