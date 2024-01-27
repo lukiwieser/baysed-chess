@@ -5,29 +5,13 @@ from classic_mcts import ClassicMcts
 import engine
 import eval
 import util
-
-
-def simulate_game(white: engine.Engine, black: engine.Engine) -> chess.pgn.Game:
-    board = chess.Board()
-
-    is_white_playing = True
-    while not board.is_game_over():
-        play_result = white.play(board) if is_white_playing else black.play(board)
-        board.push(play_result.move)
-        print(board)
-        print()
-        is_white_playing = not is_white_playing
-
-    game = chess.pgn.Game.from_board(board)
-    game.headers['White'] = white.get_name()
-    game.headers['Black'] = black.get_name()
-    return game
+import simulation
 
 
 def test_simulate():
     white = engine.ClassicMctsEngine(chess.WHITE)
     black = engine.ClassicMctsEngine(chess.BLACK)
-    game = simulate_game(white, black)
+    game = simulation.simulate_game(white, black)
     print(game)
 
 
@@ -77,8 +61,23 @@ def analyze_results(moves: dict):
         print(f"score for move {m}: manual_score={manual_score}, engine_score={engine_score}")
 
 
+def test_evaluation():
+    a = engine.ClassicMctsEngine
+    b = engine.RandomEngine
+    evaluator = simulation.Evaluation(a,b)
+    results = evaluator.run(4)
+    a_results = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_A, results)))/len(results)*100
+    b_results = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_B, results)))/len(results)*100
+    draws = len(list(filter(lambda x: x.winner == simulation.Winner.Draw, results)))/len(results)*100
+
+    print(f"Engine {a.get_name()} won {a_results}% of games")
+    print(f"Engine {b.get_name()} won {b_results}% of games")
+    print(f"{draws}% of games resulted in a draw")
+
+
 def main():
-    test_simulate()
+    test_evaluation()
+    # test_simulate()
     # test_mcts()
     # test_stockfish()
     # test_stockfish_prob()

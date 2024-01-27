@@ -2,10 +2,10 @@ from abc import ABC, abstractmethod
 import chess
 import chess.engine
 from classic_mcts import ClassicMcts
+import random
 
 
 class Engine(ABC):
-
     color: chess.Color
     """The side the engine plays (``chess.WHITE`` or ``chess.BLACK``)."""
 
@@ -21,8 +21,9 @@ class Engine(ABC):
         """
         pass
 
+    @staticmethod
     @abstractmethod
-    def get_name(self) -> str:
+    def get_name() -> str:
         """
         Return the engine's name
         :return: the engine's name
@@ -34,7 +35,8 @@ class ClassicMctsEngine(Engine):
     def __init__(self, color: chess.Color):
         super().__init__(color)
 
-    def get_name(self) -> str:
+    @staticmethod
+    def get_name() -> str:
         return "ClassicMctsEngine"
 
     def play(self, board: chess.Board) -> chess.engine.PlayResult:
@@ -43,3 +45,16 @@ class ClassicMctsEngine(Engine):
         best_move = max(mcts_root.children, key=lambda x: x.score).move if board.turn == chess.WHITE else (
             min(mcts_root.children, key=lambda x: x.score).move)
         return chess.engine.PlayResult(move=best_move, ponder=None)
+
+
+class RandomEngine(Engine):
+    def __init__(self, color: chess.Color):
+        super().__init__(color)
+
+    @staticmethod
+    def get_name() -> str:
+        return "Random"
+
+    def play(self, board: chess.Board) -> chess.engine.PlayResult:
+        move = random.choice(list(board.legal_moves))
+        return chess.engine.PlayResult(move=move, ponder=None)
