@@ -1,16 +1,17 @@
 import chess
 import random
 import eval
-import engine
+import util
 import numpy as np
 
 
 class ClassicMcts:
 
-    def __init__(self, board: chess.Board, parent=None, move: chess.Move | None = None,
+    def __init__(self, board: chess.Board, color: chess.Color, parent=None, move: chess.Move | None = None,
                  random_state: int | None = None):
         self.random = random.Random(random_state)
         self.board = board
+        self.color = color
         self.parent = parent
         self.move = move
         self.children = []
@@ -28,7 +29,7 @@ class ClassicMcts:
         self.untried_actions.remove(move)
         next_board = self.board.copy()
         next_board.push(move)
-        child_node = ClassicMcts(next_board, parent=self, move=move)
+        child_node = ClassicMcts(next_board, color=self.color, parent=self, move=move)
         self.children.append(child_node)
         return child_node
 
@@ -44,7 +45,7 @@ class ClassicMcts:
             if copied_board.is_game_over():
                 break
 
-            m = engine.pick_move(copied_board)
+            m = util.pick_move(copied_board)
             copied_board.push(m)
             steps += 1
 
@@ -73,7 +74,8 @@ class ClassicMcts:
         # NOTE: maybe clamp the score between [-1, +1] instead of [-inf, +inf]
         choices_weights = [(c.score / c.visits) + np.sqrt(((2 * np.log(self.visits)) / c.visits))
                            for c in self.children]
-        return self.children[np.argmax(choices_weights)]
+        best_child_index = np.argmax(choices_weights) if self.color == chess.WHITE else np.argmin(choices_weights)
+        return self.children[best_child_index]
 
     def _select_leaf(self) -> 'ClassicMcts':
         """

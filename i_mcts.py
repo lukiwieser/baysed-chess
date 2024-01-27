@@ -27,7 +27,7 @@ class IMcts(ABC):
         pass
 
     @abstractmethod
-    def get_children(self) -> list['Mcts']:
+    def get_children(self) -> list['IMcts']:
         """
         Return the immediate children of the root node
         :return: list of immediate children of mcts root
