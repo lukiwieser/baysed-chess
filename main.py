@@ -1,11 +1,11 @@
 import chess
 import chess.engine
 import chess.pgn
-from classic_mcts import ClassicMcts
-import engine
-import eval
-import util
-import simulation
+from chesspp.classic_mcts import ClassicMcts
+from chesspp import engine
+from chesspp import eval
+from chesspp import util
+from chesspp import simulation
 
 
 def test_simulate():
@@ -64,11 +64,11 @@ def analyze_results(moves: dict):
 def test_evaluation():
     a = engine.ClassicMctsEngine
     b = engine.RandomEngine
-    evaluator = simulation.Evaluation(a,b)
+    evaluator = simulation.Evaluation(a, b)
     results = evaluator.run(4)
-    a_results = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_A, results)))/len(results)*100
-    b_results = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_B, results)))/len(results)*100
-    draws = len(list(filter(lambda x: x.winner == simulation.Winner.Draw, results)))/len(results)*100
+    a_results = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_A, results))) / len(results) * 100
+    b_results = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_B, results))) / len(results) * 100
+    draws = len(list(filter(lambda x: x.winner == simulation.Winner.Draw, results))) / len(results) * 100
 
     print(f"Engine {a.get_name()} won {a_results}% of games")
     print(f"Engine {b.get_name()} won {b_results}% of games")
