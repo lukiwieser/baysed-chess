@@ -1,6 +1,7 @@
 import chess
 from abc import ABC, abstractmethod
 from i_strategy import IStrategy
+from typing import Dict
 
 
 class IMcts(ABC):
@@ -33,3 +34,18 @@ class IMcts(ABC):
         :return: list of immediate children of mcts root
         """
         pass
+
+    @abstractmethod
+    def get_moves(self) -> Dict[chess.Move, int]:
+        """
+        Return all legal moves from this node with respective scores
+        :return: dictionary with moves as key and scores as values
+        """
+        pass
+
+"""
+TODO: add score class:
+how many moves until the end of the game?
+score ranges?
+perspective of white/black
+"""

@@ -1,5 +1,6 @@
 import chess
 import chess.engine
+import chess.pgn
 from classic_mcts import ClassicMcts
 import engine
 import eval
