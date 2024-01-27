@@ -6,7 +6,7 @@ from typing import Tuple, List
 from enum import Enum
 from dataclasses import dataclass
 
-from engine import Engine
+from chesspp.engine import Engine
 
 
 class Winner(Enum):

@@ -1,11 +1,10 @@
 import chess
 import chess.engine
 import chess.pgn
-from chesspp.classic_mcts import ClassicMcts
-from chesspp import engine
-from chesspp import eval
-from chesspp import util
-from chesspp import simulation
+from src.chesspp.classic_mcts import ClassicMcts
+from src.chesspp import engine
+from src.chesspp import util
+from src.chesspp import simulation, eval
 
 
 def test_simulate():

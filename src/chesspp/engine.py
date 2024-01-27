@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
 import chess
 import chess.engine
-from classic_mcts import ClassicMcts
 import random
+
+from chesspp.classic_mcts import ClassicMcts
 
 
 class Engine(ABC):

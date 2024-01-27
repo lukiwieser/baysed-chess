@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "chess-pp"
+version = "0.1"
+dependencies = [
+    "chess==1.10.0",
+    "numpy==1.26.3",
+    "stockfish==3.28.0",
+]
+requires-python = ">= 3.10"

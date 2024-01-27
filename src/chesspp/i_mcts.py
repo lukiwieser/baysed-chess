@@ -1,7 +1,7 @@
 import chess
 from abc import ABC, abstractmethod
-from i_strategy import IStrategy
 from typing import Dict
+from chesspp.i_strategy import IStrategy
 
 
 class IMcts(ABC):

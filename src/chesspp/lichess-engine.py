@@ -1,6 +1,7 @@
 from lichess_bot.lib.engine_wrapper import MinimalEngine, MOVE
 import chess.engine
-import engine
+
+from chesspp import engine
 
 
 class ProbStockfish(MinimalEngine):
