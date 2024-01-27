@@ -12,7 +12,7 @@ from lib.engine_wrapper import MinimalEngine, MOVE
 from typing import Any
 import logging
 
-from engines import engine
+from chesspp.engine import ClassicMctsEngine
 
 # Use this logger variable to print messages to the console or log files.
 # logger.info("message") will always print "message" to the console or log file.
@@ -63,7 +63,8 @@ class ComboEngine(ExampleEngine):
     This engine demonstrates how one can use `time_limit`, `draw_offered`, and `root_moves`.
     """
 
-    def search(self, board: chess.Board, time_limit: Limit, ponder: bool, draw_offered: bool, root_moves: MOVE) -> PlayResult:
+    def search(self, board: chess.Board, time_limit: Limit, ponder: bool, draw_offered: bool,
+               root_moves: MOVE) -> PlayResult:
         """
         Choose a move using multiple different methods.
 
@@ -96,20 +97,30 @@ class ComboEngine(ExampleEngine):
         return PlayResult(move, None, draw_offered=draw_offered)
 
 
-class ProbStockfish(MinimalEngine):
+# class ProbStockfish(MinimalEngine):
+#     def search(self, board: chess.Board, time_limit: chess.engine.Limit, ponder: bool, draw_offered: bool,
+#                root_moves: MOVE) -> chess.engine.PlayResult:
+#         moves = {}
+#         untried_moves = list(board.legal_moves)
+#         for move in untried_moves:
+#             mean, std = engine.simulate_stockfish_prob(board.copy(), move, 10, 2)
+#             moves[move] = (mean, std)
+#             if mean == 100_000 and std == 0:
+#                 return chess.engine.PlayResult(move, None)
+#
+#         return self.get_best_move(moves)
+#
+#     def get_best_move(self, moves: dict) -> chess.engine.PlayResult:
+#         best_avg = max(moves.items(), key=lambda m: m[1][0])
+#         next_move = best_avg[0]
+#         return chess.engine.PlayResult(next_move, None)
+
+
+class MctsEngine(MinimalEngine):
     def search(self, board: chess.Board, time_limit: chess.engine.Limit, ponder: bool, draw_offered: bool,
                root_moves: MOVE) -> chess.engine.PlayResult:
-        moves = {}
-        untried_moves = list(board.legal_moves)
-        for move in untried_moves:
-            mean, std = engine.simulate_stockfish_prob(board.copy(), move, 10, 2)
-            moves[move] = (mean, std)
-            if mean == 100_000 and std == 0:
-                return chess.engine.PlayResult(move, None)
-
-        return self.get_best_move(moves)
-
-    def get_best_move(self, moves: dict) -> chess.engine.PlayResult:
-        best_avg = max(moves.items(), key=lambda m: m[1][0])
-        next_move = best_avg[0]
-        return chess.engine.PlayResult(next_move, None)
+        my_engine = ClassicMctsEngine(board.turn)
+        print("Color:", board.turn)
+        print("engine play result: ", my_engine.play(board.copy()))
+        print("Engine name", my_engine)
+        return my_engine.play(board.copy())

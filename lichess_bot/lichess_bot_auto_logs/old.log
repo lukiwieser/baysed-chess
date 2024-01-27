@@ -1,16 +1,16 @@
-2024-01-26 16:56:16,511 __main__ (lichess-bot.py:1023) INFO 
+2024-01-27 22:11:10,124 __main__ (lichess-bot.py:1023) INFO 
     .   _/|
     .  // o\
     .  || ._)  lichess_bot 2024.1.21.1
     .  //__\
     .  )___(   Play on Lichess with a bot
     
-2024-01-26 16:56:16,531 lib.config (config.py:261) DEBUG Config:
+2024-01-27 22:11:10,145 lib.config (config.py:261) DEBUG Config:
 token: logger
 url: https://lichess.org/
 engine:
   dir: ./engines
-  name: ProbStockfish
+  name: MctsEngine
   working_dir: ''
   protocol: homemade
   ponder: true
@@ -137,13 +137,13 @@ matchmaking:
   challenge_mode: random
   challenge_filter: none
 
-2024-01-26 16:56:16,531 lib.config (config.py:262) DEBUG ====================
-2024-01-26 16:56:16,536 lib.config (config.py:261) DEBUG Config:
+2024-01-27 22:11:10,145 lib.config (config.py:262) DEBUG ====================
+2024-01-27 22:11:10,150 lib.config (config.py:261) DEBUG Config:
 token: logger
 url: https://lichess.org/
 engine:
   dir: ./engines
-  name: ProbStockfish
+  name: MctsEngine
   working_dir: /home/luke/projects/pp-project/chess-engine-pp/lichess_bot
   protocol: homemade
   ponder: true
@@ -282,634 +282,42 @@ matchmaking:
   overrides: {}
 pgn_file_grouping: game
 
-2024-01-26 16:56:16,536 lib.config (config.py:262) DEBUG ====================
-2024-01-26 16:56:16,536 __main__ (lichess-bot.py:1026) INFO Checking engine configuration ...
-2024-01-26 16:56:16,586 lib.engine_wrapper (engine_wrapper.py:65) DEBUG Starting engine: ['/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/engines/ProbStockfish']
-2024-01-26 16:56:16,586 __main__ (lichess-bot.py:1029) INFO Engine configuration OK
-2024-01-26 16:56:16,588 urllib3.connectionpool (connectionpool.py:1052) DEBUG Starting new HTTPS connection (1): lichess.org:443
-2024-01-26 16:56:16,733 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/token/test HTTP/1.1" 200 None
-2024-01-26 16:56:16,764 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "GET /api/account HTTP/1.1" 200 None
-2024-01-26 16:56:16,764 __main__ (lichess-bot.py:1038) INFO Welcome probabilistic-bot!
-2024-01-26 16:56:16,765 __main__ (lichess-bot.py:206) INFO You're now connected to https://lichess.org/ and awaiting challenges.
-2024-01-26 16:56:17,110 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "GET /api/account/playing HTTP/1.1" 200 None
-2024-01-26 16:56:17,365 __main__ (lichess-bot.py:370) DEBUG Event: {'type': 'gameStart', 'game': {'fullId': '4bebkUSq8GI3', 'gameId': '4bebkUSq', 'fen': 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', 'color': 'white', 'lastMove': '', 'source': 'friend', 'status': {'id': 20, 'name': 'started'}, 'variant': {'key': 'standard', 'name': 'Standard'}, 'speed': 'rapid', 'perf': 'rapid', 'rated': False, 'hasMoved': False, 'opponent': {'id': 'luk3k', 'username': 'luk3k', 'rating': 1500}, 'isMyTurn': True, 'secondsLeft': 480, 'compat': {'bot': True, 'board': True}, 'id': '4bebkUSq'}}
-2024-01-26 16:56:17,365 __main__ (lichess-bot.py:254) INFO --- Process Used. Count: 1. IDs: {'4bebkUSq'}
-2024-01-26 16:56:17,371 urllib3.connectionpool (connectionpool.py:1052) DEBUG Starting new HTTPS connection (1): lichess.org:443
-2024-01-26 16:56:17,516 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "GET /api/bot/game/stream/4bebkUSq HTTP/1.1" 200 None
-2024-01-26 16:56:17,517 __mp_main__ (lichess-bot.py:572) DEBUG Initial state: {'id': '4bebkUSq', 'variant': {'key': 'standard', 'name': 'Standard', 'short': 'Std'}, 'speed': 'rapid', 'perf': {'name': 'Rapid'}, 'rated': False, 'createdAt': 1706284502377, 'white': {'id': 'probabilistic-bot', 'name': 'probabilistic-bot', 'title': 'BOT', 'rating': 2000, 'provisional': True}, 'black': {'id': 'luk3k', 'name': 'luk3k', 'title': None, 'rating': 1500, 'provisional': True}, 'initialFen': 'startpos', 'clock': {'initial': 480000, 'increment': 3000}, 'type': 'gameFull', 'state': {'type': 'gameState', 'moves': '', 'wtime': 480000, 'btime': 480000, 'winc': 3000, 'binc': 3000, 'status': 'started'}}
-2024-01-26 16:56:17,564 lib.engine_wrapper (engine_wrapper.py:65) DEBUG Starting engine: ['/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/engines/ProbStockfish']
-2024-01-26 16:56:17,564 __mp_main__ (lichess-bot.py:578) DEBUG The engine for game 4bebkUSq has pid=?
-2024-01-26 16:56:17,564 __mp_main__ (lichess-bot.py:581) INFO +++ https://lichess.org/4bebkUSq/white Rapid vs luk3k (1500?) (4bebkUSq)
-2024-01-26 16:56:17,564 lib.conversation (conversation.py:83) INFO *** https://lichess.org/4bebkUSq/white [player] probabilistic-bot: Hi! I'm probabilistic-bot. Good luck! Type !help for a list of commands I can respond to.
-2024-01-26 16:56:17,565 urllib3.connectionpool (connectionpool.py:1052) DEBUG Starting new HTTPS connection (2): lichess.org:443
-2024-01-26 16:56:17,712 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/4bebkUSq/chat HTTP/1.1" 200 11
-2024-01-26 16:56:17,713 lib.conversation (conversation.py:83) INFO *** https://lichess.org/4bebkUSq/white [spectator] probabilistic-bot: Hi! I'm probabilistic-bot. Type !help for a list of commands I can respond to.
-2024-01-26 16:56:17,746 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/4bebkUSq/chat HTTP/1.1" 200 11
-2024-01-26 16:56:17,747 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-26 16:56:17,747 __mp_main__ (lichess-bot.py:689) INFO move: 1
-2024-01-26 16:56:17,747 lib.engine_wrapper (engine_wrapper.py:650) INFO Searching for time 10 seconds for game 4bebkUSq
-2024-01-26 16:56:17,748 asyncio (selector_events.py:54) DEBUG Using selector: EpollSelector
-2024-01-26 16:56:17,749 chess.engine (engine.py:124) DEBUG Using PidfdChildWatcher
-2024-01-26 16:56:17,750 chess.engine (engine.py:1040) DEBUG <UciProtocol (pid=100788)>: Connection made
-2024-01-26 16:56:17,750 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << uci
-2024-01-26 16:56:17,751 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> Stockfish 16 by the Stockfish developers (see AUTHORS file)
-2024-01-26 16:56:17,869 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> id name Stockfish 16
-2024-01-26 16:56:17,870 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> id author the Stockfish developers (see AUTHORS file)
-2024-01-26 16:56:17,870 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> 
-2024-01-26 16:56:17,870 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name Debug Log File type string default 
-2024-01-26 16:56:17,870 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name Threads type spin default 1 min 1 max 1024
-2024-01-26 16:56:17,870 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name Hash type spin default 16 min 1 max 33554432
-2024-01-26 16:56:17,870 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name Clear Hash type button
-2024-01-26 16:56:17,870 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name Ponder type check default false
-2024-01-26 16:56:17,870 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name MultiPV type spin default 1 min 1 max 500
-2024-01-26 16:56:17,871 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name Skill Level type spin default 20 min 0 max 20
-2024-01-26 16:56:17,871 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name Move Overhead type spin default 10 min 0 max 5000
-2024-01-26 16:56:17,871 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name Slow Mover type spin default 100 min 10 max 1000
-2024-01-26 16:56:17,871 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name nodestime type spin default 0 min 0 max 10000
-2024-01-26 16:56:17,871 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name UCI_Chess960 type check default false
-2024-01-26 16:56:17,871 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name UCI_AnalyseMode type check default false
-2024-01-26 16:56:17,871 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name UCI_LimitStrength type check default false
-2024-01-26 16:56:17,871 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name UCI_Elo type spin default 1320 min 1320 max 3190
-2024-01-26 16:56:17,871 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name UCI_ShowWDL type check default false
-2024-01-26 16:56:17,871 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name SyzygyPath type string default <empty>
-2024-01-26 16:56:17,872 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name SyzygyProbeDepth type spin default 1 min 1 max 100
-2024-01-26 16:56:17,872 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name Syzygy50MoveRule type check default true
-2024-01-26 16:56:17,872 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name SyzygyProbeLimit type spin default 7 min 0 max 7
-2024-01-26 16:56:17,872 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name Use NNUE type check default true
-2024-01-26 16:56:17,872 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> option name EvalFile type string default nn-5af11540bbfe.nnue
-2024-01-26 16:56:17,872 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> uciok
-2024-01-26 16:56:17,873 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << ucinewgame
-2024-01-26 16:56:17,873 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << isready
-2024-01-26 16:56:17,874 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> readyok
-2024-01-26 16:56:17,875 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << position startpos moves g1h3
-2024-01-26 16:56:17,875 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << go depth 2
-2024-01-26 16:56:17,875 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:17,875 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 1 seldepth 1 multipv 1 score cp -5 nodes 20 nps 20000 hashfull 0 tbhits 0 time 1 pv g8f6
-2024-01-26 16:56:17,875 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 2 seldepth 2 multipv 1 score cp -5 nodes 40 nps 40000 hashfull 0 tbhits 0 time 1 pv g8f6
-2024-01-26 16:56:17,875 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> bestmove g8f6
-2024-01-26 16:56:17,876 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << position startpos moves g1h3 g8f6
-2024-01-26 16:56:17,876 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << go depth 2
-2024-01-26 16:56:17,876 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:17,876 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 1 seldepth 1 multipv 1 score cp -28 nodes 20 nps 20000 hashfull 0 tbhits 0 time 1 pv d2d4
-2024-01-26 16:56:17,876 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 2 seldepth 2 multipv 1 score cp -28 nodes 40 nps 40000 hashfull 0 tbhits 0 time 1 pv d2d4
-2024-01-26 16:56:17,877 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> bestmove d2d4
-2024-01-26 16:56:17,877 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << position startpos moves g1h3 g8f6 d2d4
-2024-01-26 16:56:17,877 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << go depth 2
-2024-01-26 16:56:17,877 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:17,877 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 1 seldepth 1 multipv 1 score cp -9 nodes 24 nps 12000 hashfull 0 tbhits 0 time 2 pv d7d5
-2024-01-26 16:56:17,878 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 2 seldepth 2 multipv 1 score cp -9 nodes 46 nps 23000 hashfull 0 tbhits 0 time 2 pv d7d5
-2024-01-26 16:56:17,878 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> bestmove d7d5
-2024-01-26 16:56:17,878 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << position startpos moves g1h3 g8f6 d2d4 d7d5
-2024-01-26 16:56:17,878 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << go depth 2
-2024-01-26 16:56:17,878 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:17,879 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 1 seldepth 1 multipv 1 score cp -59 nodes 48 nps 48000 hashfull 0 tbhits 0 time 1 pv g2g3
-2024-01-26 16:56:17,879 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 2 seldepth 2 multipv 1 score cp -59 nodes 78 nps 78000 hashfull 0 tbhits 0 time 1 pv g2g3
-2024-01-26 16:56:17,879 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> bestmove g2g3
-2024-01-26 16:56:17,879 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3
-2024-01-26 16:56:17,879 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << go depth 2
-2024-01-26 16:56:17,879 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:17,880 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 1 seldepth 1 multipv 1 score cp 13 nodes 34 nps 34000 hashfull 0 tbhits 0 time 1 pv c7c5
-2024-01-26 16:56:17,880 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 2 seldepth 2 multipv 1 score cp 13 nodes 65 nps 65000 hashfull 0 tbhits 0 time 1 pv c7c5
-2024-01-26 16:56:17,880 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> bestmove c7c5
-2024-01-26 16:56:17,880 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5
-2024-01-26 16:56:17,880 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << go depth 2
-2024-01-26 16:56:17,881 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:17,881 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 1 seldepth 1 multipv 1 score cp -18 nodes 36 nps 36000 hashfull 0 tbhits 0 time 1 pv d4c5
-2024-01-26 16:56:17,881 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 2 seldepth 2 multipv 1 score cp -18 nodes 65 nps 65000 hashfull 0 tbhits 0 time 1 pv d4c5
-2024-01-26 16:56:17,881 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> bestmove d4c5
-2024-01-26 16:56:17,881 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5
-2024-01-26 16:56:17,882 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << go depth 2
-2024-01-26 16:56:17,882 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:17,882 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 1 seldepth 1 multipv 1 score cp 525 nodes 40 nps 40000 hashfull 0 tbhits 0 time 1 pv d8a5 b2b4 a5b4 b1c3 b4c3 c1d2
-2024-01-26 16:56:17,882 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 2 seldepth 2 multipv 1 score cp 6 nodes 187 nps 187000 hashfull 0 tbhits 0 time 1 pv e7e5
-2024-01-26 16:56:17,882 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> bestmove e7e5
-2024-01-26 16:56:17,883 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5 e7e5
-2024-01-26 16:56:17,883 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << go depth 2
-2024-01-26 16:56:17,883 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:17,883 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 1 seldepth 1 multipv 1 score cp -78 nodes 50 nps 50000 hashfull 0 tbhits 0 time 1 pv f1g2 f8c5
-2024-01-26 16:56:17,883 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 2 seldepth 2 multipv 1 score cp -78 nodes 87 nps 87000 hashfull 0 tbhits 0 time 1 pv f1g2 f8c5
-2024-01-26 16:56:17,883 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> bestmove f1g2 ponder f8c5
-2024-01-26 16:56:17,884 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5 e7e5 f1g2
-2024-01-26 16:56:17,884 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << go depth 2
-2024-01-26 16:56:17,884 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:17,884 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 1 seldepth 1 multipv 1 score cp 78 nodes 38 nps 38000 hashfull 0 tbhits 0 time 1 pv f8c5
-2024-01-26 16:56:17,884 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 2 seldepth 2 multipv 1 score cp 78 nodes 74 nps 74000 hashfull 0 tbhits 0 time 1 pv f8c5
-2024-01-26 16:56:17,884 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> bestmove f8c5
-2024-01-26 16:56:17,885 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5 e7e5 f1g2 f8c5
-2024-01-26 16:56:17,885 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << go depth 2
-2024-01-26 16:56:17,885 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:17,885 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 1 seldepth 1 multipv 1 score cp -80 nodes 50 nps 50000 hashfull 0 tbhits 0 time 1 pv c2c4
-2024-01-26 16:56:17,885 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> info depth 2 seldepth 2 multipv 1 score cp -80 nodes 87 nps 87000 hashfull 0 tbhits 0 time 1 pv c2c4
-2024-01-26 16:56:17,885 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100788)>: >> bestmove c2c4
-2024-01-26 16:56:17,886 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100788)>: << quit
-2024-01-26 16:56:17,890 chess.engine (engine.py:1059) DEBUG <UciProtocol (pid=100788)>: Process exited
-2024-01-26 16:56:17,891 chess.engine (engine.py:1046) DEBUG <UciProtocol (pid=100788)>: Connection lost (exit code: 0, error: None)
-2024-01-26 16:56:17,891 backoff (_common.py:105) INFO Backing off play_game(...) for 0.4s (TypeError: cannot unpack non-iterable NoneType object)
-2024-01-26 16:56:17,891 lib.lichess (lichess.py:63) DEBUG Backing off 0.4 seconds after 1 tries calling function <function play_game at 0x7f265698ed40> with args () and kwargs {'li': <lib.lichess.Lichess object at 0x7f2656999b40>, 'control_queue': <AutoProxy[Queue] object, typeid 'Queue' at 0x7f265699a920>, 'user_profile': {'id': 'probabilistic-bot', 'username': 'probabilistic-bot', 'perfs': {'blitz': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'bullet': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'correspondence': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'classical': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'rapid': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}}, 'title': 'BOT', 'createdAt': 1706196643794, 'seenAt': 1706284268775, 'playTime': {'total': 1252, 'tv': 0}, 'url': 'https://lichess.org/@/probabilistic-bot', 'playing': 'https://lichess.org/4bebkUSq/white', 'count': {'all': 5, 'rated': 0, 'ai': 0, 'draw': 0, 'drawH': 0, 'loss': 4, 'lossH': 4, 'win': 1, 'winH': 1, 'bookmark': 0, 'playing': 1, 'import': 0, 'me': 0}, 'followable': True, 'following': False, 'blocking': False, 'followsYou': False}, 'config': <lib.config.Configuration object at 0x7f265699a8f0>, 'challenge_queue': <ListProxy object, typeid 'list' at 0x7f265699bc40>, 'correspondence_queue': <AutoProxy[Queue] object, typeid 'Queue' at 0x7f26569dfd00>, 'logging_queue': <AutoProxy[Queue] object, typeid 'Queue' at 0x7f26569df9a0>, 'game_id': '4bebkUSq'}
-2024-01-26 16:56:17,892 lib.lichess (lichess.py:65) DEBUG Exception: Traceback (most recent call last):
-  File "/home/luke/projects/pp-project/chess-engine-pp/.venv/lib/python3.10/site-packages/backoff/_sync.py", line 105, in retry
-    ret = target(*args, **kwargs)
-  File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lichess-bot.py", line 620, in play_game
-    engine.play_move(board,
-  File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lib/engine_wrapper.py", line 157, in play_move
-    best_move = self.search(board, time_limit, can_ponder, draw_offered, best_move)
-  File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lib/strategies.py", line 105, in search
-    mean, std = engine.simulate_game(board.copy(), move, 10)
-TypeError: cannot unpack non-iterable NoneType object
-
-2024-01-26 16:56:18,270 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-26 16:56:18,456 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "GET /api/bot/game/stream/4bebkUSq HTTP/1.1" 200 None
-2024-01-26 16:56:18,457 __mp_main__ (lichess-bot.py:572) DEBUG Initial state: {'id': '4bebkUSq', 'variant': {'key': 'standard', 'name': 'Standard', 'short': 'Std'}, 'speed': 'rapid', 'perf': {'name': 'Rapid'}, 'rated': False, 'createdAt': 1706284502377, 'white': {'id': 'probabilistic-bot', 'name': 'probabilistic-bot', 'title': 'BOT', 'rating': 2000, 'provisional': True}, 'black': {'id': 'luk3k', 'name': 'luk3k', 'title': None, 'rating': 1500, 'provisional': True}, 'initialFen': 'startpos', 'clock': {'initial': 480000, 'increment': 3000}, 'type': 'gameFull', 'state': {'type': 'gameState', 'moves': '', 'wtime': 480000, 'btime': 480000, 'winc': 3000, 'binc': 3000, 'status': 'started'}}
-2024-01-26 16:56:18,457 lib.engine_wrapper (engine_wrapper.py:65) DEBUG Starting engine: ['/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/engines/ProbStockfish']
-2024-01-26 16:56:18,457 __mp_main__ (lichess-bot.py:578) DEBUG The engine for game 4bebkUSq has pid=?
-2024-01-26 16:56:18,457 __mp_main__ (lichess-bot.py:581) INFO +++ https://lichess.org/4bebkUSq/white Rapid vs luk3k (1500?) (4bebkUSq)
-2024-01-26 16:56:18,457 lib.conversation (conversation.py:83) INFO *** https://lichess.org/4bebkUSq/white [player] probabilistic-bot: Hi! I'm probabilistic-bot. Good luck! Type !help for a list of commands I can respond to.
-2024-01-26 16:56:18,491 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/4bebkUSq/chat HTTP/1.1" 200 11
-2024-01-26 16:56:18,491 lib.conversation (conversation.py:83) INFO *** https://lichess.org/4bebkUSq/white [spectator] probabilistic-bot: Hi! I'm probabilistic-bot. Type !help for a list of commands I can respond to.
-2024-01-26 16:56:18,529 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/4bebkUSq/chat HTTP/1.1" 200 11
-2024-01-26 16:56:18,529 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-26 16:56:18,530 __mp_main__ (lichess-bot.py:689) INFO move: 1
-2024-01-26 16:56:18,530 lib.engine_wrapper (engine_wrapper.py:650) INFO Searching for time 10 seconds for game 4bebkUSq
-2024-01-26 16:56:18,530 asyncio (selector_events.py:54) DEBUG Using selector: EpollSelector
-2024-01-26 16:56:18,532 chess.engine (engine.py:124) DEBUG Using PidfdChildWatcher
-2024-01-26 16:56:18,532 chess.engine (engine.py:1040) DEBUG <UciProtocol (pid=100795)>: Connection made
-2024-01-26 16:56:18,533 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << uci
-2024-01-26 16:56:18,534 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> Stockfish 16 by the Stockfish developers (see AUTHORS file)
-2024-01-26 16:56:18,651 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> id name Stockfish 16
-2024-01-26 16:56:18,651 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> id author the Stockfish developers (see AUTHORS file)
-2024-01-26 16:56:18,651 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> 
-2024-01-26 16:56:18,652 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name Debug Log File type string default 
-2024-01-26 16:56:18,652 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name Threads type spin default 1 min 1 max 1024
-2024-01-26 16:56:18,652 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name Hash type spin default 16 min 1 max 33554432
-2024-01-26 16:56:18,652 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name Clear Hash type button
-2024-01-26 16:56:18,652 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name Ponder type check default false
-2024-01-26 16:56:18,652 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name MultiPV type spin default 1 min 1 max 500
-2024-01-26 16:56:18,652 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name Skill Level type spin default 20 min 0 max 20
-2024-01-26 16:56:18,652 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name Move Overhead type spin default 10 min 0 max 5000
-2024-01-26 16:56:18,652 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name Slow Mover type spin default 100 min 10 max 1000
-2024-01-26 16:56:18,652 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name nodestime type spin default 0 min 0 max 10000
-2024-01-26 16:56:18,653 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name UCI_Chess960 type check default false
-2024-01-26 16:56:18,653 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name UCI_AnalyseMode type check default false
-2024-01-26 16:56:18,653 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name UCI_LimitStrength type check default false
-2024-01-26 16:56:18,653 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name UCI_Elo type spin default 1320 min 1320 max 3190
-2024-01-26 16:56:18,653 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name UCI_ShowWDL type check default false
-2024-01-26 16:56:18,653 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name SyzygyPath type string default <empty>
-2024-01-26 16:56:18,653 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name SyzygyProbeDepth type spin default 1 min 1 max 100
-2024-01-26 16:56:18,653 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name Syzygy50MoveRule type check default true
-2024-01-26 16:56:18,653 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name SyzygyProbeLimit type spin default 7 min 0 max 7
-2024-01-26 16:56:18,654 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name Use NNUE type check default true
-2024-01-26 16:56:18,654 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> option name EvalFile type string default nn-5af11540bbfe.nnue
-2024-01-26 16:56:18,654 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> uciok
-2024-01-26 16:56:18,654 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << ucinewgame
-2024-01-26 16:56:18,655 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << isready
-2024-01-26 16:56:18,656 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> readyok
-2024-01-26 16:56:18,657 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << position startpos moves g1h3
-2024-01-26 16:56:18,657 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << go depth 2
-2024-01-26 16:56:18,657 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:18,657 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 1 seldepth 1 multipv 1 score cp -5 nodes 20 nps 20000 hashfull 0 tbhits 0 time 1 pv g8f6
-2024-01-26 16:56:18,657 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 2 seldepth 2 multipv 1 score cp -5 nodes 40 nps 40000 hashfull 0 tbhits 0 time 1 pv g8f6
-2024-01-26 16:56:18,658 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> bestmove g8f6
-2024-01-26 16:56:18,658 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << position startpos moves g1h3 g8f6
-2024-01-26 16:56:18,658 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << go depth 2
-2024-01-26 16:56:18,659 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:18,659 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 1 seldepth 1 multipv 1 score cp -28 nodes 20 nps 20000 hashfull 0 tbhits 0 time 1 pv d2d4
-2024-01-26 16:56:18,659 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 2 seldepth 2 multipv 1 score cp -28 nodes 40 nps 40000 hashfull 0 tbhits 0 time 1 pv d2d4
-2024-01-26 16:56:18,659 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> bestmove d2d4
-2024-01-26 16:56:18,660 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << position startpos moves g1h3 g8f6 d2d4
-2024-01-26 16:56:18,660 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << go depth 2
-2024-01-26 16:56:18,660 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:18,660 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 1 seldepth 1 multipv 1 score cp -9 nodes 24 nps 24000 hashfull 0 tbhits 0 time 1 pv d7d5
-2024-01-26 16:56:18,661 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 2 seldepth 2 multipv 1 score cp -9 nodes 46 nps 46000 hashfull 0 tbhits 0 time 1 pv d7d5
-2024-01-26 16:56:18,661 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> bestmove d7d5
-2024-01-26 16:56:18,661 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << position startpos moves g1h3 g8f6 d2d4 d7d5
-2024-01-26 16:56:18,662 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << go depth 2
-2024-01-26 16:56:18,662 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:18,662 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 1 seldepth 1 multipv 1 score cp -59 nodes 48 nps 48000 hashfull 0 tbhits 0 time 1 pv g2g3
-2024-01-26 16:56:18,662 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 2 seldepth 2 multipv 1 score cp -59 nodes 78 nps 78000 hashfull 0 tbhits 0 time 1 pv g2g3
-2024-01-26 16:56:18,662 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> bestmove g2g3
-2024-01-26 16:56:18,663 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3
-2024-01-26 16:56:18,663 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << go depth 2
-2024-01-26 16:56:18,663 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:18,663 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 1 seldepth 1 multipv 1 score cp 13 nodes 34 nps 34000 hashfull 0 tbhits 0 time 1 pv c7c5
-2024-01-26 16:56:18,664 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 2 seldepth 2 multipv 1 score cp 13 nodes 65 nps 65000 hashfull 0 tbhits 0 time 1 pv c7c5
-2024-01-26 16:56:18,664 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> bestmove c7c5
-2024-01-26 16:56:18,664 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5
-2024-01-26 16:56:18,664 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << go depth 2
-2024-01-26 16:56:18,665 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:18,665 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 1 seldepth 1 multipv 1 score cp -18 nodes 36 nps 36000 hashfull 0 tbhits 0 time 1 pv d4c5
-2024-01-26 16:56:18,665 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 2 seldepth 2 multipv 1 score cp -18 nodes 65 nps 65000 hashfull 0 tbhits 0 time 1 pv d4c5
-2024-01-26 16:56:18,665 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> bestmove d4c5
-2024-01-26 16:56:18,666 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5
-2024-01-26 16:56:18,666 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << go depth 2
-2024-01-26 16:56:18,666 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:18,666 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 1 seldepth 1 multipv 1 score cp 525 nodes 40 nps 40000 hashfull 0 tbhits 0 time 1 pv d8a5 b2b4 a5b4 b1c3 b4c3 c1d2
-2024-01-26 16:56:18,666 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 2 seldepth 2 multipv 1 score cp 6 nodes 187 nps 187000 hashfull 0 tbhits 0 time 1 pv e7e5
-2024-01-26 16:56:18,667 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> bestmove e7e5
-2024-01-26 16:56:18,667 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5 e7e5
-2024-01-26 16:56:18,667 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << go depth 2
-2024-01-26 16:56:18,668 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:18,668 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 1 seldepth 1 multipv 1 score cp -78 nodes 50 nps 50000 hashfull 0 tbhits 0 time 1 pv f1g2 f8c5
-2024-01-26 16:56:18,668 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 2 seldepth 2 multipv 1 score cp -78 nodes 87 nps 87000 hashfull 0 tbhits 0 time 1 pv f1g2 f8c5
-2024-01-26 16:56:18,668 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> bestmove f1g2 ponder f8c5
-2024-01-26 16:56:18,669 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5 e7e5 f1g2
-2024-01-26 16:56:18,669 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << go depth 2
-2024-01-26 16:56:18,669 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:18,669 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 1 seldepth 1 multipv 1 score cp 78 nodes 38 nps 38000 hashfull 0 tbhits 0 time 1 pv f8c5
-2024-01-26 16:56:18,669 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 2 seldepth 2 multipv 1 score cp 78 nodes 74 nps 74000 hashfull 0 tbhits 0 time 1 pv f8c5
-2024-01-26 16:56:18,669 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> bestmove f8c5
-2024-01-26 16:56:18,670 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5 e7e5 f1g2 f8c5
-2024-01-26 16:56:18,670 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << go depth 2
-2024-01-26 16:56:18,671 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:18,671 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 1 seldepth 1 multipv 1 score cp -80 nodes 50 nps 50000 hashfull 0 tbhits 0 time 1 pv c2c4
-2024-01-26 16:56:18,671 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> info depth 2 seldepth 2 multipv 1 score cp -80 nodes 87 nps 87000 hashfull 0 tbhits 0 time 1 pv c2c4
-2024-01-26 16:56:18,671 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100795)>: >> bestmove c2c4
-2024-01-26 16:56:18,671 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100795)>: << quit
-2024-01-26 16:56:18,676 chess.engine (engine.py:1059) DEBUG <UciProtocol (pid=100795)>: Process exited
-2024-01-26 16:56:18,676 chess.engine (engine.py:1046) DEBUG <UciProtocol (pid=100795)>: Connection lost (exit code: 0, error: None)
-2024-01-26 16:56:18,676 backoff (_common.py:105) INFO Backing off play_game(...) for 1.8s (TypeError: cannot unpack non-iterable NoneType object)
-2024-01-26 16:56:18,677 lib.lichess (lichess.py:63) DEBUG Backing off 1.8 seconds after 2 tries calling function <function play_game at 0x7f265698ed40> with args () and kwargs {'li': <lib.lichess.Lichess object at 0x7f2656999b40>, 'control_queue': <AutoProxy[Queue] object, typeid 'Queue' at 0x7f265699a920>, 'user_profile': {'id': 'probabilistic-bot', 'username': 'probabilistic-bot', 'perfs': {'blitz': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'bullet': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'correspondence': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'classical': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'rapid': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}}, 'title': 'BOT', 'createdAt': 1706196643794, 'seenAt': 1706284268775, 'playTime': {'total': 1252, 'tv': 0}, 'url': 'https://lichess.org/@/probabilistic-bot', 'playing': 'https://lichess.org/4bebkUSq/white', 'count': {'all': 5, 'rated': 0, 'ai': 0, 'draw': 0, 'drawH': 0, 'loss': 4, 'lossH': 4, 'win': 1, 'winH': 1, 'bookmark': 0, 'playing': 1, 'import': 0, 'me': 0}, 'followable': True, 'following': False, 'blocking': False, 'followsYou': False}, 'config': <lib.config.Configuration object at 0x7f265699a8f0>, 'challenge_queue': <ListProxy object, typeid 'list' at 0x7f265699bc40>, 'correspondence_queue': <AutoProxy[Queue] object, typeid 'Queue' at 0x7f26569dfd00>, 'logging_queue': <AutoProxy[Queue] object, typeid 'Queue' at 0x7f26569df9a0>, 'game_id': '4bebkUSq'}
-2024-01-26 16:56:18,677 lib.lichess (lichess.py:65) DEBUG Exception: Traceback (most recent call last):
-  File "/home/luke/projects/pp-project/chess-engine-pp/.venv/lib/python3.10/site-packages/backoff/_sync.py", line 105, in retry
-    ret = target(*args, **kwargs)
-  File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lichess-bot.py", line 620, in play_game
-    engine.play_move(board,
-  File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lib/engine_wrapper.py", line 157, in play_move
-    best_move = self.search(board, time_limit, can_ponder, draw_offered, best_move)
-  File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lib/strategies.py", line 105, in search
-    mean, std = engine.simulate_game(board.copy(), move, 10)
-TypeError: cannot unpack non-iterable NoneType object
-
-2024-01-26 16:56:20,494 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-26 16:56:20,676 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "GET /api/bot/game/stream/4bebkUSq HTTP/1.1" 200 None
-2024-01-26 16:56:20,677 __mp_main__ (lichess-bot.py:572) DEBUG Initial state: {'id': '4bebkUSq', 'variant': {'key': 'standard', 'name': 'Standard', 'short': 'Std'}, 'speed': 'rapid', 'perf': {'name': 'Rapid'}, 'rated': False, 'createdAt': 1706284502377, 'white': {'id': 'probabilistic-bot', 'name': 'probabilistic-bot', 'title': 'BOT', 'rating': 2000, 'provisional': True}, 'black': {'id': 'luk3k', 'name': 'luk3k', 'title': None, 'rating': 1500, 'provisional': True}, 'initialFen': 'startpos', 'clock': {'initial': 480000, 'increment': 3000}, 'type': 'gameFull', 'state': {'type': 'gameState', 'moves': '', 'wtime': 480000, 'btime': 480000, 'winc': 3000, 'binc': 3000, 'status': 'started'}}
-2024-01-26 16:56:20,677 lib.engine_wrapper (engine_wrapper.py:65) DEBUG Starting engine: ['/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/engines/ProbStockfish']
-2024-01-26 16:56:20,677 __mp_main__ (lichess-bot.py:578) DEBUG The engine for game 4bebkUSq has pid=?
-2024-01-26 16:56:20,677 __mp_main__ (lichess-bot.py:581) INFO +++ https://lichess.org/4bebkUSq/white Rapid vs luk3k (1500?) (4bebkUSq)
-2024-01-26 16:56:20,678 lib.conversation (conversation.py:83) INFO *** https://lichess.org/4bebkUSq/white [player] probabilistic-bot: Hi! I'm probabilistic-bot. Good luck! Type !help for a list of commands I can respond to.
-2024-01-26 16:56:20,712 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/4bebkUSq/chat HTTP/1.1" 200 11
-2024-01-26 16:56:20,712 lib.conversation (conversation.py:83) INFO *** https://lichess.org/4bebkUSq/white [spectator] probabilistic-bot: Hi! I'm probabilistic-bot. Type !help for a list of commands I can respond to.
-2024-01-26 16:56:20,746 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/4bebkUSq/chat HTTP/1.1" 200 11
-2024-01-26 16:56:20,747 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-26 16:56:20,747 __mp_main__ (lichess-bot.py:689) INFO move: 1
-2024-01-26 16:56:20,747 lib.engine_wrapper (engine_wrapper.py:650) INFO Searching for time 10 seconds for game 4bebkUSq
-2024-01-26 16:56:20,748 asyncio (selector_events.py:54) DEBUG Using selector: EpollSelector
-2024-01-26 16:56:20,749 chess.engine (engine.py:124) DEBUG Using PidfdChildWatcher
-2024-01-26 16:56:20,749 chess.engine (engine.py:1040) DEBUG <UciProtocol (pid=100802)>: Connection made
-2024-01-26 16:56:20,750 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << uci
-2024-01-26 16:56:20,751 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> Stockfish 16 by the Stockfish developers (see AUTHORS file)
-2024-01-26 16:56:20,865 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> id name Stockfish 16
-2024-01-26 16:56:20,866 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> id author the Stockfish developers (see AUTHORS file)
-2024-01-26 16:56:20,866 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> 
-2024-01-26 16:56:20,866 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name Debug Log File type string default 
-2024-01-26 16:56:20,866 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name Threads type spin default 1 min 1 max 1024
-2024-01-26 16:56:20,866 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name Hash type spin default 16 min 1 max 33554432
-2024-01-26 16:56:20,866 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name Clear Hash type button
-2024-01-26 16:56:20,866 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name Ponder type check default false
-2024-01-26 16:56:20,866 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name MultiPV type spin default 1 min 1 max 500
-2024-01-26 16:56:20,866 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name Skill Level type spin default 20 min 0 max 20
-2024-01-26 16:56:20,867 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name Move Overhead type spin default 10 min 0 max 5000
-2024-01-26 16:56:20,867 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name Slow Mover type spin default 100 min 10 max 1000
-2024-01-26 16:56:20,867 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name nodestime type spin default 0 min 0 max 10000
-2024-01-26 16:56:20,867 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name UCI_Chess960 type check default false
-2024-01-26 16:56:20,867 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name UCI_AnalyseMode type check default false
-2024-01-26 16:56:20,867 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name UCI_LimitStrength type check default false
-2024-01-26 16:56:20,867 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name UCI_Elo type spin default 1320 min 1320 max 3190
-2024-01-26 16:56:20,867 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name UCI_ShowWDL type check default false
-2024-01-26 16:56:20,867 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name SyzygyPath type string default <empty>
-2024-01-26 16:56:20,867 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name SyzygyProbeDepth type spin default 1 min 1 max 100
-2024-01-26 16:56:20,867 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name Syzygy50MoveRule type check default true
-2024-01-26 16:56:20,868 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name SyzygyProbeLimit type spin default 7 min 0 max 7
-2024-01-26 16:56:20,868 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name Use NNUE type check default true
-2024-01-26 16:56:20,868 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> option name EvalFile type string default nn-5af11540bbfe.nnue
-2024-01-26 16:56:20,868 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> uciok
-2024-01-26 16:56:20,868 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << ucinewgame
-2024-01-26 16:56:20,869 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << isready
-2024-01-26 16:56:20,870 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> readyok
-2024-01-26 16:56:20,871 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << position startpos moves g1h3
-2024-01-26 16:56:20,871 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << go depth 2
-2024-01-26 16:56:20,871 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:20,871 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 1 seldepth 1 multipv 1 score cp -5 nodes 20 nps 20000 hashfull 0 tbhits 0 time 1 pv g8f6
-2024-01-26 16:56:20,871 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 2 seldepth 2 multipv 1 score cp -5 nodes 40 nps 40000 hashfull 0 tbhits 0 time 1 pv g8f6
-2024-01-26 16:56:20,872 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> bestmove g8f6
-2024-01-26 16:56:20,872 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << position startpos moves g1h3 g8f6
-2024-01-26 16:56:20,872 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << go depth 2
-2024-01-26 16:56:20,873 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:20,873 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 1 seldepth 1 multipv 1 score cp -28 nodes 20 nps 20000 hashfull 0 tbhits 0 time 1 pv d2d4
-2024-01-26 16:56:20,873 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 2 seldepth 2 multipv 1 score cp -28 nodes 40 nps 40000 hashfull 0 tbhits 0 time 1 pv d2d4
-2024-01-26 16:56:20,873 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> bestmove d2d4
-2024-01-26 16:56:20,874 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << position startpos moves g1h3 g8f6 d2d4
-2024-01-26 16:56:20,874 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << go depth 2
-2024-01-26 16:56:20,874 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:20,874 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 1 seldepth 1 multipv 1 score cp -9 nodes 24 nps 24000 hashfull 0 tbhits 0 time 1 pv d7d5
-2024-01-26 16:56:20,874 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 2 seldepth 2 multipv 1 score cp -9 nodes 46 nps 46000 hashfull 0 tbhits 0 time 1 pv d7d5
-2024-01-26 16:56:20,875 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> bestmove d7d5
-2024-01-26 16:56:20,875 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << position startpos moves g1h3 g8f6 d2d4 d7d5
-2024-01-26 16:56:20,875 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << go depth 2
-2024-01-26 16:56:20,876 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:20,876 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 1 seldepth 1 multipv 1 score cp -59 nodes 48 nps 48000 hashfull 0 tbhits 0 time 1 pv g2g3
-2024-01-26 16:56:20,876 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 2 seldepth 2 multipv 1 score cp -59 nodes 78 nps 78000 hashfull 0 tbhits 0 time 1 pv g2g3
-2024-01-26 16:56:20,876 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> bestmove g2g3
-2024-01-26 16:56:20,877 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3
-2024-01-26 16:56:20,877 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << go depth 2
-2024-01-26 16:56:20,877 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:20,877 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 1 seldepth 1 multipv 1 score cp 13 nodes 34 nps 34000 hashfull 0 tbhits 0 time 1 pv c7c5
-2024-01-26 16:56:20,877 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 2 seldepth 2 multipv 1 score cp 13 nodes 65 nps 65000 hashfull 0 tbhits 0 time 1 pv c7c5
-2024-01-26 16:56:20,878 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> bestmove c7c5
-2024-01-26 16:56:20,878 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5
-2024-01-26 16:56:20,879 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << go depth 2
-2024-01-26 16:56:20,879 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:20,879 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 1 seldepth 1 multipv 1 score cp -18 nodes 36 nps 36000 hashfull 0 tbhits 0 time 1 pv d4c5
-2024-01-26 16:56:20,879 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 2 seldepth 2 multipv 1 score cp -18 nodes 65 nps 65000 hashfull 0 tbhits 0 time 1 pv d4c5
-2024-01-26 16:56:20,879 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> bestmove d4c5
-2024-01-26 16:56:20,880 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5
-2024-01-26 16:56:20,880 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << go depth 2
-2024-01-26 16:56:20,880 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:20,881 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 1 seldepth 1 multipv 1 score cp 525 nodes 40 nps 20000 hashfull 0 tbhits 0 time 2 pv d8a5 b2b4 a5b4 b1c3 b4c3 c1d2
-2024-01-26 16:56:20,881 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 2 seldepth 2 multipv 1 score cp 6 nodes 187 nps 93500 hashfull 0 tbhits 0 time 2 pv e7e5
-2024-01-26 16:56:20,881 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> bestmove e7e5
-2024-01-26 16:56:20,881 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5 e7e5
-2024-01-26 16:56:20,882 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << go depth 2
-2024-01-26 16:56:20,882 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:20,882 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 1 seldepth 1 multipv 1 score cp -78 nodes 50 nps 50000 hashfull 0 tbhits 0 time 1 pv f1g2 f8c5
-2024-01-26 16:56:20,882 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 2 seldepth 2 multipv 1 score cp -78 nodes 87 nps 87000 hashfull 0 tbhits 0 time 1 pv f1g2 f8c5
-2024-01-26 16:56:20,882 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> bestmove f1g2 ponder f8c5
-2024-01-26 16:56:20,883 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5 e7e5 f1g2
-2024-01-26 16:56:20,883 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << go depth 2
-2024-01-26 16:56:20,883 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:20,884 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 1 seldepth 1 multipv 1 score cp 78 nodes 38 nps 38000 hashfull 0 tbhits 0 time 1 pv f8c5
-2024-01-26 16:56:20,884 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 2 seldepth 2 multipv 1 score cp 78 nodes 74 nps 74000 hashfull 0 tbhits 0 time 1 pv f8c5
-2024-01-26 16:56:20,884 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> bestmove f8c5
-2024-01-26 16:56:20,885 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5 e7e5 f1g2 f8c5
-2024-01-26 16:56:20,885 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << go depth 2
-2024-01-26 16:56:20,885 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:20,885 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 1 seldepth 1 multipv 1 score cp -80 nodes 50 nps 50000 hashfull 0 tbhits 0 time 1 pv c2c4
-2024-01-26 16:56:20,885 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> info depth 2 seldepth 2 multipv 1 score cp -80 nodes 87 nps 87000 hashfull 0 tbhits 0 time 1 pv c2c4
-2024-01-26 16:56:20,885 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100802)>: >> bestmove c2c4
-2024-01-26 16:56:20,886 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100802)>: << quit
-2024-01-26 16:56:20,891 chess.engine (engine.py:1059) DEBUG <UciProtocol (pid=100802)>: Process exited
-2024-01-26 16:56:20,891 chess.engine (engine.py:1046) DEBUG <UciProtocol (pid=100802)>: Connection lost (exit code: 0, error: None)
-2024-01-26 16:56:20,892 backoff (_common.py:105) INFO Backing off play_game(...) for 3.1s (TypeError: cannot unpack non-iterable NoneType object)
-2024-01-26 16:56:20,892 lib.lichess (lichess.py:63) DEBUG Backing off 3.1 seconds after 3 tries calling function <function play_game at 0x7f265698ed40> with args () and kwargs {'li': <lib.lichess.Lichess object at 0x7f2656999b40>, 'control_queue': <AutoProxy[Queue] object, typeid 'Queue' at 0x7f265699a920>, 'user_profile': {'id': 'probabilistic-bot', 'username': 'probabilistic-bot', 'perfs': {'blitz': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'bullet': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'correspondence': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'classical': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'rapid': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}}, 'title': 'BOT', 'createdAt': 1706196643794, 'seenAt': 1706284268775, 'playTime': {'total': 1252, 'tv': 0}, 'url': 'https://lichess.org/@/probabilistic-bot', 'playing': 'https://lichess.org/4bebkUSq/white', 'count': {'all': 5, 'rated': 0, 'ai': 0, 'draw': 0, 'drawH': 0, 'loss': 4, 'lossH': 4, 'win': 1, 'winH': 1, 'bookmark': 0, 'playing': 1, 'import': 0, 'me': 0}, 'followable': True, 'following': False, 'blocking': False, 'followsYou': False}, 'config': <lib.config.Configuration object at 0x7f265699a8f0>, 'challenge_queue': <ListProxy object, typeid 'list' at 0x7f265699bc40>, 'correspondence_queue': <AutoProxy[Queue] object, typeid 'Queue' at 0x7f26569dfd00>, 'logging_queue': <AutoProxy[Queue] object, typeid 'Queue' at 0x7f26569df9a0>, 'game_id': '4bebkUSq'}
-2024-01-26 16:56:20,892 lib.lichess (lichess.py:65) DEBUG Exception: Traceback (most recent call last):
-  File "/home/luke/projects/pp-project/chess-engine-pp/.venv/lib/python3.10/site-packages/backoff/_sync.py", line 105, in retry
-    ret = target(*args, **kwargs)
-  File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lichess-bot.py", line 620, in play_game
-    engine.play_move(board,
-  File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lib/engine_wrapper.py", line 157, in play_move
-    best_move = self.search(board, time_limit, can_ponder, draw_offered, best_move)
-  File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lib/strategies.py", line 105, in search
-    mean, std = engine.simulate_game(board.copy(), move, 10)
-TypeError: cannot unpack non-iterable NoneType object
-
-2024-01-26 16:56:24,027 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-26 16:56:24,209 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "GET /api/bot/game/stream/4bebkUSq HTTP/1.1" 200 None
-2024-01-26 16:56:24,210 __mp_main__ (lichess-bot.py:572) DEBUG Initial state: {'id': '4bebkUSq', 'variant': {'key': 'standard', 'name': 'Standard', 'short': 'Std'}, 'speed': 'rapid', 'perf': {'name': 'Rapid'}, 'rated': False, 'createdAt': 1706284502377, 'white': {'id': 'probabilistic-bot', 'name': 'probabilistic-bot', 'title': 'BOT', 'rating': 2000, 'provisional': True}, 'black': {'id': 'luk3k', 'name': 'luk3k', 'title': None, 'rating': 1500, 'provisional': True}, 'initialFen': 'startpos', 'clock': {'initial': 480000, 'increment': 3000}, 'type': 'gameFull', 'state': {'type': 'gameState', 'moves': '', 'wtime': 480000, 'btime': 480000, 'winc': 3000, 'binc': 3000, 'status': 'started'}}
-2024-01-26 16:56:24,210 lib.engine_wrapper (engine_wrapper.py:65) DEBUG Starting engine: ['/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/engines/ProbStockfish']
-2024-01-26 16:56:24,210 __mp_main__ (lichess-bot.py:578) DEBUG The engine for game 4bebkUSq has pid=?
-2024-01-26 16:56:24,211 __mp_main__ (lichess-bot.py:581) INFO +++ https://lichess.org/4bebkUSq/white Rapid vs luk3k (1500?) (4bebkUSq)
-2024-01-26 16:56:24,211 lib.conversation (conversation.py:83) INFO *** https://lichess.org/4bebkUSq/white [player] probabilistic-bot: Hi! I'm probabilistic-bot. Good luck! Type !help for a list of commands I can respond to.
-2024-01-26 16:56:24,249 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/4bebkUSq/chat HTTP/1.1" 200 11
-2024-01-26 16:56:24,249 lib.conversation (conversation.py:83) INFO *** https://lichess.org/4bebkUSq/white [spectator] probabilistic-bot: Hi! I'm probabilistic-bot. Type !help for a list of commands I can respond to.
-2024-01-26 16:56:24,304 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/4bebkUSq/chat HTTP/1.1" 200 11
-2024-01-26 16:56:24,305 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-26 16:56:24,305 __mp_main__ (lichess-bot.py:689) INFO move: 1
-2024-01-26 16:56:24,305 lib.engine_wrapper (engine_wrapper.py:650) INFO Searching for time 10 seconds for game 4bebkUSq
-2024-01-26 16:56:24,306 asyncio (selector_events.py:54) DEBUG Using selector: EpollSelector
-2024-01-26 16:56:24,307 chess.engine (engine.py:124) DEBUG Using PidfdChildWatcher
-2024-01-26 16:56:24,308 chess.engine (engine.py:1040) DEBUG <UciProtocol (pid=100811)>: Connection made
-2024-01-26 16:56:24,308 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << uci
-2024-01-26 16:56:24,310 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> Stockfish 16 by the Stockfish developers (see AUTHORS file)
-2024-01-26 16:56:24,429 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> id name Stockfish 16
-2024-01-26 16:56:24,429 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> id author the Stockfish developers (see AUTHORS file)
-2024-01-26 16:56:24,429 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> 
-2024-01-26 16:56:24,429 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name Debug Log File type string default 
-2024-01-26 16:56:24,429 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name Threads type spin default 1 min 1 max 1024
-2024-01-26 16:56:24,429 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name Hash type spin default 16 min 1 max 33554432
-2024-01-26 16:56:24,429 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name Clear Hash type button
-2024-01-26 16:56:24,429 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name Ponder type check default false
-2024-01-26 16:56:24,429 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name MultiPV type spin default 1 min 1 max 500
-2024-01-26 16:56:24,429 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name Skill Level type spin default 20 min 0 max 20
-2024-01-26 16:56:24,429 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name Move Overhead type spin default 10 min 0 max 5000
-2024-01-26 16:56:24,430 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name Slow Mover type spin default 100 min 10 max 1000
-2024-01-26 16:56:24,430 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name nodestime type spin default 0 min 0 max 10000
-2024-01-26 16:56:24,430 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name UCI_Chess960 type check default false
-2024-01-26 16:56:24,430 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name UCI_AnalyseMode type check default false
-2024-01-26 16:56:24,430 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name UCI_LimitStrength type check default false
-2024-01-26 16:56:24,430 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name UCI_Elo type spin default 1320 min 1320 max 3190
-2024-01-26 16:56:24,430 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name UCI_ShowWDL type check default false
-2024-01-26 16:56:24,430 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name SyzygyPath type string default <empty>
-2024-01-26 16:56:24,431 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name SyzygyProbeDepth type spin default 1 min 1 max 100
-2024-01-26 16:56:24,431 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name Syzygy50MoveRule type check default true
-2024-01-26 16:56:24,431 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name SyzygyProbeLimit type spin default 7 min 0 max 7
-2024-01-26 16:56:24,431 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name Use NNUE type check default true
-2024-01-26 16:56:24,431 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> option name EvalFile type string default nn-5af11540bbfe.nnue
-2024-01-26 16:56:24,431 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> uciok
-2024-01-26 16:56:24,432 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << ucinewgame
-2024-01-26 16:56:24,432 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << isready
-2024-01-26 16:56:24,434 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> readyok
-2024-01-26 16:56:24,434 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << position startpos moves g1h3
-2024-01-26 16:56:24,434 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << go depth 2
-2024-01-26 16:56:24,434 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:24,435 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 1 seldepth 1 multipv 1 score cp -5 nodes 20 nps 20000 hashfull 0 tbhits 0 time 1 pv g8f6
-2024-01-26 16:56:24,435 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 2 seldepth 2 multipv 1 score cp -5 nodes 40 nps 40000 hashfull 0 tbhits 0 time 1 pv g8f6
-2024-01-26 16:56:24,435 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> bestmove g8f6
-2024-01-26 16:56:24,436 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << position startpos moves g1h3 g8f6
-2024-01-26 16:56:24,436 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << go depth 2
-2024-01-26 16:56:24,436 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:24,436 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 1 seldepth 1 multipv 1 score cp -28 nodes 20 nps 20000 hashfull 0 tbhits 0 time 1 pv d2d4
-2024-01-26 16:56:24,436 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 2 seldepth 2 multipv 1 score cp -28 nodes 40 nps 40000 hashfull 0 tbhits 0 time 1 pv d2d4
-2024-01-26 16:56:24,436 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> bestmove d2d4
-2024-01-26 16:56:24,437 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << position startpos moves g1h3 g8f6 d2d4
-2024-01-26 16:56:24,437 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << go depth 2
-2024-01-26 16:56:24,438 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:24,438 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 1 seldepth 1 multipv 1 score cp -9 nodes 24 nps 24000 hashfull 0 tbhits 0 time 1 pv d7d5
-2024-01-26 16:56:24,438 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 2 seldepth 2 multipv 1 score cp -9 nodes 46 nps 46000 hashfull 0 tbhits 0 time 1 pv d7d5
-2024-01-26 16:56:24,438 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> bestmove d7d5
-2024-01-26 16:56:24,439 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << position startpos moves g1h3 g8f6 d2d4 d7d5
-2024-01-26 16:56:24,439 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << go depth 2
-2024-01-26 16:56:24,439 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:24,439 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 1 seldepth 1 multipv 1 score cp -59 nodes 48 nps 48000 hashfull 0 tbhits 0 time 1 pv g2g3
-2024-01-26 16:56:24,439 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 2 seldepth 2 multipv 1 score cp -59 nodes 78 nps 78000 hashfull 0 tbhits 0 time 1 pv g2g3
-2024-01-26 16:56:24,439 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> bestmove g2g3
-2024-01-26 16:56:24,440 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3
-2024-01-26 16:56:24,440 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << go depth 2
-2024-01-26 16:56:24,441 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:24,441 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 1 seldepth 1 multipv 1 score cp 13 nodes 34 nps 34000 hashfull 0 tbhits 0 time 1 pv c7c5
-2024-01-26 16:56:24,441 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 2 seldepth 2 multipv 1 score cp 13 nodes 65 nps 65000 hashfull 0 tbhits 0 time 1 pv c7c5
-2024-01-26 16:56:24,441 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> bestmove c7c5
-2024-01-26 16:56:24,442 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5
-2024-01-26 16:56:24,442 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << go depth 2
-2024-01-26 16:56:24,442 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:24,442 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 1 seldepth 1 multipv 1 score cp -18 nodes 36 nps 36000 hashfull 0 tbhits 0 time 1 pv d4c5
-2024-01-26 16:56:24,442 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 2 seldepth 2 multipv 1 score cp -18 nodes 65 nps 65000 hashfull 0 tbhits 0 time 1 pv d4c5
-2024-01-26 16:56:24,442 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> bestmove d4c5
-2024-01-26 16:56:24,443 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5
-2024-01-26 16:56:24,443 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << go depth 2
-2024-01-26 16:56:24,444 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:24,444 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 1 seldepth 1 multipv 1 score cp 525 nodes 40 nps 40000 hashfull 0 tbhits 0 time 1 pv d8a5 b2b4 a5b4 b1c3 b4c3 c1d2
-2024-01-26 16:56:24,444 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 2 seldepth 2 multipv 1 score cp 6 nodes 187 nps 187000 hashfull 0 tbhits 0 time 1 pv e7e5
-2024-01-26 16:56:24,444 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> bestmove e7e5
-2024-01-26 16:56:24,445 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5 e7e5
-2024-01-26 16:56:24,445 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << go depth 2
-2024-01-26 16:56:24,445 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:24,445 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 1 seldepth 1 multipv 1 score cp -78 nodes 50 nps 50000 hashfull 0 tbhits 0 time 1 pv f1g2 f8c5
-2024-01-26 16:56:24,445 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 2 seldepth 2 multipv 1 score cp -78 nodes 87 nps 87000 hashfull 0 tbhits 0 time 1 pv f1g2 f8c5
-2024-01-26 16:56:24,446 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> bestmove f1g2 ponder f8c5
-2024-01-26 16:56:24,446 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5 e7e5 f1g2
-2024-01-26 16:56:24,447 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << go depth 2
-2024-01-26 16:56:24,447 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:24,447 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 1 seldepth 1 multipv 1 score cp 78 nodes 38 nps 38000 hashfull 0 tbhits 0 time 1 pv f8c5
-2024-01-26 16:56:24,447 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 2 seldepth 2 multipv 1 score cp 78 nodes 74 nps 74000 hashfull 0 tbhits 0 time 1 pv f8c5
-2024-01-26 16:56:24,447 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> bestmove f8c5
-2024-01-26 16:56:24,448 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5 e7e5 f1g2 f8c5
-2024-01-26 16:56:24,448 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << go depth 2
-2024-01-26 16:56:24,448 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:24,449 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 1 seldepth 1 multipv 1 score cp -80 nodes 50 nps 50000 hashfull 0 tbhits 0 time 1 pv c2c4
-2024-01-26 16:56:24,449 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> info depth 2 seldepth 2 multipv 1 score cp -80 nodes 87 nps 87000 hashfull 0 tbhits 0 time 1 pv c2c4
-2024-01-26 16:56:24,449 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100811)>: >> bestmove c2c4
-2024-01-26 16:56:24,449 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100811)>: << quit
-2024-01-26 16:56:24,454 chess.engine (engine.py:1059) DEBUG <UciProtocol (pid=100811)>: Process exited
-2024-01-26 16:56:24,454 chess.engine (engine.py:1046) DEBUG <UciProtocol (pid=100811)>: Connection lost (exit code: 0, error: None)
-2024-01-26 16:56:24,454 backoff (_common.py:105) INFO Backing off play_game(...) for 2.8s (TypeError: cannot unpack non-iterable NoneType object)
-2024-01-26 16:56:24,455 lib.lichess (lichess.py:63) DEBUG Backing off 2.8 seconds after 4 tries calling function <function play_game at 0x7f265698ed40> with args () and kwargs {'li': <lib.lichess.Lichess object at 0x7f2656999b40>, 'control_queue': <AutoProxy[Queue] object, typeid 'Queue' at 0x7f265699a920>, 'user_profile': {'id': 'probabilistic-bot', 'username': 'probabilistic-bot', 'perfs': {'blitz': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'bullet': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'correspondence': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'classical': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'rapid': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}}, 'title': 'BOT', 'createdAt': 1706196643794, 'seenAt': 1706284268775, 'playTime': {'total': 1252, 'tv': 0}, 'url': 'https://lichess.org/@/probabilistic-bot', 'playing': 'https://lichess.org/4bebkUSq/white', 'count': {'all': 5, 'rated': 0, 'ai': 0, 'draw': 0, 'drawH': 0, 'loss': 4, 'lossH': 4, 'win': 1, 'winH': 1, 'bookmark': 0, 'playing': 1, 'import': 0, 'me': 0}, 'followable': True, 'following': False, 'blocking': False, 'followsYou': False}, 'config': <lib.config.Configuration object at 0x7f265699a8f0>, 'challenge_queue': <ListProxy object, typeid 'list' at 0x7f265699bc40>, 'correspondence_queue': <AutoProxy[Queue] object, typeid 'Queue' at 0x7f26569dfd00>, 'logging_queue': <AutoProxy[Queue] object, typeid 'Queue' at 0x7f26569df9a0>, 'game_id': '4bebkUSq'}
-2024-01-26 16:56:24,455 lib.lichess (lichess.py:65) DEBUG Exception: Traceback (most recent call last):
-  File "/home/luke/projects/pp-project/chess-engine-pp/.venv/lib/python3.10/site-packages/backoff/_sync.py", line 105, in retry
-    ret = target(*args, **kwargs)
-  File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lichess-bot.py", line 620, in play_game
-    engine.play_move(board,
-  File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lib/engine_wrapper.py", line 157, in play_move
-    best_move = self.search(board, time_limit, can_ponder, draw_offered, best_move)
-  File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lib/strategies.py", line 105, in search
-    mean, std = engine.simulate_game(board.copy(), move, 10)
-TypeError: cannot unpack non-iterable NoneType object
-
-2024-01-26 16:56:27,307 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-26 16:56:27,499 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "GET /api/bot/game/stream/4bebkUSq HTTP/1.1" 200 None
-2024-01-26 16:56:27,499 __mp_main__ (lichess-bot.py:572) DEBUG Initial state: {'id': '4bebkUSq', 'variant': {'key': 'standard', 'name': 'Standard', 'short': 'Std'}, 'speed': 'rapid', 'perf': {'name': 'Rapid'}, 'rated': False, 'createdAt': 1706284502377, 'white': {'id': 'probabilistic-bot', 'name': 'probabilistic-bot', 'title': 'BOT', 'rating': 2000, 'provisional': True}, 'black': {'id': 'luk3k', 'name': 'luk3k', 'title': None, 'rating': 1500, 'provisional': True}, 'initialFen': 'startpos', 'clock': {'initial': 480000, 'increment': 3000}, 'type': 'gameFull', 'state': {'type': 'gameState', 'moves': '', 'wtime': 480000, 'btime': 480000, 'winc': 3000, 'binc': 3000, 'status': 'started'}}
-2024-01-26 16:56:27,499 lib.engine_wrapper (engine_wrapper.py:65) DEBUG Starting engine: ['/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/engines/ProbStockfish']
-2024-01-26 16:56:27,499 __mp_main__ (lichess-bot.py:578) DEBUG The engine for game 4bebkUSq has pid=?
-2024-01-26 16:56:27,500 __mp_main__ (lichess-bot.py:581) INFO +++ https://lichess.org/4bebkUSq/white Rapid vs luk3k (1500?) (4bebkUSq)
-2024-01-26 16:56:27,500 lib.conversation (conversation.py:83) INFO *** https://lichess.org/4bebkUSq/white [player] probabilistic-bot: Hi! I'm probabilistic-bot. Good luck! Type !help for a list of commands I can respond to.
-2024-01-26 16:56:27,535 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/4bebkUSq/chat HTTP/1.1" 200 11
-2024-01-26 16:56:27,535 lib.conversation (conversation.py:83) INFO *** https://lichess.org/4bebkUSq/white [spectator] probabilistic-bot: Hi! I'm probabilistic-bot. Type !help for a list of commands I can respond to.
-2024-01-26 16:56:27,571 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/4bebkUSq/chat HTTP/1.1" 200 11
-2024-01-26 16:56:27,571 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-26 16:56:27,572 __mp_main__ (lichess-bot.py:689) INFO move: 1
-2024-01-26 16:56:27,572 lib.engine_wrapper (engine_wrapper.py:650) INFO Searching for time 10 seconds for game 4bebkUSq
-2024-01-26 16:56:27,572 asyncio (selector_events.py:54) DEBUG Using selector: EpollSelector
-2024-01-26 16:56:27,573 chess.engine (engine.py:124) DEBUG Using PidfdChildWatcher
-2024-01-26 16:56:27,574 chess.engine (engine.py:1040) DEBUG <UciProtocol (pid=100820)>: Connection made
-2024-01-26 16:56:27,574 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << uci
-2024-01-26 16:56:27,576 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> Stockfish 16 by the Stockfish developers (see AUTHORS file)
-2024-01-26 16:56:27,695 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> id name Stockfish 16
-2024-01-26 16:56:27,696 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> id author the Stockfish developers (see AUTHORS file)
-2024-01-26 16:56:27,696 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> 
-2024-01-26 16:56:27,696 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name Debug Log File type string default 
-2024-01-26 16:56:27,696 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name Threads type spin default 1 min 1 max 1024
-2024-01-26 16:56:27,696 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name Hash type spin default 16 min 1 max 33554432
-2024-01-26 16:56:27,697 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name Clear Hash type button
-2024-01-26 16:56:27,697 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name Ponder type check default false
-2024-01-26 16:56:27,697 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name MultiPV type spin default 1 min 1 max 500
-2024-01-26 16:56:27,697 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name Skill Level type spin default 20 min 0 max 20
-2024-01-26 16:56:27,697 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name Move Overhead type spin default 10 min 0 max 5000
-2024-01-26 16:56:27,697 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name Slow Mover type spin default 100 min 10 max 1000
-2024-01-26 16:56:27,697 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name nodestime type spin default 0 min 0 max 10000
-2024-01-26 16:56:27,698 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name UCI_Chess960 type check default false
-2024-01-26 16:56:27,698 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name UCI_AnalyseMode type check default false
-2024-01-26 16:56:27,698 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name UCI_LimitStrength type check default false
-2024-01-26 16:56:27,698 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name UCI_Elo type spin default 1320 min 1320 max 3190
-2024-01-26 16:56:27,698 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name UCI_ShowWDL type check default false
-2024-01-26 16:56:27,698 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name SyzygyPath type string default <empty>
-2024-01-26 16:56:27,698 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name SyzygyProbeDepth type spin default 1 min 1 max 100
-2024-01-26 16:56:27,698 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name Syzygy50MoveRule type check default true
-2024-01-26 16:56:27,699 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name SyzygyProbeLimit type spin default 7 min 0 max 7
-2024-01-26 16:56:27,699 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name Use NNUE type check default true
-2024-01-26 16:56:27,699 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> option name EvalFile type string default nn-5af11540bbfe.nnue
-2024-01-26 16:56:27,699 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> uciok
-2024-01-26 16:56:27,700 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << ucinewgame
-2024-01-26 16:56:27,700 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << isready
-2024-01-26 16:56:27,702 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> readyok
-2024-01-26 16:56:27,702 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << position startpos moves g1h3
-2024-01-26 16:56:27,702 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << go depth 2
-2024-01-26 16:56:27,702 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:27,702 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 1 seldepth 1 multipv 1 score cp -5 nodes 20 nps 20000 hashfull 0 tbhits 0 time 1 pv g8f6
-2024-01-26 16:56:27,702 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 2 seldepth 2 multipv 1 score cp -5 nodes 40 nps 40000 hashfull 0 tbhits 0 time 1 pv g8f6
-2024-01-26 16:56:27,703 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> bestmove g8f6
-2024-01-26 16:56:27,703 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << position startpos moves g1h3 g8f6
-2024-01-26 16:56:27,703 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << go depth 2
-2024-01-26 16:56:27,704 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:27,704 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 1 seldepth 1 multipv 1 score cp -28 nodes 20 nps 20000 hashfull 0 tbhits 0 time 1 pv d2d4
-2024-01-26 16:56:27,704 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 2 seldepth 2 multipv 1 score cp -28 nodes 40 nps 40000 hashfull 0 tbhits 0 time 1 pv d2d4
-2024-01-26 16:56:27,704 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> bestmove d2d4
-2024-01-26 16:56:27,704 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << position startpos moves g1h3 g8f6 d2d4
-2024-01-26 16:56:27,705 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << go depth 2
-2024-01-26 16:56:27,705 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:27,705 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 1 seldepth 1 multipv 1 score cp -9 nodes 24 nps 24000 hashfull 0 tbhits 0 time 1 pv d7d5
-2024-01-26 16:56:27,705 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 2 seldepth 2 multipv 1 score cp -9 nodes 46 nps 46000 hashfull 0 tbhits 0 time 1 pv d7d5
-2024-01-26 16:56:27,705 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> bestmove d7d5
-2024-01-26 16:56:27,706 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << position startpos moves g1h3 g8f6 d2d4 d7d5
-2024-01-26 16:56:27,706 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << go depth 2
-2024-01-26 16:56:27,706 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:27,706 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 1 seldepth 1 multipv 1 score cp -59 nodes 48 nps 48000 hashfull 0 tbhits 0 time 1 pv g2g3
-2024-01-26 16:56:27,706 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 2 seldepth 2 multipv 1 score cp -59 nodes 78 nps 78000 hashfull 0 tbhits 0 time 1 pv g2g3
-2024-01-26 16:56:27,707 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> bestmove g2g3
-2024-01-26 16:56:27,707 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3
-2024-01-26 16:56:27,707 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << go depth 2
-2024-01-26 16:56:27,707 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:27,707 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 1 seldepth 1 multipv 1 score cp 13 nodes 34 nps 17000 hashfull 0 tbhits 0 time 2 pv c7c5
-2024-01-26 16:56:27,708 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 2 seldepth 2 multipv 1 score cp 13 nodes 65 nps 32500 hashfull 0 tbhits 0 time 2 pv c7c5
-2024-01-26 16:56:27,708 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> bestmove c7c5
-2024-01-26 16:56:27,708 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5
-2024-01-26 16:56:27,708 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << go depth 2
-2024-01-26 16:56:27,708 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:27,708 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 1 seldepth 1 multipv 1 score cp -18 nodes 36 nps 18000 hashfull 0 tbhits 0 time 2 pv d4c5
-2024-01-26 16:56:27,709 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 2 seldepth 2 multipv 1 score cp -18 nodes 65 nps 32500 hashfull 0 tbhits 0 time 2 pv d4c5
-2024-01-26 16:56:27,709 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> bestmove d4c5
-2024-01-26 16:56:27,709 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5
-2024-01-26 16:56:27,709 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << go depth 2
-2024-01-26 16:56:27,709 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:27,709 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 1 seldepth 1 multipv 1 score cp 525 nodes 40 nps 20000 hashfull 0 tbhits 0 time 2 pv d8a5 b2b4 a5b4 b1c3 b4c3 c1d2
-2024-01-26 16:56:27,710 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 2 seldepth 2 multipv 1 score cp 6 nodes 187 nps 93500 hashfull 0 tbhits 0 time 2 pv e7e5
-2024-01-26 16:56:27,710 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> bestmove e7e5
-2024-01-26 16:56:27,710 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5 e7e5
-2024-01-26 16:56:27,710 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << go depth 2
-2024-01-26 16:56:27,710 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:27,711 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 1 seldepth 1 multipv 1 score cp -78 nodes 50 nps 50000 hashfull 0 tbhits 0 time 1 pv f1g2 f8c5
-2024-01-26 16:56:27,711 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 2 seldepth 2 multipv 1 score cp -78 nodes 87 nps 87000 hashfull 0 tbhits 0 time 1 pv f1g2 f8c5
-2024-01-26 16:56:27,711 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> bestmove f1g2 ponder f8c5
-2024-01-26 16:56:27,711 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5 e7e5 f1g2
-2024-01-26 16:56:27,711 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << go depth 2
-2024-01-26 16:56:27,712 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:27,712 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 1 seldepth 1 multipv 1 score cp 78 nodes 38 nps 38000 hashfull 0 tbhits 0 time 1 pv f8c5
-2024-01-26 16:56:27,712 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 2 seldepth 2 multipv 1 score cp 78 nodes 74 nps 74000 hashfull 0 tbhits 0 time 1 pv f8c5
-2024-01-26 16:56:27,712 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> bestmove f8c5
-2024-01-26 16:56:27,712 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << position startpos moves g1h3 g8f6 d2d4 d7d5 g2g3 c7c5 d4c5 e7e5 f1g2 f8c5
-2024-01-26 16:56:27,712 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << go depth 2
-2024-01-26 16:56:27,713 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info string NNUE evaluation using nn-5af11540bbfe.nnue enabled
-2024-01-26 16:56:27,713 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 1 seldepth 1 multipv 1 score cp -80 nodes 50 nps 50000 hashfull 0 tbhits 0 time 1 pv c2c4
-2024-01-26 16:56:27,713 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> info depth 2 seldepth 2 multipv 1 score cp -80 nodes 87 nps 87000 hashfull 0 tbhits 0 time 1 pv c2c4
-2024-01-26 16:56:27,713 chess.engine (engine.py:1088) DEBUG <UciProtocol (pid=100820)>: >> bestmove c2c4
-2024-01-26 16:56:27,713 chess.engine (engine.py:1062) DEBUG <UciProtocol (pid=100820)>: << quit
-2024-01-26 16:56:27,717 chess.engine (engine.py:1059) DEBUG <UciProtocol (pid=100820)>: Process exited
-2024-01-26 16:56:27,718 chess.engine (engine.py:1046) DEBUG <UciProtocol (pid=100820)>: Connection lost (exit code: 0, error: None)
-2024-01-26 16:56:27,718 backoff (_common.py:105) INFO Backing off play_game(...) for 5.4s (TypeError: cannot unpack non-iterable NoneType object)
-2024-01-26 16:56:27,718 lib.lichess (lichess.py:63) DEBUG Backing off 5.4 seconds after 5 tries calling function <function play_game at 0x7f265698ed40> with args () and kwargs {'li': <lib.lichess.Lichess object at 0x7f2656999b40>, 'control_queue': <AutoProxy[Queue] object, typeid 'Queue' at 0x7f265699a920>, 'user_profile': {'id': 'probabilistic-bot', 'username': 'probabilistic-bot', 'perfs': {'blitz': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'bullet': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'correspondence': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'classical': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}, 'rapid': {'games': 0, 'rating': 2000, 'rd': 500, 'prog': 0, 'prov': True}}, 'title': 'BOT', 'createdAt': 1706196643794, 'seenAt': 1706284268775, 'playTime': {'total': 1252, 'tv': 0}, 'url': 'https://lichess.org/@/probabilistic-bot', 'playing': 'https://lichess.org/4bebkUSq/white', 'count': {'all': 5, 'rated': 0, 'ai': 0, 'draw': 0, 'drawH': 0, 'loss': 4, 'lossH': 4, 'win': 1, 'winH': 1, 'bookmark': 0, 'playing': 1, 'import': 0, 'me': 0}, 'followable': True, 'following': False, 'blocking': False, 'followsYou': False}, 'config': <lib.config.Configuration object at 0x7f265699a8f0>, 'challenge_queue': <ListProxy object, typeid 'list' at 0x7f265699bc40>, 'correspondence_queue': <AutoProxy[Queue] object, typeid 'Queue' at 0x7f26569dfd00>, 'logging_queue': <AutoProxy[Queue] object, typeid 'Queue' at 0x7f26569df9a0>, 'game_id': '4bebkUSq'}
-2024-01-26 16:56:27,719 lib.lichess (lichess.py:65) DEBUG Exception: Traceback (most recent call last):
-  File "/home/luke/projects/pp-project/chess-engine-pp/.venv/lib/python3.10/site-packages/backoff/_sync.py", line 105, in retry
-    ret = target(*args, **kwargs)
-  File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lichess-bot.py", line 620, in play_game
-    engine.play_move(board,
-  File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lib/engine_wrapper.py", line 157, in play_move
-    best_move = self.search(board, time_limit, can_ponder, draw_offered, best_move)
-  File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lib/strategies.py", line 105, in search
-    mean, std = engine.simulate_game(board.copy(), move, 10)
-TypeError: cannot unpack non-iterable NoneType object
-
-2024-01-26 16:56:28,831 __main__ (lichess-bot.py:370) DEBUG Event: {'type': 'gameFinish', 'game': {'fullId': '4bebkUSq8GI3', 'gameId': '4bebkUSq', 'fen': 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', 'color': 'white', 'lastMove': '', 'source': 'friend', 'status': {'id': 25, 'name': 'aborted'}, 'variant': {'key': 'standard', 'name': 'Standard'}, 'speed': 'rapid', 'perf': 'rapid', 'rated': False, 'hasMoved': False, 'opponent': {'id': 'luk3k', 'username': 'luk3k', 'rating': 1500}, 'isMyTurn': False, 'secondsLeft': 480, 'compat': {'bot': True, 'board': True}, 'id': '4bebkUSq'}}
-2024-01-26 16:56:33,167 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-26 16:56:33,237 __mp_main__ (lichess-bot.py:65) DEBUG Received SIGINT. Terminating client.
-2024-01-26 16:56:33,281 __mp_main__ (lichess-bot.py:65) DEBUG Received SIGINT. Terminating client.
-2024-01-26 16:56:33,378 __main__ (lichess-bot.py:1091) ERROR Quitting lichess_bot due to an error:
+2024-01-27 22:11:10,150 lib.config (config.py:262) DEBUG ====================
+2024-01-27 22:11:10,150 __main__ (lichess-bot.py:1026) INFO Checking engine configuration ...
+2024-01-27 22:11:10,199 lib.engine_wrapper (engine_wrapper.py:65) DEBUG Starting engine: ['/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/engines/MctsEngine']
+2024-01-27 22:11:10,199 __main__ (lichess-bot.py:1029) INFO Engine configuration OK
+2024-01-27 22:11:10,201 urllib3.connectionpool (connectionpool.py:1052) DEBUG Starting new HTTPS connection (1): lichess.org:443
+2024-01-27 22:11:10,344 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/token/test HTTP/1.1" 200 None
+2024-01-27 22:11:10,376 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "GET /api/account HTTP/1.1" 200 None
+2024-01-27 22:11:10,376 __main__ (lichess-bot.py:1038) INFO Welcome probabilistic-bot!
+2024-01-27 22:11:10,377 __main__ (lichess-bot.py:206) INFO You're now connected to https://lichess.org/ and awaiting challenges.
+2024-01-27 22:11:10,630 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "GET /api/account/playing HTTP/1.1" 200 None
+2024-01-27 22:11:10,980 __main__ (lichess-bot.py:370) DEBUG Event: {'type': 'gameStart', 'game': {'fullId': 'ki4gFNqkIdEg', 'gameId': 'ki4gFNqk', 'fen': 'rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR b KQkq - 0 1', 'color': 'black', 'lastMove': 'd2d4', 'source': 'friend', 'status': {'id': 20, 'name': 'started'}, 'variant': {'key': 'standard', 'name': 'Standard'}, 'speed': 'blitz', 'perf': 'blitz', 'rated': False, 'hasMoved': False, 'opponent': {'id': 'luk3k', 'username': 'luk3k', 'rating': 1500}, 'isMyTurn': True, 'secondsLeft': 300, 'compat': {'bot': True, 'board': True}, 'id': 'ki4gFNqk'}}
+2024-01-27 22:11:10,980 __main__ (lichess-bot.py:254) INFO --- Process Used. Count: 1. IDs: {'ki4gFNqk'}
+2024-01-27 22:11:10,986 urllib3.connectionpool (connectionpool.py:1052) DEBUG Starting new HTTPS connection (1): lichess.org:443
+2024-01-27 22:11:11,146 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "GET /api/bot/game/stream/ki4gFNqk HTTP/1.1" 200 None
+2024-01-27 22:11:11,147 __mp_main__ (lichess-bot.py:572) DEBUG Initial state: {'id': 'ki4gFNqk', 'variant': {'key': 'standard', 'name': 'Standard', 'short': 'Std'}, 'speed': 'blitz', 'perf': {'name': 'Blitz'}, 'rated': False, 'createdAt': 1706389046389, 'white': {'id': 'luk3k', 'name': 'luk3k', 'title': None, 'rating': 1500, 'provisional': True}, 'black': {'id': 'probabilistic-bot', 'name': 'probabilistic-bot', 'title': 'BOT', 'rating': 2000, 'provisional': True}, 'initialFen': 'startpos', 'clock': {'initial': 300000, 'increment': 3000}, 'type': 'gameFull', 'state': {'type': 'gameState', 'moves': 'd2d4', 'wtime': 300000, 'btime': 300000, 'winc': 3000, 'binc': 3000, 'status': 'started'}}
+2024-01-27 22:11:11,194 lib.engine_wrapper (engine_wrapper.py:65) DEBUG Starting engine: ['/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/engines/MctsEngine']
+2024-01-27 22:11:11,194 __mp_main__ (lichess-bot.py:578) DEBUG The engine for game ki4gFNqk has pid=?
+2024-01-27 22:11:11,194 __mp_main__ (lichess-bot.py:581) INFO +++ https://lichess.org/ki4gFNqk/black Blitz vs luk3k (1500?) (ki4gFNqk)
+2024-01-27 22:11:11,195 lib.conversation (conversation.py:83) INFO *** https://lichess.org/ki4gFNqk/black [player] probabilistic-bot: Hi! I'm probabilistic-bot. Good luck! Type !help for a list of commands I can respond to.
+2024-01-27 22:11:11,195 urllib3.connectionpool (connectionpool.py:1052) DEBUG Starting new HTTPS connection (2): lichess.org:443
+2024-01-27 22:11:11,335 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/ki4gFNqk/chat HTTP/1.1" 200 11
+2024-01-27 22:11:11,335 lib.conversation (conversation.py:83) INFO *** https://lichess.org/ki4gFNqk/black [spectator] probabilistic-bot: Hi! I'm probabilistic-bot. Type !help for a list of commands I can respond to.
+2024-01-27 22:11:11,363 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/ki4gFNqk/chat HTTP/1.1" 200 11
+2024-01-27 22:11:11,364 __mp_main__ (lichess-bot.py:688) INFO 
+2024-01-27 22:11:11,364 __mp_main__ (lichess-bot.py:689) INFO move: 1
+2024-01-27 22:11:11,364 lib.engine_wrapper (engine_wrapper.py:650) INFO Searching for time 10 seconds for game ki4gFNqk
+2024-01-27 22:11:17,153 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
+2024-01-27 22:11:17,187 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/ki4gFNqk/move/b8a6?offeringDraw=false HTTP/1.1" 200 11
+2024-01-27 22:11:17,187 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'chatLine', 'room': 'player', 'username': 'probabilistic-bot', 'text': "Hi! I'm probabilistic-bot. Good luck! Type !help for a list of commands I can respond to."}
+2024-01-27 22:11:17,188 lib.conversation (conversation.py:42) INFO *** https://lichess.org/ki4gFNqk/black [player] probabilistic-bot: Hi! I'm probabilistic-bot. Good luck! Type !help for a list of commands I can respond to.
+2024-01-27 22:11:17,188 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'chatLine', 'room': 'spectator', 'username': 'probabilistic-bot', 'text': "Hi! I'm probabilistic-bot. Type !help for a list of commands I can respond to."}
+2024-01-27 22:11:17,188 lib.conversation (conversation.py:42) INFO *** https://lichess.org/ki4gFNqk/black [spectator] probabilistic-bot: Hi! I'm probabilistic-bot. Type !help for a list of commands I can respond to.
+2024-01-27 22:11:17,188 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d4 b8a6', 'wtime': 300000, 'btime': 300000, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-27 22:11:22,844 __mp_main__ (lichess-bot.py:65) DEBUG Received SIGINT. Terminating client.
+2024-01-27 22:11:22,844 __mp_main__ (lichess-bot.py:65) DEBUG Received SIGINT. Terminating client.
+2024-01-27 22:11:23,017 __main__ (lichess-bot.py:1091) ERROR Quitting lichess_bot due to an error:
 Traceback (most recent call last):
   File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lichess-bot.py", line 1088, in <module>
     start_lichess_bot()
