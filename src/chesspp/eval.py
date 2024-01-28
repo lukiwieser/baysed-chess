@@ -140,14 +140,16 @@ def check_endgame(board: chess.Board) -> bool:
 
 def score_manual(board: chess.Board) -> int:
     """
-    Calculate the score of the given board regarding the given color
+    Calculate the score of a given board.
+    Positive scores indicate an advantage for WHITE, negative scores indicate and advantage for BLACK.
+    The range of scores is from approx. -1.100.000 to 1.100.000
     :param board: the chess board
-    :return: score metric
+    :return: score
     """
     outcome = board.outcome()
     if outcome is not None:
         if outcome.termination == chess.Termination.CHECKMATE:
-            return sys.maxsize if outcome.winner == chess.WHITE else -sys.maxsize
+            return 1_100_000 if outcome.winner == chess.WHITE else -1_100_000
         else:  # draw
             return 0
 

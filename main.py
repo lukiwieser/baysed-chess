@@ -31,12 +31,13 @@ def test_bayes_mcts():
     global lookup_count
     fools_mate = "rnbqkbnr/pppp1ppp/4p3/8/5PP1/8/PPPPP2P/RNBQKBNR b KQkq f3 0 2"
     board = chess.Board(fools_mate)
-    seed = 1
-    stategy = RandomStrategy(random.Random(seed))
-    mcts = BayesianMcts(board, stategy, seed)
+    seed = None
+    strategy = RandomStrategy(random.Random(seed))
+    mcts = BayesianMcts(board, strategy, chess.BLACK, seed)
     mcts.sample()
-    for c in mcts.get_children():
-        print("move (mcts):", c.move, " with score:", c.mu)
+    mcts.print()
+    for move, score in mcts.get_moves().items():
+        print("move (mcts):", move, " with score:", score)
 
 
 def test_stockfish():
@@ -96,7 +97,7 @@ def main():
     # test_mcts()
     # test_stockfish()
     # test_stockfish_prob()
-
+    test_bayes_mcts()
 
 if __name__ == '__main__':
     main()

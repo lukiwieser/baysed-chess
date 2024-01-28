@@ -10,11 +10,12 @@ CDF: dict[float, float] = {}
 lookup_count = 0
 
 
-def max_gaussian_numeric(mu1, sigma1, mu2, sigma2) -> (float, float):
-    pass
+def get_lookup_count():
+    global lookup_count
+    return lookup_count
 
 
-def max_gaussian(mu1, sigma1, mu2, sigma2) -> (float, float):
+def max_gaussian(mu1, sigma1, mu2, sigma2) -> tuple[float, float]:
     global lookup_count
     global F1
     global F2
@@ -26,46 +27,69 @@ def max_gaussian(mu1, sigma1, mu2, sigma2) -> (float, float):
     :param sigma1: sigma of the first Gaussian
     :param mu2: mu of the second Gaussian
     :param sigma2: sigma of the second Gaussian
+    :return: mu and sigma maximized
     """
     # we assume independence of the two gaussians
+    #print(mu1, sigma1, mu2, sigma2)
+    normal = dist.Normal(0, 1)
+    sigma_m = math.sqrt(sigma1 ** 2 + sigma2 ** 2)
+    alpha = (mu1 - mu2) / sigma_m
+
+    if alpha in CDF:
+        cdf_alpha = CDF[alpha]
+        lookup_count += 1
+    else:
+        cdf_alpha = normal.cdf(torch.tensor(alpha)).item()
+        CDF[alpha] = cdf_alpha
+
+    pdf_alpha = exp(normal.log_prob(torch.tensor(alpha))).item()
+
+    if alpha in F1:
+        f1_alpha = F1[alpha]
+        lookup_count += 1
+    else:
+        f1_alpha = alpha * cdf_alpha + pdf_alpha
+        F1[alpha] = f1_alpha
+
+    if alpha in F2:
+        f2_alpha = F2[alpha]
+        lookup_count += 1
+    else:
+        f2_alpha = alpha ** 2 * cdf_alpha * (1 - cdf_alpha) + (
+                    1 - 2 * cdf_alpha) * alpha * pdf_alpha - pdf_alpha ** 2
+        F2[alpha] = f2_alpha
+
+    mu = mu2 + sigma_m * f1_alpha
+    sigma = math.sqrt(sigma2 ** 2 + (sigma1 ** 2 - sigma2 ** 2) * cdf_alpha + sigma_m ** 2 * f2_alpha)
+    #sigma = math.sqrt((mu1**2 + sigma1**2) * cdf_alpha + (mu2**2 + sigma2**2) * (1 - cdf_alpha) + (mu1 + mu2) * sigma_m * pdf_alpha - mu**2)
+
+    return mu, sigma
+
+
+def min_gaussian(mu1, sigma1, mu2, sigma2) -> tuple[float, float]:
+    """
+    Returns the combined min gaussian of two Gaussians represented by mu1, sigma1, mu2, simga2
+    :param mu1: mu of the first Gaussian
+    :param sigma1: sigma of the first Gaussian
+    :param mu2: mu of the second Gaussian
+    :param sigma2: sigma of the second Gaussian
+    :return: mu and sigma minimized
+    """
     try:
-        #print(mu1, sigma1, mu2, sigma2)
         normal = dist.Normal(0, 1)
         sigma_m = math.sqrt(sigma1 ** 2 + sigma2 ** 2)
         alpha = (mu1 - mu2) / sigma_m
 
-        if alpha in CDF:
-            cdf_alpha = CDF[alpha]
-            lookup_count += 1
-        else:
-            cdf_alpha = normal.cdf(torch.tensor(alpha)).item()
-            CDF[alpha] = cdf_alpha
-
+        cdf_alpha = normal.cdf(torch.tensor(alpha)).item()
         pdf_alpha = exp(normal.log_prob(torch.tensor(alpha))).item()
+        pdf_alpha_neg = exp(normal.log_prob(torch.tensor(-alpha))).item()
 
-        if alpha in F1:
-            f1_alpha = F1[alpha]
-            lookup_count += 1
-        else:
-            f1_alpha = alpha * cdf_alpha + pdf_alpha
-            F1[alpha] = f1_alpha
-
-        if alpha in F2:
-            f2_alpha = F2[alpha]
-            lookup_count += 1
-        else:
-            f2_alpha = alpha ** 2 * cdf_alpha * (1 - cdf_alpha) + (
-                        1 - 2 * cdf_alpha) * alpha * pdf_alpha - pdf_alpha ** 2
-            F2[alpha] = f2_alpha
-
-        mu = mu2 + sigma_m * f1_alpha
-        #sigma_old = sigma2 ** 2 + (sigma1 ** 2 - sigma2 ** 2) * cdf_alpha + sigma_m ** 2 * f2_alpha
-        sigma = math.sqrt((mu1**2 + sigma1**2) * cdf_alpha + (mu2**2 + sigma2**2) * (1 - cdf_alpha) + (mu1 + mu2) * sigma_m * pdf_alpha - mu**2)
-
+        mu = mu1 * (1 - cdf_alpha) + mu2 * cdf_alpha - pdf_alpha_neg * sigma_m
+        sigma = math.sqrt((mu1**2 + sigma1**2) * (1 - cdf_alpha) + (mu2**2 + sigma2**2) * cdf_alpha - (mu1 + mu2) * sigma_m * pdf_alpha - mu**2)
         return mu, sigma
     except ValueError:
         print(mu1, sigma1, mu2, sigma2)
-        exit(1)
+
 
 
 def beta_mean(alpha, beta):
