@@ -30,21 +30,22 @@ class Simulate:
         self.white = engine_white
         self.black = engine_black
 
-    def run(self):
+    def run(self, limit: engine.Limit):
         board = chess.Board()
 
         is_white_playing = True
         while not board.is_game_over():
-            play_result = self.white.play(board) if is_white_playing else self.black.play(board)
+            play_result = self.white.play(board, limit) if is_white_playing else self.black.play(board, limit)
             board.push(play_result.move)
             yield board
             is_white_playing = not is_white_playing
 
 
 class WebInterface:
-    def __init__(self, white_engine: engine.Engine.__class__, black_engine: engine.Engine.__class__):
+    def __init__(self, white_engine: engine.Engine.__class__, black_engine: engine.Engine.__class__, limit: engine.Limit):
         self.white = white_engine
         self.black = black_engine
+        self.limit = limit
 
 
     async def handle_index(self, request) -> web.Response:
@@ -70,7 +71,7 @@ class WebInterface:
 
         async def turns():
             """ Simulates the game and sends the response to the client """
-            runner = Simulate(self.white(chess.WHITE), self.black(chess.BLACK)).run()
+            runner = Simulate(self.white(chess.WHITE), self.black(chess.BLACK)).run(limit)
             def sim():
                 return next(runner, None)
 
@@ -98,4 +99,5 @@ class WebInterface:
         web.run_app(app)
 
 if __name__ == '__main__':
-    WebInterface(engine.ClassicMctsEngine, engine.ClassicMctsEngine).run_app()
+    limit = engine.Limit(time=0.5)
+    WebInterface(engine.ClassicMctsEngine, engine.ClassicMctsEngine, limit).run_app()

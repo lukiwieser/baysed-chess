@@ -63,7 +63,8 @@ def analyze_results(moves: dict):
 def test_evaluation():
     a = engine.ClassicMctsEngine
     b = engine.RandomEngine
-    evaluator = simulation.Evaluation(a, b)
+    limit = engine.Limit(time=0.5)
+    evaluator = simulation.Evaluation(a, b, limit)
     results = evaluator.run(4)
     a_results = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_A, results))) / len(results) * 100
     b_results = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_B, results))) / len(results) * 100
