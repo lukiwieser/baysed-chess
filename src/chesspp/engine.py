@@ -3,7 +3,7 @@ import chess
 import chess.engine
 import random
 import time
-from chesspp.classic_mcts import ClassicMcts
+from src.chesspp.classic_mcts import ClassicMcts
 
 class Limit:
     """ Class to determine when to stop searching for moves """

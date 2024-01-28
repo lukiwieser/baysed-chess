@@ -1,7 +1,10 @@
+import random
 import chess
 import chess.engine
 import chess.pgn
 from src.chesspp.classic_mcts import ClassicMcts
+from src.chesspp.baysian_mcts import BayesianMcts
+from src.chesspp.random_strategy import RandomStrategy
 from src.chesspp import engine
 from src.chesspp import util
 from src.chesspp import simulation, eval
@@ -22,6 +25,18 @@ def test_mcts():
     sorted_moves = sorted(mcts_root.children, key=lambda x: x.move.uci())
     for c in sorted_moves:
         print("move (mcts):", c.move, " with score:", c.score)
+
+
+def test_bayes_mcts():
+    global lookup_count
+    fools_mate = "rnbqkbnr/pppp1ppp/4p3/8/5PP1/8/PPPPP2P/RNBQKBNR b KQkq f3 0 2"
+    board = chess.Board(fools_mate)
+    seed = 1
+    stategy = RandomStrategy(random.Random(seed))
+    mcts = BayesianMcts(board, stategy, seed)
+    mcts.sample()
+    for c in mcts.get_children():
+        print("move (mcts):", c.move, " with score:", c.mu)
 
 
 def test_stockfish():
