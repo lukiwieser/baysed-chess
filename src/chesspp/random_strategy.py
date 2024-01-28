@@ -1,6 +1,6 @@
 import chess
 import random
-from src.chesspp.i_strategy import IStrategy
+from chesspp.i_strategy import IStrategy
 
 
 class RandomStrategy(IStrategy):

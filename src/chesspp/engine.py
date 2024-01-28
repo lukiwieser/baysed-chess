@@ -3,7 +3,10 @@ import chess
 import chess.engine
 import random
 import time
-from src.chesspp.classic_mcts import ClassicMcts
+from chesspp.classic_mcts import ClassicMcts
+from chesspp.baysian_mcts import BayesianMcts
+from chesspp.random_strategy import RandomStrategy
+
 
 class Limit:
     """ Class to determine when to stop searching for moves """
@@ -68,6 +71,25 @@ class Engine(ABC):
         pass
 
 
+class BayesMctsEngine(Engine):
+    def __init__(self, color: chess.Color):
+        super().__init__(color)
+
+    @staticmethod
+    def get_name() -> str:
+        return "BayesMctsEngine"
+
+    def play(self, board: chess.Board, limit: Limit) -> chess.engine.PlayResult:
+        strategy = RandomStrategy(random.Random())
+        bayes_mcts = BayesianMcts(board, strategy, self.color)
+        bayes_mcts.sample(1000)
+        # limit.run(lambda: mcts_root.build_tree())
+        best_move = max(bayes_mcts.get_moves().items(), key=lambda x: x[1])[0] if board.turn == chess.WHITE else (
+            min(bayes_mcts.get_moves().items(), key=lambda x: x[1])[0])
+        print(best_move)
+        return chess.engine.PlayResult(move=best_move, ponder=None)
+
+
 class ClassicMctsEngine(Engine):
     def __init__(self, color: chess.Color):
         super().__init__(color)
@@ -78,7 +100,8 @@ class ClassicMctsEngine(Engine):
 
     def play(self, board: chess.Board, limit: Limit) -> chess.engine.PlayResult:
         mcts_root = ClassicMcts(board, self.color)
-        limit.run(lambda: mcts_root.build_tree(samples=1))
+        mcts_root.build_tree()
+        # limit.run(lambda: mcts_root.build_tree())
         best_move = max(mcts_root.children, key=lambda x: x.score).move if board.turn == chess.WHITE else (
             min(mcts_root.children, key=lambda x: x.score).move)
         return chess.engine.PlayResult(move=best_move, ponder=None)

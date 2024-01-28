@@ -179,7 +179,19 @@ def score_stockfish(board: chess.Board) -> chess.engine.PovScore:
     :param board:
     :return:
     """
-    engine = chess.engine.SimpleEngine.popen_uci("./stockfish/stockfish-ubuntu-x86-64-avx2")
+    engine = chess.engine.SimpleEngine.popen_uci("/home/luke/projects/pp-project/chess-engine-pp/stockfish/stockfish-ubuntu-x86-64-avx2")
     info = engine.analyse(board, chess.engine.Limit(depth=0))
+    engine.quit()
+    return info["score"]
+
+
+def score_lc0(board: chess.Board) -> chess.engine.PovScore:
+    """
+    Calculate the score of the given board using lc0
+    :param board:
+    :return:
+    """
+    engine = chess.engine.SimpleEngine.popen_uci("/home/luke/projects/pp-project/chess-engine-pp/lc0/lc0")
+    info = engine.analyse(board, chess.engine.Limit(depth=4))
     engine.quit()
     return info["score"]

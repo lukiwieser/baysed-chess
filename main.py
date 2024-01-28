@@ -2,12 +2,12 @@ import random
 import chess
 import chess.engine
 import chess.pgn
-from src.chesspp.classic_mcts import ClassicMcts
-from src.chesspp.baysian_mcts import BayesianMcts
-from src.chesspp.random_strategy import RandomStrategy
-from src.chesspp import engine
-from src.chesspp import util
-from src.chesspp import simulation, eval
+from chesspp.classic_mcts import ClassicMcts
+from chesspp.baysian_mcts import BayesianMcts
+from chesspp.random_strategy import RandomStrategy
+from chesspp import engine
+from chesspp import util
+from chesspp import simulation, eval
 
 
 def test_simulate():
@@ -81,7 +81,7 @@ def test_evaluation():
     b = engine.RandomEngine
     limit = engine.Limit(time=0.5)
     evaluator = simulation.Evaluation(a, b, limit)
-    results = evaluator.run(4)
+    results = evaluator.run(1)
     a_results = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_A, results))) / len(results) * 100
     b_results = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_B, results))) / len(results) * 100
     draws = len(list(filter(lambda x: x.winner == simulation.Winner.Draw, results))) / len(results) * 100
@@ -97,7 +97,7 @@ def main():
     # test_mcts()
     # test_stockfish()
     # test_stockfish_prob()
-    test_bayes_mcts()
+    # test_bayes_mcts()
 
 if __name__ == '__main__':
     main()

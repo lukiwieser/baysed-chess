@@ -1,16 +1,16 @@
-2024-01-27 22:11:40,995 __main__ (lichess-bot.py:1023) INFO 
+2024-01-28 23:00:59,851 __main__ (lichess-bot.py:1023) INFO 
     .   _/|
     .  // o\
     .  || ._)  lichess_bot 2024.1.21.1
     .  //__\
     .  )___(   Play on Lichess with a bot
     
-2024-01-27 22:11:41,015 lib.config (config.py:261) DEBUG Config:
+2024-01-28 23:00:59,864 lib.config (config.py:261) DEBUG Config:
 token: logger
 url: https://lichess.org/
 engine:
   dir: ./engines
-  name: MctsEngine
+  name: MyBayesMctsEngine
   working_dir: ''
   protocol: homemade
   ponder: true
@@ -137,13 +137,13 @@ matchmaking:
   challenge_mode: random
   challenge_filter: none
 
-2024-01-27 22:11:41,015 lib.config (config.py:262) DEBUG ====================
-2024-01-27 22:11:41,020 lib.config (config.py:261) DEBUG Config:
+2024-01-28 23:00:59,864 lib.config (config.py:262) DEBUG ====================
+2024-01-28 23:00:59,867 lib.config (config.py:261) DEBUG Config:
 token: logger
 url: https://lichess.org/
 engine:
   dir: ./engines
-  name: MctsEngine
+  name: MyBayesMctsEngine
   working_dir: /home/luke/projects/pp-project/chess-engine-pp/lichess_bot
   protocol: homemade
   ponder: true
@@ -282,446 +282,142 @@ matchmaking:
   overrides: {}
 pgn_file_grouping: game
 
-2024-01-27 22:11:41,020 lib.config (config.py:262) DEBUG ====================
-2024-01-27 22:11:41,020 __main__ (lichess-bot.py:1026) INFO Checking engine configuration ...
-2024-01-27 22:11:41,069 lib.engine_wrapper (engine_wrapper.py:65) DEBUG Starting engine: ['/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/engines/MctsEngine']
-2024-01-27 22:11:41,069 __main__ (lichess-bot.py:1029) INFO Engine configuration OK
-2024-01-27 22:11:41,071 urllib3.connectionpool (connectionpool.py:1052) DEBUG Starting new HTTPS connection (1): lichess.org:443
-2024-01-27 22:11:41,218 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/token/test HTTP/1.1" 200 None
-2024-01-27 22:11:41,254 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "GET /api/account HTTP/1.1" 200 None
-2024-01-27 22:11:41,254 __main__ (lichess-bot.py:1038) INFO Welcome probabilistic-bot!
-2024-01-27 22:11:41,255 __main__ (lichess-bot.py:206) INFO You're now connected to https://lichess.org/ and awaiting challenges.
-2024-01-27 22:11:41,514 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "GET /api/account/playing HTTP/1.1" 200 17
-2024-01-27 22:11:50,449 __main__ (lichess-bot.py:370) DEBUG Event: {'type': 'challenge', 'challenge': {'id': 'toJfqr5x', 'url': 'https://lichess.org/toJfqr5x', 'status': 'created', 'challenger': {'id': 'luk3k', 'name': 'luk3k', 'rating': 1500, 'title': None, 'provisional': True, 'online': True, 'lag': 4}, 'destUser': {'id': 'probabilistic-bot', 'name': 'probabilistic-bot', 'rating': 2000, 'title': 'BOT', 'provisional': True, 'online': True}, 'variant': {'key': 'standard', 'name': 'Standard', 'short': 'Std'}, 'rated': False, 'speed': 'blitz', 'timeControl': {'type': 'clock', 'limit': 300, 'increment': 3, 'show': '5+3'}, 'color': 'white', 'finalColor': 'white', 'perf': {'icon': '\ue01d', 'name': 'Blitz'}}, 'compat': {'bot': True, 'board': True}}
-2024-01-27 22:11:50,450 __main__ (lichess-bot.py:421) INFO Accept Blitz casual challenge from luk3k (1500?) (toJfqr5x)
-2024-01-27 22:11:50,491 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/challenge/toJfqr5x/accept HTTP/1.1" 200 11
-2024-01-27 22:11:50,491 __main__ (lichess-bot.py:254) INFO --- Process Queued. Count: 1. IDs: {'toJfqr5x'}
-2024-01-27 22:11:50,492 __main__ (lichess-bot.py:370) DEBUG Event: {'type': 'gameStart', 'game': {'fullId': 'toJfqr5x0Gme', 'gameId': 'toJfqr5x', 'fen': 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', 'color': 'black', 'lastMove': '', 'source': 'friend', 'status': {'id': 20, 'name': 'started'}, 'variant': {'key': 'standard', 'name': 'Standard'}, 'speed': 'blitz', 'perf': 'blitz', 'rated': False, 'hasMoved': False, 'opponent': {'id': 'luk3k', 'username': 'luk3k', 'rating': 1500}, 'isMyTurn': False, 'secondsLeft': 300, 'compat': {'bot': True, 'board': True}, 'id': 'toJfqr5x'}}
-2024-01-27 22:11:50,492 __main__ (lichess-bot.py:254) INFO --- Process Used. Count: 1. IDs: {'toJfqr5x'}
-2024-01-27 22:11:50,498 urllib3.connectionpool (connectionpool.py:1052) DEBUG Starting new HTTPS connection (1): lichess.org:443
-2024-01-27 22:11:50,646 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "GET /api/bot/game/stream/toJfqr5x HTTP/1.1" 200 None
-2024-01-27 22:11:50,646 __mp_main__ (lichess-bot.py:572) DEBUG Initial state: {'id': 'toJfqr5x', 'variant': {'key': 'standard', 'name': 'Standard', 'short': 'Std'}, 'speed': 'blitz', 'perf': {'name': 'Blitz'}, 'rated': False, 'createdAt': 1706389910474, 'white': {'id': 'luk3k', 'name': 'luk3k', 'title': None, 'rating': 1500, 'provisional': True}, 'black': {'id': 'probabilistic-bot', 'name': 'probabilistic-bot', 'title': 'BOT', 'rating': 2000, 'provisional': True}, 'initialFen': 'startpos', 'clock': {'initial': 300000, 'increment': 3000}, 'type': 'gameFull', 'state': {'type': 'gameState', 'moves': '', 'wtime': 300000, 'btime': 300000, 'winc': 3000, 'binc': 3000, 'status': 'started'}}
-2024-01-27 22:11:50,727 lib.engine_wrapper (engine_wrapper.py:65) DEBUG Starting engine: ['/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/engines/MctsEngine']
-2024-01-27 22:11:50,728 __mp_main__ (lichess-bot.py:578) DEBUG The engine for game toJfqr5x has pid=?
-2024-01-27 22:11:50,728 __mp_main__ (lichess-bot.py:581) INFO +++ https://lichess.org/toJfqr5x/black Blitz vs luk3k (1500?) (toJfqr5x)
-2024-01-27 22:11:52,151 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4', 'wtime': 300000, 'btime': 300000, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:11:52,151 lib.conversation (conversation.py:83) INFO *** https://lichess.org/toJfqr5x/black [player] probabilistic-bot: Hi! I'm probabilistic-bot. Good luck! Type !help for a list of commands I can respond to.
-2024-01-27 22:11:52,152 urllib3.connectionpool (connectionpool.py:1052) DEBUG Starting new HTTPS connection (2): lichess.org:443
-2024-01-27 22:11:52,303 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/chat HTTP/1.1" 200 11
-2024-01-27 22:11:52,304 lib.conversation (conversation.py:83) INFO *** https://lichess.org/toJfqr5x/black [spectator] probabilistic-bot: Hi! I'm probabilistic-bot. Type !help for a list of commands I can respond to.
-2024-01-27 22:11:52,338 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/chat HTTP/1.1" 200 11
-2024-01-27 22:11:52,338 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:11:52,338 __mp_main__ (lichess-bot.py:689) INFO move: 1
-2024-01-27 22:11:52,339 lib.engine_wrapper (engine_wrapper.py:650) INFO Searching for time 10 seconds for game toJfqr5x
-2024-01-27 22:11:58,280 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:11:58,314 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/c7c6?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:11:58,314 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'chatLine', 'room': 'player', 'username': 'probabilistic-bot', 'text': "Hi! I'm probabilistic-bot. Good luck! Type !help for a list of commands I can respond to."}
-2024-01-27 22:11:58,315 lib.conversation (conversation.py:42) INFO *** https://lichess.org/toJfqr5x/black [player] probabilistic-bot: Hi! I'm probabilistic-bot. Good luck! Type !help for a list of commands I can respond to.
-2024-01-27 22:11:58,315 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'chatLine', 'room': 'spectator', 'username': 'probabilistic-bot', 'text': "Hi! I'm probabilistic-bot. Type !help for a list of commands I can respond to."}
-2024-01-27 22:11:58,315 lib.conversation (conversation.py:42) INFO *** https://lichess.org/toJfqr5x/black [spectator] probabilistic-bot: Hi! I'm probabilistic-bot. Type !help for a list of commands I can respond to.
-2024-01-27 22:11:58,315 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6', 'wtime': 300000, 'btime': 300000, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:12:00,302 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4', 'wtime': 301040, 'btime': 300000, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:12:00,302 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:12:00,302 __mp_main__ (lichess-bot.py:689) INFO move: 2
-2024-01-27 22:12:00,303 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 301040 btime 298000 for game toJfqr5x
-2024-01-27 22:12:04,689 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:12:04,723 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/d8a5?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:12:04,723 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5', 'wtime': 301040, 'btime': 298580, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:12:15,587 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2', 'wtime': 293210, 'btime': 298580, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:12:15,588 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:12:15,588 __mp_main__ (lichess-bot.py:689) INFO move: 3
-2024-01-27 22:12:15,588 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 293210 btime 296580 for game toJfqr5x
-2024-01-27 22:12:20,912 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:12:20,914 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-27 22:12:21,067 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/a5d2?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:12:21,068 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2', 'wtime': 293210, 'btime': 296100, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:12:26,950 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2', 'wtime': 290370, 'btime': 296100, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:12:26,951 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:12:26,951 __mp_main__ (lichess-bot.py:689) INFO move: 4
-2024-01-27 22:12:26,951 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 290370 btime 294100 for game toJfqr5x
-2024-01-27 22:12:32,425 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:12:32,426 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-27 22:12:32,580 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/b7b5?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:12:32,581 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5', 'wtime': 290370, 'btime': 293460, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:12:35,743 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4', 'wtime': 290240, 'btime': 293460, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:12:35,743 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:12:35,743 __mp_main__ (lichess-bot.py:689) INFO move: 5
-2024-01-27 22:12:35,744 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 290240 btime 291460 for game toJfqr5x
-2024-01-27 22:12:40,974 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:12:41,009 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/c6c5?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:12:41,010 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5', 'wtime': 290240, 'btime': 291190, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:12:42,943 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5', 'wtime': 291350, 'btime': 291190, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:12:42,944 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:12:42,944 __mp_main__ (lichess-bot.py:689) INFO move: 6
-2024-01-27 22:12:42,944 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 291350 btime 289190 for game toJfqr5x
-2024-01-27 22:12:48,153 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:12:48,188 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/c8b7?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:12:48,188 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7', 'wtime': 291350, 'btime': 288940, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:12:51,340 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6', 'wtime': 291230, 'btime': 288940, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:12:51,341 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:12:51,341 __mp_main__ (lichess-bot.py:689) INFO move: 7
-2024-01-27 22:12:51,341 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 291230 btime 286940 for game toJfqr5x
-2024-01-27 22:12:56,856 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:12:56,890 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/e7e5?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:12:56,890 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5', 'wtime': 291230, 'btime': 286390, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:13:01,520 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7', 'wtime': 289630, 'btime': 286390, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:13:01,521 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:13:01,521 __mp_main__ (lichess-bot.py:689) INFO move: 8
-2024-01-27 22:13:01,521 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 289630 btime 284390 for game toJfqr5x
-2024-01-27 22:13:06,952 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:13:06,952 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-27 22:13:07,108 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/a7a5?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:13:07,109 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5', 'wtime': 289630, 'btime': 283800, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:13:08,300 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8', 'wtime': 291470, 'btime': 283800, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:13:08,300 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:13:08,301 __mp_main__ (lichess-bot.py:689) INFO move: 9
-2024-01-27 22:13:08,301 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 291470 btime 281800 for game toJfqr5x
-2024-01-27 22:13:13,596 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:13:13,627 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/e8d8?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:13:13,627 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8', 'wtime': 291470, 'btime': 281470, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:13:13,662 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8', 'wtime': 294470, 'btime': 281470, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:13:13,663 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:13:13,663 __mp_main__ (lichess-bot.py:689) INFO move: 10
-2024-01-27 22:13:13,663 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 294470 btime 279470 for game toJfqr5x
-2024-01-27 22:13:18,932 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:13:18,976 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/d8e7?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:13:18,977 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7', 'wtime': 294470, 'btime': 279170, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:13:22,834 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5', 'wtime': 293640, 'btime': 279170, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:13:22,835 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:13:22,836 __mp_main__ (lichess-bot.py:689) INFO move: 11
-2024-01-27 22:13:22,836 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 293640 btime 277170 for game toJfqr5x
-2024-01-27 22:13:28,240 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:13:28,273 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/e7d8?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:13:28,274 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8', 'wtime': 293640, 'btime': 276730, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:13:29,175 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7', 'wtime': 295770, 'btime': 276730, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:13:29,175 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:13:29,176 __mp_main__ (lichess-bot.py:689) INFO move: 12
-2024-01-27 22:13:29,176 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 295770 btime 274730 for game toJfqr5x
-2024-01-27 22:13:34,457 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:13:34,492 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/d8c8?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:13:34,494 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8', 'wtime': 295770, 'btime': 274410, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:13:43,878 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5', 'wtime': 289420, 'btime': 274410, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:13:43,879 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:13:43,879 __mp_main__ (lichess-bot.py:689) INFO move: 13
-2024-01-27 22:13:43,879 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 289420 btime 272410 for game toJfqr5x
-2024-01-27 22:13:49,127 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:13:49,128 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-27 22:13:49,303 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/g8h6?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:13:49,304 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6', 'wtime': 289420, 'btime': 271980, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:13:59,335 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7', 'wtime': 282420, 'btime': 271980, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:13:59,337 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:13:59,337 __mp_main__ (lichess-bot.py:689) INFO move: 14
-2024-01-27 22:13:59,337 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 282420 btime 269979 for game toJfqr5x
-2024-01-27 22:14:04,720 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:14:04,721 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-27 22:14:04,901 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/h6f7?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:14:04,902 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7', 'wtime': 282420, 'btime': 269430, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:14:29,769 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7', 'wtime': 260580, 'btime': 269430, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:14:29,770 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:14:29,770 __mp_main__ (lichess-bot.py:689) INFO move: 15
-2024-01-27 22:14:29,770 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 260580 btime 267430 for game toJfqr5x
-2024-01-27 22:14:35,202 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:14:35,203 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-27 22:14:35,362 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/c8b7?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:14:35,363 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7', 'wtime': 260580, 'btime': 266840, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:15:27,619 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3', 'wtime': 211350, 'btime': 266840, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:15:27,620 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:15:27,620 __mp_main__ (lichess-bot.py:689) INFO move: 16
-2024-01-27 22:15:27,620 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 211350 btime 264840 for game toJfqr5x
-2024-01-27 22:15:33,238 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:15:33,239 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-27 22:15:33,398 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/b7c7?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:15:33,399 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7', 'wtime': 211350, 'btime': 264060, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:15:33,431 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5', 'wtime': 214350, 'btime': 264060, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:15:33,433 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:15:33,433 __mp_main__ (lichess-bot.py:689) INFO move: 17
-2024-01-27 22:15:33,433 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 214350 btime 262060 for game toJfqr5x
-2024-01-27 22:15:38,982 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:15:39,015 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/f7e5?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:15:39,016 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5', 'wtime': 214350, 'btime': 261480, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:15:40,273 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5', 'wtime': 216120, 'btime': 261480, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:15:40,275 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:15:40,275 __mp_main__ (lichess-bot.py:689) INFO move: 18
-2024-01-27 22:15:40,275 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 216120 btime 259480 for game toJfqr5x
-2024-01-27 22:15:45,565 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:15:45,599 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/f8a3?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:15:45,600 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3', 'wtime': 216120, 'btime': 259150, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:15:45,634 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6', 'wtime': 219120, 'btime': 259150, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:15:45,635 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:15:45,635 __mp_main__ (lichess-bot.py:689) INFO move: 19
-2024-01-27 22:15:45,635 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 219120 btime 257150 for game toJfqr5x
-2024-01-27 22:15:50,860 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:15:50,894 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/a3f8?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:15:50,895 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8', 'wtime': 219120, 'btime': 256890, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:15:50,935 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7', 'wtime': 222120, 'btime': 256890, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:15:50,936 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:15:50,936 __mp_main__ (lichess-bot.py:689) INFO move: 20
-2024-01-27 22:15:50,936 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 222120 btime 254890 for game toJfqr5x
-2024-01-27 22:15:56,093 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:15:56,139 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/h7h6?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:15:56,140 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6', 'wtime': 222120, 'btime': 254700, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:15:57,008 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q', 'wtime': 224290, 'btime': 254700, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:15:57,009 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:15:57,009 __mp_main__ (lichess-bot.py:689) INFO move: 21
-2024-01-27 22:15:57,010 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 224290 btime 252700 for game toJfqr5x
-2024-01-27 22:16:02,231 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:16:02,265 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/c7d7?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:16:02,266 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7', 'wtime': 224290, 'btime': 252430, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:02,305 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8', 'wtime': 227290, 'btime': 252430, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:02,306 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:16:02,306 __mp_main__ (lichess-bot.py:689) INFO move: 22
-2024-01-27 22:16:02,306 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 227290 btime 250430 for game toJfqr5x
-2024-01-27 22:16:07,234 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:16:07,269 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/a5a4?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:16:07,269 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4', 'wtime': 227290, 'btime': 250470, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:07,307 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4', 'wtime': 230290, 'btime': 250470, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:07,308 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:16:07,308 __mp_main__ (lichess-bot.py:689) INFO move: 23
-2024-01-27 22:16:07,308 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 230290 btime 248470 for game toJfqr5x
-2024-01-27 22:16:12,351 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:16:12,386 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/d7c6?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:16:12,387 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6', 'wtime': 230290, 'btime': 248390, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:12,425 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5', 'wtime': 233290, 'btime': 248390, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:12,426 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:16:12,426 __mp_main__ (lichess-bot.py:689) INFO move: 24
-2024-01-27 22:16:12,426 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 233290 btime 246390 for game toJfqr5x
-2024-01-27 22:16:17,419 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:16:17,452 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/h6g5?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:16:17,452 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5', 'wtime': 233290, 'btime': 246360, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:18,841 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5', 'wtime': 234930, 'btime': 246360, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:18,842 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:16:18,843 __mp_main__ (lichess-bot.py:689) INFO move: 25
-2024-01-27 22:16:18,843 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 234930 btime 244360 for game toJfqr5x
-2024-01-27 22:16:23,872 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:16:23,916 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/c6d6?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:16:23,916 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6', 'wtime': 234930, 'btime': 244280, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:25,061 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4', 'wtime': 236820, 'btime': 244280, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:25,062 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:16:25,062 __mp_main__ (lichess-bot.py:689) INFO move: 26
-2024-01-27 22:16:25,062 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 236820 btime 242280 for game toJfqr5x
-2024-01-27 22:16:30,158 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:16:30,191 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/d6c6?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:16:30,193 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6', 'wtime': 236820, 'btime': 242150, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:30,231 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7', 'wtime': 239820, 'btime': 242150, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:30,232 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:16:30,232 __mp_main__ (lichess-bot.py:689) INFO move: 27
-2024-01-27 22:16:30,233 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 239820 btime 240150 for game toJfqr5x
-2024-01-27 22:16:35,313 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:16:35,349 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/a4a3?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:16:35,349 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3', 'wtime': 239820, 'btime': 240030, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:35,388 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5', 'wtime': 242820, 'btime': 240030, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:35,390 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:16:35,390 __mp_main__ (lichess-bot.py:689) INFO move: 28
-2024-01-27 22:16:35,390 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 242820 btime 238030 for game toJfqr5x
-2024-01-27 22:16:40,404 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:16:40,483 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/c6b6?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:16:40,484 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6', 'wtime': 242820, 'btime': 237940, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:40,513 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6', 'wtime': 245820, 'btime': 237940, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:40,514 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:16:40,514 __mp_main__ (lichess-bot.py:689) INFO move: 29
-2024-01-27 22:16:40,514 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 245820 btime 235940 for game toJfqr5x
-2024-01-27 22:16:41,794 __main__ (lichess-bot.py:370) DEBUG Event: {'type': 'correspondence_ping'}
-2024-01-27 22:16:45,504 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:16:45,538 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/b6c5?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:16:45,538 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5', 'wtime': 245820, 'btime': 235910, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:45,572 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7', 'wtime': 248820, 'btime': 235910, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:45,573 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:16:45,573 __mp_main__ (lichess-bot.py:689) INFO move: 30
-2024-01-27 22:16:45,573 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 248820 btime 233910 for game toJfqr5x
-2024-01-27 22:16:50,603 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:16:50,635 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/c5c4?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:16:50,636 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4', 'wtime': 248820, 'btime': 233850, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:52,370 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4 h7h8q', 'wtime': 250120, 'btime': 233850, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:16:52,372 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:16:52,372 __mp_main__ (lichess-bot.py:689) INFO move: 31
-2024-01-27 22:16:52,372 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 250120 btime 231850 for game toJfqr5x
-2024-01-27 22:16:57,767 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:16:57,826 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/a3b2?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:16:57,827 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4 h7h8q a3b2', 'wtime': 250120, 'btime': 231400, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:17:02,316 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4 h7h8q a3b2 h8h3', 'wtime': 248660, 'btime': 231400, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:17:02,317 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:17:02,317 __mp_main__ (lichess-bot.py:689) INFO move: 32
-2024-01-27 22:17:02,318 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 248660 btime 229400 for game toJfqr5x
-2024-01-27 22:17:07,749 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:17:07,783 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/c4b5?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:17:07,784 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4 h7h8q a3b2 h8h3 c4b5', 'wtime': 248660, 'btime': 228930, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:17:11,105 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4 h7h8q a3b2 h8h3 c4b5 h3g4', 'wtime': 248370, 'btime': 228930, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:17:11,106 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:17:11,107 __mp_main__ (lichess-bot.py:689) INFO move: 33
-2024-01-27 22:17:11,107 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 248370 btime 226930 for game toJfqr5x
-2024-01-27 22:17:16,508 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:17:16,540 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/b2a1q?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:17:16,541 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4 h7h8q a3b2 h8h3 c4b5 h3g4 b2a1q', 'wtime': 248370, 'btime': 226490, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:17:22,436 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4 h7h8q a3b2 h8h3 c4b5 h3g4 b2a1q g7a1', 'wtime': 245500, 'btime': 226490, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:17:22,438 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:17:22,438 __mp_main__ (lichess-bot.py:689) INFO move: 34
-2024-01-27 22:17:22,438 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 245500 btime 224490 for game toJfqr5x
-2024-01-27 22:17:27,589 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:17:27,590 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-27 22:17:27,743 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/b5c5?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:17:27,743 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4 h7h8q a3b2 h8h3 c4b5 h3g4 b2a1q g7a1 b5c5', 'wtime': 245500, 'btime': 224180, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:17:28,992 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4 h7h8q a3b2 h8h3 c4b5 h3g4 b2a1q g7a1 b5c5 a1e5', 'wtime': 247280, 'btime': 224180, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:17:28,994 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:17:28,994 __mp_main__ (lichess-bot.py:689) INFO move: 35
-2024-01-27 22:17:28,994 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 247280 btime 222180 for game toJfqr5x
-2024-01-27 22:17:33,971 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:17:34,004 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/c5b6?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:17:34,005 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4 h7h8q a3b2 h8h3 c4b5 h3g4 b2a1q g7a1 b5c5 a1e5 c5b6', 'wtime': 247280, 'btime': 222170, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:17:34,040 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4 h7h8q a3b2 h8h3 c4b5 h3g4 b2a1q g7a1 b5c5 a1e5 c5b6 g5e4', 'wtime': 250280, 'btime': 222170, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:17:34,042 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:17:34,042 __mp_main__ (lichess-bot.py:689) INFO move: 36
-2024-01-27 22:17:34,042 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 250280 btime 220170 for game toJfqr5x
-2024-01-27 22:17:39,041 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:17:39,072 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/b6a6?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:17:39,073 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4 h7h8q a3b2 h8h3 c4b5 h3g4 b2a1q g7a1 b5c5 a1e5 c5b6 g5e4 b6a6', 'wtime': 250280, 'btime': 220140, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:17:39,108 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4 h7h8q a3b2 h8h3 c4b5 h3g4 b2a1q g7a1 b5c5 a1e5 c5b6 g5e4 b6a6 g4g6', 'wtime': 253280, 'btime': 220140, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:17:39,110 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:17:39,110 __mp_main__ (lichess-bot.py:689) INFO move: 37
-2024-01-27 22:17:39,110 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 253280 btime 218140 for game toJfqr5x
-2024-01-27 22:17:41,173 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:17:41,205 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/a6b7?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:17:41,206 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4 h7h8q a3b2 h8h3 c4b5 h3g4 b2a1q g7a1 b5c5 a1e5 c5b6 g5e4 b6a6 g4g6 a6b7', 'wtime': 253280, 'btime': 221040, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:17:41,244 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4 h7h8q a3b2 h8h3 c4b5 h3g4 b2a1q g7a1 b5c5 a1e5 c5b6 g5e4 b6a6 g4g6 a6b7 e5e7', 'wtime': 256280, 'btime': 221040, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:17:41,246 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:17:41,246 __mp_main__ (lichess-bot.py:689) INFO move: 38
-2024-01-27 22:17:41,246 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 256280 btime 219040 for game toJfqr5x
-2024-01-27 22:17:42,549 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:17:42,577 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/move/b7a8?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:17:42,578 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4 h7h8q a3b2 h8h3 c4b5 h3g4 b2a1q g7a1 b5c5 a1e5 c5b6 g5e4 b6a6 g4g6 a6b7 e5e7 b7a8', 'wtime': 256280, 'btime': 222710, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:17:42,623 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'e2e4 c7c6 d2d4 d8a5 c1d2 a5d2 d1d2 b7b5 d2b4 c6c5 b4c5 c8b7 c5c6 e7e5 c6b7 a7a5 b7a8 e8d8 a8b8 d8e7 b8e5 e7d8 e5e7 d8c8 f1b5 g8h6 e7f7 h6f7 b5d7 c8b7 g1f3 b7c7 e4e5 f7e5 d4e5 f8a3 e5e6 a3f8 e6e7 h7h6 e7f8q c7d7 f8h8 a5a4 g2g4 d7c6 g4g5 h6g5 f3g5 c6d6 h2h4 d6c6 h8g7 a4a3 h4h5 c6b6 h5h6 b6c5 h6h7 c5c4 h7h8q a3b2 h8h3 c4b5 h3g4 b2a1q g7a1 b5c5 a1e5 c5b6 g5e4 b6a6 g4g6 a6b7 e5e7 b7a8 g6g8', 'wtime': 256280, 'btime': 222710, 'winc': 3000, 'binc': 3000, 'status': 'mate', 'winner': 'white'}
-2024-01-27 22:17:42,623 __main__ (lichess-bot.py:370) DEBUG Event: {'type': 'gameFinish', 'game': {'fullId': 'toJfqr5x0Gme', 'gameId': 'toJfqr5x', 'fen': 'k5Q1/4Q3/8/8/4N3/8/P1P2P2/1N2K2R b K - 10 39', 'color': 'black', 'lastMove': 'g6g8', 'source': 'friend', 'status': {'id': 30, 'name': 'mate'}, 'variant': {'key': 'standard', 'name': 'Standard'}, 'speed': 'blitz', 'perf': 'blitz', 'rated': False, 'hasMoved': True, 'opponent': {'id': 'luk3k', 'username': 'luk3k', 'rating': 1500}, 'isMyTurn': False, 'secondsLeft': 223, 'winner': 'white', 'compat': {'bot': True, 'board': True}, 'id': 'toJfqr5x'}}
-2024-01-27 22:17:42,625 __mp_main__ (lichess-bot.py:788) INFO luk3k won!
-2024-01-27 22:17:42,625 __mp_main__ (lichess-bot.py:799) INFO Game won by checkmate.
-2024-01-27 22:17:42,625 lib.conversation (conversation.py:83) INFO *** https://lichess.org/toJfqr5x/black [player] probabilistic-bot: Good game!
-2024-01-27 22:17:42,654 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/chat HTTP/1.1" 200 11
-2024-01-27 22:17:42,654 lib.conversation (conversation.py:83) INFO *** https://lichess.org/toJfqr5x/black [spectator] probabilistic-bot: Thanks for watching!
-2024-01-27 22:17:42,684 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/toJfqr5x/chat HTTP/1.1" 200 11
-2024-01-27 22:17:42,685 __mp_main__ (lichess-bot.py:762) INFO --- https://lichess.org/toJfqr5x/black Game over
-2024-01-27 22:17:42,685 __main__ (lichess-bot.py:370) DEBUG Event: {'type': 'local_game_done', 'game': {'id': 'toJfqr5x', 'pgn': '', 'complete': True}}
-2024-01-27 22:17:42,686 __main__ (lichess-bot.py:254) INFO +++ Process Freed. Count: 0. IDs: None
-2024-01-27 22:17:46,261 __main__ (lichess-bot.py:370) DEBUG Event: {'type': 'challenge', 'challenge': {'id': 'jQ3Kc8pe', 'url': 'https://lichess.org/jQ3Kc8pe', 'status': 'created', 'challenger': {'id': 'luk3k', 'name': 'luk3k', 'rating': 1500, 'title': None, 'provisional': True, 'online': True, 'lag': 4}, 'destUser': {'id': 'probabilistic-bot', 'name': 'probabilistic-bot', 'rating': 2000, 'title': 'BOT', 'provisional': True, 'online': True}, 'variant': {'key': 'standard', 'name': 'Standard', 'short': 'Std'}, 'rated': False, 'speed': 'blitz', 'timeControl': {'type': 'clock', 'limit': 300, 'increment': 3, 'show': '5+3'}, 'color': 'black', 'finalColor': 'black', 'perf': {'icon': '\ue01d', 'name': 'Blitz'}, 'rematchOf': 'toJfqr5x'}, 'compat': {'bot': True, 'board': True}}
-2024-01-27 22:17:46,262 __main__ (lichess-bot.py:421) INFO Accept Blitz casual challenge from luk3k (1500?) (jQ3Kc8pe)
-2024-01-27 22:17:46,263 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-27 22:17:46,450 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/challenge/jQ3Kc8pe/accept HTTP/1.1" 200 11
-2024-01-27 22:17:46,450 __main__ (lichess-bot.py:254) INFO --- Process Queued. Count: 1. IDs: {'jQ3Kc8pe'}
-2024-01-27 22:17:46,596 __main__ (lichess-bot.py:370) DEBUG Event: {'type': 'gameStart', 'game': {'fullId': 'jQ3Kc8pe4E7R', 'gameId': 'jQ3Kc8pe', 'fen': 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', 'color': 'white', 'lastMove': '', 'source': 'friend', 'status': {'id': 20, 'name': 'started'}, 'variant': {'key': 'standard', 'name': 'Standard'}, 'speed': 'blitz', 'perf': 'blitz', 'rated': False, 'hasMoved': False, 'opponent': {'id': 'luk3k', 'username': 'luk3k', 'rating': 1500}, 'isMyTurn': True, 'secondsLeft': 300, 'compat': {'bot': True, 'board': True}, 'id': 'jQ3Kc8pe'}}
-2024-01-27 22:17:46,596 __main__ (lichess-bot.py:254) INFO --- Process Used. Count: 1. IDs: {'jQ3Kc8pe'}
-2024-01-27 22:17:46,603 urllib3.connectionpool (connectionpool.py:1052) DEBUG Starting new HTTPS connection (1): lichess.org:443
-2024-01-27 22:17:46,758 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "GET /api/bot/game/stream/jQ3Kc8pe HTTP/1.1" 200 None
-2024-01-27 22:17:46,759 __mp_main__ (lichess-bot.py:572) DEBUG Initial state: {'id': 'jQ3Kc8pe', 'variant': {'key': 'standard', 'name': 'Standard', 'short': 'Std'}, 'speed': 'blitz', 'perf': {'name': 'Blitz'}, 'rated': False, 'createdAt': 1706390266578, 'white': {'id': 'probabilistic-bot', 'name': 'probabilistic-bot', 'title': 'BOT', 'rating': 2000, 'provisional': True}, 'black': {'id': 'luk3k', 'name': 'luk3k', 'title': None, 'rating': 1500, 'provisional': True}, 'initialFen': 'startpos', 'clock': {'initial': 300000, 'increment': 3000}, 'type': 'gameFull', 'state': {'type': 'gameState', 'moves': '', 'wtime': 300000, 'btime': 300000, 'winc': 3000, 'binc': 3000, 'status': 'started'}}
-2024-01-27 22:17:46,833 lib.engine_wrapper (engine_wrapper.py:65) DEBUG Starting engine: ['/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/engines/MctsEngine']
-2024-01-27 22:17:46,833 __mp_main__ (lichess-bot.py:578) DEBUG The engine for game jQ3Kc8pe has pid=?
-2024-01-27 22:17:46,833 __mp_main__ (lichess-bot.py:581) INFO +++ https://lichess.org/jQ3Kc8pe/white Blitz vs luk3k (1500?) (jQ3Kc8pe)
-2024-01-27 22:17:46,833 lib.conversation (conversation.py:83) INFO *** https://lichess.org/jQ3Kc8pe/white [player] probabilistic-bot: Hi! I'm probabilistic-bot. Good luck! Type !help for a list of commands I can respond to.
-2024-01-27 22:17:46,834 urllib3.connectionpool (connectionpool.py:1052) DEBUG Starting new HTTPS connection (2): lichess.org:443
-2024-01-27 22:17:46,978 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/jQ3Kc8pe/chat HTTP/1.1" 200 11
-2024-01-27 22:17:46,979 lib.conversation (conversation.py:83) INFO *** https://lichess.org/jQ3Kc8pe/white [spectator] probabilistic-bot: Hi! I'm probabilistic-bot. Type !help for a list of commands I can respond to.
-2024-01-27 22:17:47,008 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/jQ3Kc8pe/chat HTTP/1.1" 200 11
-2024-01-27 22:17:47,009 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:17:47,009 __mp_main__ (lichess-bot.py:689) INFO move: 1
-2024-01-27 22:17:47,009 lib.engine_wrapper (engine_wrapper.py:650) INFO Searching for time 10 seconds for game jQ3Kc8pe
-2024-01-27 22:17:52,275 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:17:52,312 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/jQ3Kc8pe/move/g1f3?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:17:52,313 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'chatLine', 'room': 'player', 'username': 'probabilistic-bot', 'text': "Hi! I'm probabilistic-bot. Good luck! Type !help for a list of commands I can respond to."}
-2024-01-27 22:17:52,313 lib.conversation (conversation.py:42) INFO *** https://lichess.org/jQ3Kc8pe/white [player] probabilistic-bot: Hi! I'm probabilistic-bot. Good luck! Type !help for a list of commands I can respond to.
-2024-01-27 22:17:52,313 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'chatLine', 'room': 'spectator', 'username': 'probabilistic-bot', 'text': "Hi! I'm probabilistic-bot. Type !help for a list of commands I can respond to."}
-2024-01-27 22:17:52,313 lib.conversation (conversation.py:42) INFO *** https://lichess.org/jQ3Kc8pe/white [spectator] probabilistic-bot: Hi! I'm probabilistic-bot. Type !help for a list of commands I can respond to.
-2024-01-27 22:17:52,314 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3', 'wtime': 300000, 'btime': 300000, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:17:57,685 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5', 'wtime': 300000, 'btime': 300000, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:17:57,686 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:17:57,686 __mp_main__ (lichess-bot.py:689) INFO move: 2
-2024-01-27 22:17:57,686 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 298000 btime 300000 for game jQ3Kc8pe
-2024-01-27 22:18:02,617 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:18:02,618 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-27 22:18:02,777 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/jQ3Kc8pe/move/b2b3?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:18:02,778 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3', 'wtime': 297910, 'btime': 300000, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:18:07,079 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4', 'wtime': 297910, 'btime': 298730, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:18:07,079 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:18:07,080 __mp_main__ (lichess-bot.py:689) INFO move: 3
-2024-01-27 22:18:07,080 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 295910 btime 298730 for game jQ3Kc8pe
-2024-01-27 22:18:12,946 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:18:12,946 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-27 22:18:13,105 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/jQ3Kc8pe/move/g2g3?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:18:13,106 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3', 'wtime': 294880, 'btime': 298730, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:18:13,920 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5', 'wtime': 294880, 'btime': 300950, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:18:13,921 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:18:13,921 __mp_main__ (lichess-bot.py:689) INFO move: 4
-2024-01-27 22:18:13,921 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 292880 btime 300950 for game jQ3Kc8pe
-2024-01-27 22:18:19,395 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:18:19,429 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/jQ3Kc8pe/move/h2h3?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:18:19,430 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5 h2h3', 'wtime': 292370, 'btime': 300950, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:18:19,468 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5 h2h3 d8h4', 'wtime': 292370, 'btime': 303950, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:18:19,468 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:18:19,468 __mp_main__ (lichess-bot.py:689) INFO move: 5
-2024-01-27 22:18:19,469 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 290370 btime 303950 for game jQ3Kc8pe
-2024-01-27 22:18:24,719 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:18:24,752 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/jQ3Kc8pe/move/g3h4?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:18:24,753 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5 h2h3 d8h4 g3h4', 'wtime': 290090, 'btime': 303950, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:18:30,442 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5 h2h3 d8h4 g3h4 c8g4', 'wtime': 290090, 'btime': 301290, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:18:30,442 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:18:30,443 __mp_main__ (lichess-bot.py:689) INFO move: 6
-2024-01-27 22:18:30,443 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 288090 btime 301290 for game jQ3Kc8pe
-2024-01-27 22:18:36,140 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:18:36,141 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-27 22:18:36,305 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/jQ3Kc8pe/move/f1g2?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:18:36,306 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5 h2h3 d8h4 g3h4 c8g4 f1g2', 'wtime': 287240, 'btime': 301290, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:18:47,303 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5 h2h3 d8h4 g3h4 c8g4 f1g2 f8a3', 'wtime': 287240, 'btime': 293320, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:18:47,304 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:18:47,304 __mp_main__ (lichess-bot.py:689) INFO move: 7
-2024-01-27 22:18:47,304 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 285240 btime 293320 for game jQ3Kc8pe
-2024-01-27 22:18:53,146 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:18:53,146 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-27 22:18:53,295 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/jQ3Kc8pe/move/b1c3?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:18:53,296 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5 h2h3 d8h4 g3h4 c8g4 f1g2 f8a3 b1c3', 'wtime': 284250, 'btime': 293320, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:18:55,859 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5 h2h3 d8h4 g3h4 c8g4 f1g2 f8a3 b1c3 e4e3', 'wtime': 284250, 'btime': 293790, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:18:55,859 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:18:55,860 __mp_main__ (lichess-bot.py:689) INFO move: 8
-2024-01-27 22:18:55,860 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 282250 btime 293790 for game jQ3Kc8pe
-2024-01-27 22:19:01,905 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:19:01,938 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/jQ3Kc8pe/move/f3h2?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:19:01,939 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5 h2h3 d8h4 g3h4 c8g4 f1g2 f8a3 b1c3 e4e3 f3h2', 'wtime': 281170, 'btime': 293790, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:19:12,785 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5 h2h3 d8h4 g3h4 c8g4 f1g2 f8a3 b1c3 e4e3 f3h2 e8e7', 'wtime': 281170, 'btime': 285970, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:19:12,786 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:19:12,786 __mp_main__ (lichess-bot.py:689) INFO move: 9
-2024-01-27 22:19:12,787 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 279170 btime 285970 for game jQ3Kc8pe
-2024-01-27 22:19:16,977 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:19:16,978 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
-2024-01-27 22:19:17,126 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/jQ3Kc8pe/move/e1g1?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:19:17,127 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5 h2h3 d8h4 g3h4 c8g4 f1g2 f8a3 b1c3 e4e3 f3h2 e8e7 e1g1', 'wtime': 279830, 'btime': 285970, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:19:17,161 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5 h2h3 d8h4 g3h4 c8g4 f1g2 f8a3 b1c3 e4e3 f3h2 e8e7 e1g1 e7e6', 'wtime': 279830, 'btime': 288970, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:19:17,162 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:19:17,162 __mp_main__ (lichess-bot.py:689) INFO move: 10
-2024-01-27 22:19:17,162 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 277830 btime 288970 for game jQ3Kc8pe
-2024-01-27 22:19:21,835 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:19:21,869 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/jQ3Kc8pe/move/h2g4?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:19:21,870 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5 h2h3 d8h4 g3h4 c8g4 f1g2 f8a3 b1c3 e4e3 f3h2 e8e7 e1g1 e7e6 h2g4', 'wtime': 278120, 'btime': 288970, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:19:23,999 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5 h2h3 d8h4 g3h4 c8g4 f1g2 f8a3 b1c3 e4e3 f3h2 e8e7 e1g1 e7e6 h2g4 e6f5', 'wtime': 278120, 'btime': 289880, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:19:24,000 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:19:24,000 __mp_main__ (lichess-bot.py:689) INFO move: 11
-2024-01-27 22:19:24,000 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 276120 btime 289880 for game jQ3Kc8pe
-2024-01-27 22:19:26,201 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:19:26,230 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/jQ3Kc8pe/move/g2e4?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:19:26,230 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5 h2h3 d8h4 g3h4 c8g4 f1g2 f8a3 b1c3 e4e3 f3h2 e8e7 e1g1 e7e6 h2g4 e6f5 g2e4', 'wtime': 278890, 'btime': 289880, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:19:27,872 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5 h2h3 d8h4 g3h4 c8g4 f1g2 f8a3 b1c3 e4e3 f3h2 e8e7 e1g1 e7e6 h2g4 e6f5 g2e4 f5f4', 'wtime': 278890, 'btime': 291270, 'winc': 3000, 'binc': 3000, 'status': 'started'}
-2024-01-27 22:19:27,873 __mp_main__ (lichess-bot.py:688) INFO 
-2024-01-27 22:19:27,873 __mp_main__ (lichess-bot.py:689) INFO move: 12
-2024-01-27 22:19:27,874 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 276890 btime 291270 for game jQ3Kc8pe
-2024-01-27 22:19:28,483 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
-2024-01-27 22:19:28,527 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/jQ3Kc8pe/move/d2e3?offeringDraw=false HTTP/1.1" 200 11
-2024-01-27 22:19:28,528 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'g1f3 e7e5 b2b3 e5e4 g2g3 d7d5 h2h3 d8h4 g3h4 c8g4 f1g2 f8a3 b1c3 e4e3 f3h2 e8e7 e1g1 e7e6 h2g4 e6f5 g2e4 f5f4 d2e3', 'wtime': 278250, 'btime': 291270, 'winc': 3000, 'binc': 3000, 'status': 'mate', 'winner': 'white'}
-2024-01-27 22:19:28,529 __main__ (lichess-bot.py:370) DEBUG Event: {'type': 'gameFinish', 'game': {'fullId': 'jQ3Kc8pe4E7R', 'gameId': 'jQ3Kc8pe', 'fen': 'rn4nr/ppp2ppp/8/3p4/4BkNP/bPN1P2P/P1P1PP2/R1BQ1RK1 b - - 0 12', 'color': 'white', 'lastMove': 'd2e3', 'source': 'friend', 'status': {'id': 30, 'name': 'mate'}, 'variant': {'key': 'standard', 'name': 'Standard'}, 'speed': 'blitz', 'perf': 'blitz', 'rated': False, 'hasMoved': True, 'opponent': {'id': 'luk3k', 'username': 'luk3k', 'rating': 1500}, 'isMyTurn': False, 'secondsLeft': 278, 'winner': 'white', 'compat': {'bot': True, 'board': True}, 'id': 'jQ3Kc8pe'}}
-2024-01-27 22:19:28,529 __mp_main__ (lichess-bot.py:788) INFO probabilistic-bot won!
-2024-01-27 22:19:28,529 __mp_main__ (lichess-bot.py:799) INFO Game won by checkmate.
-2024-01-27 22:19:28,529 lib.conversation (conversation.py:83) INFO *** https://lichess.org/jQ3Kc8pe/white [player] probabilistic-bot: Good game!
-2024-01-27 22:19:28,561 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/jQ3Kc8pe/chat HTTP/1.1" 200 11
-2024-01-27 22:19:28,562 lib.conversation (conversation.py:83) INFO *** https://lichess.org/jQ3Kc8pe/white [spectator] probabilistic-bot: Thanks for watching!
-2024-01-27 22:19:28,592 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/jQ3Kc8pe/chat HTTP/1.1" 200 11
-2024-01-27 22:19:28,593 __mp_main__ (lichess-bot.py:762) INFO --- https://lichess.org/jQ3Kc8pe/white Game over
-2024-01-27 22:19:28,593 __main__ (lichess-bot.py:370) DEBUG Event: {'type': 'local_game_done', 'game': {'id': 'jQ3Kc8pe', 'pgn': '', 'complete': True}}
-2024-01-27 22:19:28,593 __main__ (lichess-bot.py:254) INFO +++ Process Freed. Count: 0. IDs: None
-2024-01-27 22:20:19,135 __mp_main__ (lichess-bot.py:65) DEBUG Received SIGINT. Terminating client.
-2024-01-27 22:20:19,135 __mp_main__ (lichess-bot.py:65) DEBUG Received SIGINT. Terminating client.
-2024-01-27 22:20:25,006 __main__ (lichess-bot.py:1091) ERROR Quitting lichess_bot due to an error:
+2024-01-28 23:00:59,867 lib.config (config.py:262) DEBUG ====================
+2024-01-28 23:00:59,868 __main__ (lichess-bot.py:1026) INFO Checking engine configuration ...
+2024-01-28 23:01:00,859 lib.engine_wrapper (engine_wrapper.py:65) DEBUG Starting engine: ['/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/engines/MyBayesMctsEngine']
+2024-01-28 23:01:00,860 __main__ (lichess-bot.py:1029) INFO Engine configuration OK
+2024-01-28 23:01:00,862 urllib3.connectionpool (connectionpool.py:1052) DEBUG Starting new HTTPS connection (1): lichess.org:443
+2024-01-28 23:01:01,021 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/token/test HTTP/1.1" 200 None
+2024-01-28 23:01:01,055 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "GET /api/account HTTP/1.1" 200 None
+2024-01-28 23:01:01,055 __main__ (lichess-bot.py:1038) INFO Welcome probabilistic-bot!
+2024-01-28 23:01:01,056 __main__ (lichess-bot.py:206) INFO You're now connected to https://lichess.org/ and awaiting challenges.
+2024-01-28 23:01:01,282 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "GET /api/account/playing HTTP/1.1" 200 17
+2024-01-28 23:01:13,084 __main__ (lichess-bot.py:370) DEBUG Event: {'type': 'challenge', 'challenge': {'id': 'WgJ7gOW3', 'url': 'https://lichess.org/WgJ7gOW3', 'status': 'created', 'challenger': {'id': 'luk3k', 'name': 'luk3k', 'rating': 1500, 'title': None, 'provisional': True, 'online': True, 'lag': 4}, 'destUser': {'id': 'probabilistic-bot', 'name': 'probabilistic-bot', 'rating': 2000, 'title': 'BOT', 'provisional': True, 'online': True}, 'variant': {'key': 'standard', 'name': 'Standard', 'short': 'Std'}, 'rated': False, 'speed': 'blitz', 'timeControl': {'type': 'clock', 'limit': 300, 'increment': 3, 'show': '5+3'}, 'color': 'random', 'finalColor': 'black', 'perf': {'icon': '\ue01d', 'name': 'Blitz'}}, 'compat': {'bot': True, 'board': True}}
+2024-01-28 23:01:13,085 __main__ (lichess-bot.py:421) INFO Accept Blitz casual challenge from luk3k (1500?) (WgJ7gOW3)
+2024-01-28 23:01:13,086 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
+2024-01-28 23:01:13,307 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/challenge/WgJ7gOW3/accept HTTP/1.1" 200 11
+2024-01-28 23:01:13,307 __main__ (lichess-bot.py:254) INFO --- Process Queued. Count: 1. IDs: {'WgJ7gOW3'}
+2024-01-28 23:01:13,307 __main__ (lichess-bot.py:370) DEBUG Event: {'type': 'gameStart', 'game': {'fullId': 'WgJ7gOW3N1cS', 'gameId': 'WgJ7gOW3', 'fen': 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1', 'color': 'white', 'lastMove': '', 'source': 'friend', 'status': {'id': 20, 'name': 'started'}, 'variant': {'key': 'standard', 'name': 'Standard'}, 'speed': 'blitz', 'perf': 'blitz', 'rated': False, 'hasMoved': False, 'opponent': {'id': 'luk3k', 'username': 'luk3k', 'rating': 1500}, 'isMyTurn': True, 'secondsLeft': 300, 'compat': {'bot': True, 'board': True}, 'id': 'WgJ7gOW3'}}
+2024-01-28 23:01:13,308 __main__ (lichess-bot.py:254) INFO --- Process Used. Count: 1. IDs: {'WgJ7gOW3'}
+2024-01-28 23:01:13,314 urllib3.connectionpool (connectionpool.py:1052) DEBUG Starting new HTTPS connection (1): lichess.org:443
+2024-01-28 23:01:13,507 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "GET /api/bot/game/stream/WgJ7gOW3 HTTP/1.1" 200 None
+2024-01-28 23:01:13,508 __mp_main__ (lichess-bot.py:572) DEBUG Initial state: {'id': 'WgJ7gOW3', 'variant': {'key': 'standard', 'name': 'Standard', 'short': 'Std'}, 'speed': 'blitz', 'perf': {'name': 'Blitz'}, 'rated': False, 'createdAt': 1706479273280, 'white': {'id': 'probabilistic-bot', 'name': 'probabilistic-bot', 'title': 'BOT', 'rating': 2000, 'provisional': True}, 'black': {'id': 'luk3k', 'name': 'luk3k', 'title': None, 'rating': 1500, 'provisional': True}, 'initialFen': 'startpos', 'clock': {'initial': 300000, 'increment': 3000}, 'type': 'gameFull', 'state': {'type': 'gameState', 'moves': '', 'wtime': 300000, 'btime': 300000, 'winc': 3000, 'binc': 3000, 'status': 'started'}}
+2024-01-28 23:01:14,532 lib.engine_wrapper (engine_wrapper.py:65) DEBUG Starting engine: ['/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/engines/MyBayesMctsEngine']
+2024-01-28 23:01:14,532 __mp_main__ (lichess-bot.py:578) DEBUG The engine for game WgJ7gOW3 has pid=?
+2024-01-28 23:01:14,532 __mp_main__ (lichess-bot.py:581) INFO +++ https://lichess.org/WgJ7gOW3/white Blitz vs luk3k (1500?) (WgJ7gOW3)
+2024-01-28 23:01:14,532 lib.conversation (conversation.py:83) INFO *** https://lichess.org/WgJ7gOW3/white [player] probabilistic-bot: Hi! I'm probabilistic-bot. Good luck! Type !help for a list of commands I can respond to.
+2024-01-28 23:01:14,533 urllib3.connectionpool (connectionpool.py:1052) DEBUG Starting new HTTPS connection (2): lichess.org:443
+2024-01-28 23:01:14,709 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/WgJ7gOW3/chat HTTP/1.1" 200 11
+2024-01-28 23:01:14,709 lib.conversation (conversation.py:83) INFO *** https://lichess.org/WgJ7gOW3/white [spectator] probabilistic-bot: Hi! I'm probabilistic-bot. Type !help for a list of commands I can respond to.
+2024-01-28 23:01:14,747 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/WgJ7gOW3/chat HTTP/1.1" 200 11
+2024-01-28 23:01:14,747 __mp_main__ (lichess-bot.py:688) INFO 
+2024-01-28 23:01:14,747 __mp_main__ (lichess-bot.py:689) INFO move: 1
+2024-01-28 23:01:14,748 lib.engine_wrapper (engine_wrapper.py:650) INFO Searching for time 10 seconds for game WgJ7gOW3
+2024-01-28 23:01:39,175 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
+2024-01-28 23:01:39,176 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
+2024-01-28 23:01:39,350 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/WgJ7gOW3/move/d2d3?offeringDraw=false HTTP/1.1" 200 11
+2024-01-28 23:01:39,350 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'chatLine', 'room': 'player', 'username': 'probabilistic-bot', 'text': "Hi! I'm probabilistic-bot. Good luck! Type !help for a list of commands I can respond to."}
+2024-01-28 23:01:39,351 lib.conversation (conversation.py:42) INFO *** https://lichess.org/WgJ7gOW3/white [player] probabilistic-bot: Hi! I'm probabilistic-bot. Good luck! Type !help for a list of commands I can respond to.
+2024-01-28 23:01:39,351 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'chatLine', 'room': 'spectator', 'username': 'probabilistic-bot', 'text': "Hi! I'm probabilistic-bot. Type !help for a list of commands I can respond to."}
+2024-01-28 23:01:39,351 lib.conversation (conversation.py:42) INFO *** https://lichess.org/WgJ7gOW3/white [spectator] probabilistic-bot: Hi! I'm probabilistic-bot. Type !help for a list of commands I can respond to.
+2024-01-28 23:01:39,351 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3', 'wtime': 300000, 'btime': 300000, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:01:41,035 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5', 'wtime': 300000, 'btime': 300000, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:01:41,035 __mp_main__ (lichess-bot.py:688) INFO 
+2024-01-28 23:01:41,036 __mp_main__ (lichess-bot.py:689) INFO move: 2
+2024-01-28 23:01:41,036 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 297999 btime 300000 for game WgJ7gOW3
+2024-01-28 23:02:07,078 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
+2024-01-28 23:02:07,079 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
+2024-01-28 23:02:07,235 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/WgJ7gOW3/move/c1e3?offeringDraw=false HTTP/1.1" 200 11
+2024-01-28 23:02:07,236 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3', 'wtime': 276800, 'btime': 300000, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:02:34,432 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6', 'wtime': 276800, 'btime': 275830, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:02:34,432 __mp_main__ (lichess-bot.py:688) INFO 
+2024-01-28 23:02:34,432 __mp_main__ (lichess-bot.py:689) INFO move: 3
+2024-01-28 23:02:34,433 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 274800 btime 275830 for game WgJ7gOW3
+2024-01-28 23:03:00,881 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
+2024-01-28 23:03:00,882 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
+2024-01-28 23:03:01,031 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/WgJ7gOW3/move/g1f3?offeringDraw=false HTTP/1.1" 200 11
+2024-01-28 23:03:01,032 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3', 'wtime': 253200, 'btime': 275830, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:03:02,002 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4', 'wtime': 253200, 'btime': 277890, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:03:02,002 __mp_main__ (lichess-bot.py:688) INFO 
+2024-01-28 23:03:02,002 __mp_main__ (lichess-bot.py:689) INFO move: 4
+2024-01-28 23:03:02,003 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 251200 btime 277890 for game WgJ7gOW3
+2024-01-28 23:03:35,950 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
+2024-01-28 23:03:35,952 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
+2024-01-28 23:03:36,105 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/WgJ7gOW3/move/b1d2?offeringDraw=false HTTP/1.1" 200 11
+2024-01-28 23:03:36,105 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2', 'wtime': 222100, 'btime': 277890, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:03:38,059 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2 b4d2', 'wtime': 222100, 'btime': 278970, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:03:38,060 __mp_main__ (lichess-bot.py:688) INFO 
+2024-01-28 23:03:38,060 __mp_main__ (lichess-bot.py:689) INFO move: 5
+2024-01-28 23:03:38,060 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 220100 btime 278970 for game WgJ7gOW3
+2024-01-28 23:04:06,745 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
+2024-01-28 23:04:06,746 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
+2024-01-28 23:04:06,901 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/WgJ7gOW3/move/f3d2?offeringDraw=false HTTP/1.1" 200 11
+2024-01-28 23:04:06,902 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2 b4d2 f3d2', 'wtime': 196260, 'btime': 278970, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:04:17,529 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2 b4d2 f3d2 c8g4', 'wtime': 196260, 'btime': 271370, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:04:17,529 __mp_main__ (lichess-bot.py:688) INFO 
+2024-01-28 23:04:17,530 __mp_main__ (lichess-bot.py:689) INFO move: 6
+2024-01-28 23:04:17,530 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 194260 btime 271370 for game WgJ7gOW3
+2024-01-28 23:04:44,254 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
+2024-01-28 23:04:44,255 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
+2024-01-28 23:04:44,405 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/WgJ7gOW3/move/d1b1?offeringDraw=false HTTP/1.1" 200 11
+2024-01-28 23:04:44,406 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2 b4d2 f3d2 c8g4 d1b1', 'wtime': 172380, 'btime': 271370, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:04:44,437 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2 b4d2 f3d2 c8g4 d1b1 g4f3', 'wtime': 172380, 'btime': 274370, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:04:44,438 __mp_main__ (lichess-bot.py:688) INFO 
+2024-01-28 23:04:44,438 __mp_main__ (lichess-bot.py:689) INFO move: 7
+2024-01-28 23:04:44,439 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 170380 btime 274370 for game WgJ7gOW3
+2024-01-28 23:05:12,424 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
+2024-01-28 23:05:12,426 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
+2024-01-28 23:05:12,568 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/WgJ7gOW3/move/b1d1?offeringDraw=false HTTP/1.1" 200 11
+2024-01-28 23:05:12,569 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2 b4d2 f3d2 c8g4 d1b1 g4f3 b1d1', 'wtime': 147250, 'btime': 274370, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:05:19,127 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2 b4d2 f3d2 c8g4 d1b1 g4f3 b1d1 f3e2', 'wtime': 147250, 'btime': 270840, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:05:19,128 __mp_main__ (lichess-bot.py:688) INFO 
+2024-01-28 23:05:19,128 __mp_main__ (lichess-bot.py:689) INFO move: 8
+2024-01-28 23:05:19,128 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 145249 btime 270840 for game WgJ7gOW3
+2024-01-28 23:05:49,118 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
+2024-01-28 23:05:49,119 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
+2024-01-28 23:05:49,274 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/WgJ7gOW3/move/c2c4?offeringDraw=false HTTP/1.1" 200 11
+2024-01-28 23:05:49,275 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2 b4d2 f3d2 c8g4 d1b1 g4f3 b1d1 f3e2 c2c4', 'wtime': 120100, 'btime': 270840, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:05:55,094 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2 b4d2 f3d2 c8g4 d1b1 g4f3 b1d1 f3e2 c2c4 e2d1', 'wtime': 120100, 'btime': 268050, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:05:55,095 __mp_main__ (lichess-bot.py:688) INFO 
+2024-01-28 23:05:55,096 __mp_main__ (lichess-bot.py:689) INFO move: 9
+2024-01-28 23:05:55,096 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 118099 btime 268050 for game WgJ7gOW3
+2024-01-28 23:06:01,445 __main__ (lichess-bot.py:370) DEBUG Event: {'type': 'correspondence_ping'}
+2024-01-28 23:06:26,207 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
+2024-01-28 23:06:26,208 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
+2024-01-28 23:06:26,359 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/WgJ7gOW3/move/h2h4?offeringDraw=false HTTP/1.1" 200 11
+2024-01-28 23:06:26,359 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2 b4d2 f3d2 c8g4 d1b1 g4f3 b1d1 f3e2 c2c4 e2d1 h2h4', 'wtime': 91830, 'btime': 268050, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:06:31,984 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2 b4d2 f3d2 c8g4 d1b1 g4f3 b1d1 f3e2 c2c4 e2d1 h2h4 e8d7', 'wtime': 91830, 'btime': 265460, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:06:31,985 __mp_main__ (lichess-bot.py:688) INFO 
+2024-01-28 23:06:31,985 __mp_main__ (lichess-bot.py:689) INFO move: 10
+2024-01-28 23:06:31,985 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 89830 btime 265460 for game WgJ7gOW3
+2024-01-28 23:07:06,826 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
+2024-01-28 23:07:06,827 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
+2024-01-28 23:07:06,983 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/WgJ7gOW3/move/e1d1?offeringDraw=false HTTP/1.1" 200 11
+2024-01-28 23:07:06,984 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2 b4d2 f3d2 c8g4 d1b1 g4f3 b1d1 f3e2 c2c4 e2d1 h2h4 e8d7 e1d1', 'wtime': 59830, 'btime': 265460, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:07:07,017 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2 b4d2 f3d2 c8g4 d1b1 g4f3 b1d1 f3e2 c2c4 e2d1 h2h4 e8d7 e1d1 d7e6', 'wtime': 59830, 'btime': 268460, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:07:07,018 __mp_main__ (lichess-bot.py:688) INFO 
+2024-01-28 23:07:07,018 __mp_main__ (lichess-bot.py:689) INFO move: 11
+2024-01-28 23:07:07,018 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 57830 btime 268460 for game WgJ7gOW3
+2024-01-28 23:07:35,529 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
+2024-01-28 23:07:35,530 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
+2024-01-28 23:07:35,682 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/WgJ7gOW3/move/d3d4?offeringDraw=false HTTP/1.1" 200 11
+2024-01-28 23:07:35,683 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2 b4d2 f3d2 c8g4 d1b1 g4f3 b1d1 f3e2 c2c4 e2d1 h2h4 e8d7 e1d1 d7e6 d3d4', 'wtime': 34170, 'btime': 268460, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:07:38,322 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2 b4d2 f3d2 c8g4 d1b1 g4f3 b1d1 f3e2 c2c4 e2d1 h2h4 e8d7 e1d1 d7e6 d3d4 e6f5', 'wtime': 34170, 'btime': 268850, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:07:38,323 __mp_main__ (lichess-bot.py:688) INFO 
+2024-01-28 23:07:38,323 __mp_main__ (lichess-bot.py:689) INFO move: 12
+2024-01-28 23:07:38,324 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 32170 btime 268850 for game WgJ7gOW3
+2024-01-28 23:08:10,915 lib.engine_wrapper (engine_wrapper.py:295) INFO Source: Engine
+2024-01-28 23:08:10,916 urllib3.connectionpool (connectionpool.py:292) DEBUG Resetting dropped connection: lichess.org
+2024-01-28 23:08:11,069 urllib3.connectionpool (connectionpool.py:546) DEBUG https://lichess.org:443 "POST /api/bot/game/WgJ7gOW3/move/f1d3?offeringDraw=false HTTP/1.1" 200 11
+2024-01-28 23:08:11,071 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2 b4d2 f3d2 c8g4 d1b1 g4f3 b1d1 f3e2 c2c4 e2d1 h2h4 e8d7 e1d1 d7e6 d3d4 e6f5 f1d3', 'wtime': 4420, 'btime': 268850, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:08:11,103 __mp_main__ (lichess-bot.py:697) DEBUG Game state: {'type': 'gameState', 'moves': 'd2d3 d7d5 c1e3 d8d6 g1f3 d6b4 b1d2 b4d2 f3d2 c8g4 d1b1 g4f3 b1d1 f3e2 c2c4 e2d1 h2h4 e8d7 e1d1 d7e6 d3d4 e6f5 f1d3 f5g4', 'wtime': 4420, 'btime': 271850, 'winc': 3000, 'binc': 3000, 'status': 'started'}
+2024-01-28 23:08:11,104 __mp_main__ (lichess-bot.py:688) INFO 
+2024-01-28 23:08:11,104 __mp_main__ (lichess-bot.py:689) INFO move: 13
+2024-01-28 23:08:11,104 lib.engine_wrapper (engine_wrapper.py:672) INFO Searching for wtime 2420 btime 271850 for game WgJ7gOW3
+2024-01-28 23:08:18,142 __main__ (lichess-bot.py:370) DEBUG Event: {'type': 'gameFinish', 'game': {'fullId': 'WgJ7gOW3N1cS', 'gameId': 'WgJ7gOW3', 'fen': 'rn3bnr/ppp1pppp/8/3p4/2PP2kP/3BB3/PP1N1PP1/R2K3R w - - 3 13', 'color': 'white', 'lastMove': 'f5g4', 'source': 'friend', 'status': {'id': 35, 'name': 'outoftime'}, 'variant': {'key': 'standard', 'name': 'Standard'}, 'speed': 'blitz', 'perf': 'blitz', 'rated': False, 'hasMoved': True, 'opponent': {'id': 'luk3k', 'username': 'luk3k', 'rating': 1500}, 'isMyTurn': False, 'secondsLeft': 0, 'winner': 'black', 'compat': {'bot': True, 'board': True}, 'id': 'WgJ7gOW3'}}
+2024-01-28 23:08:29,459 __mp_main__ (lichess-bot.py:65) DEBUG Received SIGINT. Terminating client.
+2024-01-28 23:08:29,564 __mp_main__ (lichess-bot.py:65) DEBUG Received SIGINT. Terminating client.
+2024-01-28 23:08:32,604 __main__ (lichess-bot.py:1091) ERROR Quitting lichess_bot due to an error:
 Traceback (most recent call last):
   File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lichess-bot.py", line 1088, in <module>
     start_lichess_bot()
@@ -731,6 +427,8 @@ Traceback (most recent call last):
     lichess_bot_main(li,
   File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lichess-bot.py", line 308, in lichess_bot_main
     event = next_event(control_queue)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
   File "/home/luke/projects/pp-project/chess-engine-pp/lichess_bot/lichess-bot.py", line 363, in next_event
     if "type" not in event:
+       ^^^^^^^^^^^^^^^^^^^
 TypeError: argument of type 'NoneType' is not iterable

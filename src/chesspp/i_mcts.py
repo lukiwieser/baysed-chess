@@ -2,7 +2,7 @@ import chess
 import random
 from abc import ABC, abstractmethod
 from typing import Dict, Self
-from src.chesspp.i_strategy import IStrategy
+from chesspp.i_strategy import IStrategy
 
 
 class IMctsNode(ABC):

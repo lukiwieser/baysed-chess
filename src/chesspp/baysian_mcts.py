@@ -1,8 +1,8 @@
 import chess
-from src.chesspp.i_mcts import *
-from src.chesspp.i_strategy import IStrategy
-from src.chesspp.util_gaussian import gaussian_ucb1, max_gaussian, min_gaussian
-from src.chesspp.eval import score_manual
+from chesspp.i_mcts import *
+from chesspp.i_strategy import IStrategy
+from chesspp.util_gaussian import gaussian_ucb1, max_gaussian, min_gaussian
+from chesspp.eval import score_manual
 import numpy as np
 import math
 

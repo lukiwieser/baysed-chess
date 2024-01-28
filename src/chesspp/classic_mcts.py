@@ -3,8 +3,8 @@ import random
 import numpy as np
 
 
-from src.chesspp import eval
-from src.chesspp import util
+from chesspp import eval
+from chesspp import util
 
 
 class ClassicMcts:
