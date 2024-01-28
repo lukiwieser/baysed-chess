@@ -28,10 +28,7 @@ socket.addEventListener("open", (event) => {
 });
 
 socket.addEventListener("message", (event) => {
-      move = event.data;
-      from = move.substr(0, 2);
-      to = move.substr(2, 2);
-      board1.move(from + '-' + to);
+      board1.position(event.data)
       console.log("Message from server ", event.data);
 });
 

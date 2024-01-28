@@ -36,56 +36,66 @@ class Simulate:
         is_white_playing = True
         while not board.is_game_over():
             play_result = self.white.play(board) if is_white_playing else self.black.play(board)
-            yield play_result.move
             board.push(play_result.move)
+            yield board
             is_white_playing = not is_white_playing
 
 
-async def handle_index(request) -> web.Response:
-    """ Entry point of webpage, returns the index html"""
-    return web.Response(text=load_index(), content_type='text/html')
+class WebInterface:
+    def __init__(self, white_engine: engine.Engine.__class__, black_engine: engine.Engine.__class__):
+        self.white = white_engine
+        self.black = black_engine
 
 
-async def handle_websocket(request):
-    """ Handles a websocket connection to the frontend"""
-    ws = web.WebSocketResponse()
-    await ws.prepare(request)
+    async def handle_index(self, request) -> web.Response:
+        """ Entry point of webpage, returns the index html"""
+        return web.Response(text=load_index(), content_type='text/html')
 
-    async def wait_msg():
-        """ Handles messages from client """
-        async for msg in ws:
-            if msg.type == aiohttp.WSMsgType.TEXT:
-                if msg.data == 'close':
-                    await ws.close()
-            elif msg.type == aiohttp.WSMsgType.ERROR:
-                print(f'ws connection closed with exception {ws.exception()}')
-    
-    async def turns():
-        """ Simulates the game and sends the response to the client """
-        runner = Simulate().run()
-        def sim():
-            return next(runner, None)
 
-        turn = await asyncio.to_thread(sim)
-        while turn is not None:
-            await ws.send_str(turn.uci())
-            turn = await asyncio.to_thread(sim)
-    
-    async with asyncio.TaskGroup() as tg:
-        tg.create_task(wait_msg())
-        tg.create_task(turns())
+    async def handle_websocket(self, request):
+        """ Handles a websocket connection to the frontend"""
+        ws = web.WebSocketResponse()
+        await ws.prepare(request)
 
-    print('websocket connection closed')
-    return ws
 
-def run_app():
-    app = web.Application()
-    app.add_routes([
-        web.get('/', handle_index),
-        web.get('/ws', handle_websocket),
-        web.static('/img/chesspieces/wikipedia/', _DATA_DIR),
-    ])
-    web.run_app(app)
+        async def wait_msg():
+            """ Handles messages from client """
+            async for msg in ws:
+                if msg.type == aiohttp.WSMsgType.TEXT:
+                    if msg.data == 'close':
+                        await ws.close()
+                elif msg.type == aiohttp.WSMsgType.ERROR:
+                    print(f'ws connection closed with exception {ws.exception()}')
+
+
+        async def turns():
+            """ Simulates the game and sends the response to the client """
+            runner = Simulate(self.white(chess.WHITE), self.black(chess.BLACK)).run()
+            def sim():
+                return next(runner, None)
+
+            board = await asyncio.to_thread(sim)
+            while board is not None:
+                await ws.send_str(board.fen())
+                board = await asyncio.to_thread(sim)
+
+
+        async with asyncio.TaskGroup() as tg:
+            tg.create_task(wait_msg())
+            tg.create_task(turns())
+
+
+        print('websocket connection closed')
+        return ws
+
+    def run_app(self):
+        app = web.Application()
+        app.add_routes([
+            web.get('/', self.handle_index),
+            web.get('/ws', self.handle_websocket),
+            web.static('/img/chesspieces/wikipedia/', _DATA_DIR),
+        ])
+        web.run_app(app)
 
 if __name__ == '__main__':
-    run_app()
+    WebInterface(engine.ClassicMctsEngine, engine.ClassicMctsEngine).run_app()
