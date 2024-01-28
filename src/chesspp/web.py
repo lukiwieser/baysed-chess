@@ -7,23 +7,28 @@ import chess
 from chesspp import engine
 
 _DIR = os.path.abspath(os.path.dirname(__file__))
-_INDEX = os.path.join(_DIR, "res/index.html")
+_DATA_DIR = os.path.abspath(os.path.join(_DIR, "static_data"))
+_INDEX = os.path.join(_DATA_DIR, "index.html")
 
-def load_index():
+
+def load_index() -> str:
+    """
+        Load and return the chessboard html file from disk
+    """
     with open(_INDEX, 'r') as fp:
         return fp.read()
 
 
-index_data = load_index()
-
-async def handle_index(request):
-    #raise web.HTTPFound('/index.html')
-    return web.Response(text=load_index(), content_type='text/html')
-
 class Simulate:
-    def __init__(self):
-        self.white = engine.ClassicMctsEngine(chess.WHITE)
-        self.black = engine.ClassicMctsEngine(chess.BLACK)
+    """ Run a simulation of two engines"""
+    def __init__(self, engine_white=None, engine_black=None):
+        if engine_white is None:
+            engine_white = engine.ClassicMctsEngine(chess.WHITE)
+        if engine_black is None:
+            engine_black = engine.ClassicMctsEngine(chess.BLACK)
+
+        self.white = engine_white
+        self.black = engine_black
 
     def run(self):
         board = chess.Board()
@@ -36,11 +41,18 @@ class Simulate:
             is_white_playing = not is_white_playing
 
 
-async def websocket_handler(request):
+async def handle_index(request) -> web.Response:
+    """ Entry point of webpage, returns the index html"""
+    return web.Response(text=load_index(), content_type='text/html')
+
+
+async def handle_websocket(request):
+    """ Handles a websocket connection to the frontend"""
     ws = web.WebSocketResponse()
     await ws.prepare(request)
 
     async def wait_msg():
+        """ Handles messages from client """
         async for msg in ws:
             if msg.type == aiohttp.WSMsgType.TEXT:
                 if msg.data == 'close':
@@ -49,9 +61,10 @@ async def websocket_handler(request):
                 print(f'ws connection closed with exception {ws.exception()}')
     
     async def turns():
+        """ Simulates the game and sends the response to the client """
         runner = Simulate().run()
         def sim():
-            return next(runner, None) 
+            return next(runner, None)
 
         turn = await asyncio.to_thread(sim)
         while turn is not None:
@@ -63,17 +76,16 @@ async def websocket_handler(request):
         tg.create_task(turns())
 
     print('websocket connection closed')
-
     return ws
 
-
-app = web.Application()
-app.add_routes([
-    web.get('/', handle_index),
-    #web.static('/', os.path.join(_DIR, 'res')),
-    web.static('/img/chesspieces/wikipedia/', os.path.join(_DIR, 'res')),
-    web.get('/ws', websocket_handler),
-])
+def run_app():
+    app = web.Application()
+    app.add_routes([
+        web.get('/', handle_index),
+        web.get('/ws', handle_websocket),
+        web.static('/img/chesspieces/wikipedia/', _DATA_DIR),
+    ])
+    web.run_app(app)
 
 if __name__ == '__main__':
-    web.run_app(app)
+    run_app()
