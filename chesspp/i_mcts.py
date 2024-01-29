@@ -51,6 +51,13 @@ class IMctsNode(ABC):
         """
         pass
 
+    def update_depth(self, depth: int) -> None:
+        """
+        Recursively updates the depth the current node and all it's children
+        :param depth: new depth for current node
+        :return:
+        """
+
 
 class IMcts(ABC):
     def __init__(self, board: chess.Board, strategy: IStrategy, seed: int | None):

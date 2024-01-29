@@ -96,7 +96,7 @@ def test_evaluation():
 
 def main():
     test_evaluation()
-    #test_simulate()
+    # test_simulate()
     # test_mcts()
     # test_stockfish()
     # test_stockfish_prob()

@@ -111,7 +111,6 @@ class BayesMctsEngine(Engine):
             min(moves.items(), key=lambda x: x[1])[0])
 
 
-
 class ClassicMctsEngine(Engine):
     def __init__(self, board: chess.Board, color: chess.Color, strategy: IStrategy):
         super().__init__(board, color, strategy)

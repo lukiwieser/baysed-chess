@@ -5,6 +5,7 @@ import chess.pgn
 from typing import Tuple, List
 from enum import Enum
 from dataclasses import dataclass
+from chesspp.i_strategy import IStrategy
 
 from chesspp.engine import Engine, Limit
 
@@ -18,7 +19,7 @@ class Winner(Enum):
 @dataclass
 class EvaluationResult:
     winner: Winner
-    game: chess.pgn.Game
+    game: str
 
 
 def simulate_game(white: Engine, black: Engine, limit: Limit, board: chess.Board) -> chess.pgn.Game:
@@ -48,7 +49,7 @@ class Evaluation:
             return pool.map(Evaluation._test_simulate, args)
 
     @staticmethod
-    def _test_simulate(arg: Tuple[Engine.__class__, Engine.__class__, Limit]) -> EvaluationResult:
+    def _test_simulate(arg: Tuple[Engine.__class__, IStrategy,  Engine.__class__, IStrategy, Limit]) -> EvaluationResult:
         engine_a, strategy_a, engine_b, strategy_b, limit = arg
         flip_engines = bool(random.getrandbits(1))
 
@@ -73,4 +74,4 @@ class Evaluation:
             case (chess.BLACK, False):
                 result = Winner.Engine_B
 
-        return EvaluationResult(result, game)
+        return EvaluationResult(result, str(game))

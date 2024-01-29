@@ -60,12 +60,16 @@ class BayesianMctsNode(IMctsNode):
 
         return best_child
 
+    def update_depth(self, depth: int) -> None:
+        self.depth = depth
+        for c in self.children:
+            c.update_depth(depth + 1)
+
     def select(self) -> IMctsNode:
-        if len(self.children) == 0:
+        if len(self.children) == 0 or self.board.is_game_over():
             return self
-        elif not self.board.is_game_over():
-            return self._select_best_child().select()
-        return self
+
+        return self._select_best_child().select()
 
     def expand(self) -> IMctsNode:
         if self.visits == 0:
@@ -159,6 +163,7 @@ class BayesianMcts(IMcts):
                 self.root = child
                 child.depth = 0
                 self.root.parent = None
+                self.root.update_depth(0)
                 return
 
         # if no child node contains the move, initialize a new tree.
