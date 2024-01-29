@@ -1,5 +1,10 @@
-/stockfish/
-.idea
-.venv
+# Python
 __pycache__
+.venv
+
+# IDE's
+.idea
+
+# Chess Engines
+/stockfish/
 /lc0/
