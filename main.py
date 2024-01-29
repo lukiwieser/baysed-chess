@@ -116,7 +116,7 @@ def read_arguments():
         description='Compare two engines by playing multiple games against each other'
     )
 
-    engines = {"Classic": engine.ClassicMctsEngine, "Baysian": engine.BayesMctsEngine, "Random": engine.RandomEngine}
+    engines = {"ClassicMCTS": engine.ClassicMctsEngine, "BayesianMCTS": engine.BayesMctsEngine, "Random": engine.RandomEngine}
     strategies = {"Random": RandomStrategy, "Stockfish": StockFishStrategy}
 
     if os.name == 'nt':
