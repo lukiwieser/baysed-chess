@@ -1,10 +1,14 @@
 import os
 import asyncio
+import random
+
 import aiohttp
 from aiohttp import web
 
 import chess
 from chesspp import engine
+from chesspp.stockfish_strategy import StockFishStrategy
+from chesspp.random_strategy import RandomStrategy
 
 _DIR = os.path.abspath(os.path.dirname(__file__))
 _DATA_DIR = os.path.abspath(os.path.join(_DIR, "static_data"))
@@ -71,7 +75,8 @@ class WebInterface:
 
         async def turns():
             """ Simulates the game and sends the response to the client """
-            runner = Simulate(self.white(chess.WHITE), self.black(chess.BLACK)).run(limit)
+            runner = Simulate(self.white(chess.Board(), chess.WHITE, RandomStrategy(random.Random())), self.black(
+                chess.Board(), chess.BLACK, RandomStrategy(random.Random()))).run(limit)
             def sim():
                 return next(runner, None)
 
@@ -100,4 +105,4 @@ class WebInterface:
 
 if __name__ == '__main__':
     limit = engine.Limit(time=0.5)
-    WebInterface(engine.ClassicMctsEngine, engine.ClassicMctsEngine, limit).run_app()
+    WebInterface(engine.BayesMctsEngine, engine.ClassicMctsEngine, limit).run_app()

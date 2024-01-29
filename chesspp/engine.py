@@ -1,11 +1,13 @@
-from abc import ABC, abstractmethod
-import chess
-import chess.engine
 import random
 import time
-from chesspp.classic_mcts import ClassicMcts
+from abc import ABC, abstractmethod
+
+import chess
+import chess.engine
+
 from chesspp.baysian_mcts import BayesianMcts
-from chesspp.random_strategy import RandomStrategy
+from chesspp.classic_mcts import ClassicMcts
+from chesspp.i_strategy import IStrategy
 
 
 class Limit:
@@ -45,11 +47,17 @@ class Limit:
 
 
 class Engine(ABC):
+    board: chess.Board
+    """The chess board"""
     color: chess.Color
     """The side the engine plays (``chess.WHITE`` or ``chess.BLACK``)."""
+    strategy: IStrategy
+    """The strategy used to pick moves when simulating games."""
 
-    def __init__(self, color: chess.Color):
+    def __init__(self, board: chess.Board, color: chess.Color, strategy: IStrategy):
+        self.board = board
         self.color = color
+        self.strategy = strategy
 
     @abstractmethod
     def play(self, board: chess.Board, limit: Limit) -> chess.engine.PlayResult:
@@ -72,27 +80,32 @@ class Engine(ABC):
 
 
 class BayesMctsEngine(Engine):
-    def __init__(self, color: chess.Color):
-        super().__init__(color)
+    mcts: BayesianMcts
+    """The Bayesian MCTS"""
+
+    def __init__(self, board: chess.Board, color: chess.Color, strategy: IStrategy):
+        super().__init__(board, color, strategy)
+        self.mcts = BayesianMcts(board, self.strategy, self.color)
 
     @staticmethod
     def get_name() -> str:
         return "BayesMctsEngine"
 
     def play(self, board: chess.Board, limit: Limit) -> chess.engine.PlayResult:
-        strategy = RandomStrategy(random.Random())
-        bayes_mcts = BayesianMcts(board, strategy, self.color)
-        bayes_mcts.sample(1000)
+        if len(board.move_stack) != 0:  # apply previous move to mcts --> reuse previous simulation results
+            self.mcts.apply_move(board.peek())
+        self.mcts.sample()
         # limit.run(lambda: mcts_root.build_tree())
-        best_move = max(bayes_mcts.get_moves().items(), key=lambda x: x[1])[0] if board.turn == chess.WHITE else (
-            min(bayes_mcts.get_moves().items(), key=lambda x: x[1])[0])
+        best_move = max(self.mcts.get_moves().items(), key=lambda x: x[1])[0] if board.turn == chess.WHITE else (
+            min(self.mcts.get_moves().items(), key=lambda x: x[1])[0])
         print(best_move)
+        self.mcts.apply_move(best_move)
         return chess.engine.PlayResult(move=best_move, ponder=None)
 
 
 class ClassicMctsEngine(Engine):
-    def __init__(self, color: chess.Color):
-        super().__init__(color)
+    def __init__(self, board: chess.Board, color: chess.Color, strategy: IStrategy):
+        super().__init__(board, color, strategy)
 
     @staticmethod
     def get_name() -> str:
@@ -108,12 +121,12 @@ class ClassicMctsEngine(Engine):
 
 
 class RandomEngine(Engine):
-    def __init__(self, color: chess.Color):
-        super().__init__(color)
+    def __init__(self, board: chess.Board, color: chess.Color, strategy: IStrategy):
+        super().__init__(board, color, strategy)
 
     @staticmethod
     def get_name() -> str:
-        return "Random"
+        return "RandomEngine"
 
     def play(self, board: chess.Board, limit: Limit) -> chess.engine.PlayResult:
         move = random.choice(list(board.legal_moves))

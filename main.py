@@ -5,15 +5,18 @@ import chess.pgn
 from chesspp.classic_mcts import ClassicMcts
 from chesspp.baysian_mcts import BayesianMcts
 from chesspp.random_strategy import RandomStrategy
+from chesspp.stockfish_strategy import StockFishStrategy
 from chesspp import engine
 from chesspp import util
 from chesspp import simulation, eval
 
 
 def test_simulate():
-    white = engine.ClassicMctsEngine(chess.WHITE)
-    black = engine.ClassicMctsEngine(chess.BLACK)
-    game = simulation.simulate_game(white, black)
+    board = chess.Board()
+    strategy = StockFishStrategy()
+    white = engine.BayesMctsEngine(board.copy(), chess.WHITE, strategy)
+    black = engine.RandomEngine(board.copy(), chess.BLACK, RandomStrategy(random.Random()))
+    game = simulation.simulate_game(white, black, engine.Limit(time=0.5), board)
     print(game)
 
 
@@ -92,12 +95,13 @@ def test_evaluation():
 
 
 def main():
-    test_evaluation()
-    # test_simulate()
+    # test_evaluation()
+    test_simulate()
     # test_mcts()
     # test_stockfish()
     # test_stockfish_prob()
     # test_bayes_mcts()
+
 
 if __name__ == '__main__':
     main()

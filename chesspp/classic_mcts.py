@@ -35,7 +35,7 @@ class ClassicMcts:
         self.children.append(child_node)
         return child_node
 
-    def _rollout(self, rollout_depth: int = 20) -> int:
+    def _rollout(self, rollout_depth: int = 3) -> int:
         """
         Rolls out the node by simulating a game for a given depth.
         Sometimes this step is called 'simulation' or 'playout'.

@@ -21,11 +21,12 @@ class EvaluationResult:
     game: chess.pgn.Game
 
 
-def simulate_game(white: Engine, black: Engine, limit: Limit) -> chess.pgn.Game:
-    board = chess.Board()
-
+def simulate_game(white: Engine, black: Engine, limit: Limit, board: chess.Board) -> chess.pgn.Game:
     is_white_playing = True
     while not board.is_game_over():
+        print("simulation board:\n", board)
+        print()
+        print("mcts board:\n", white.mcts.board)
         play_result = white.play(board, limit) if is_white_playing else black.play(board, limit)
         board.push(play_result.move)
         is_white_playing = not is_white_playing

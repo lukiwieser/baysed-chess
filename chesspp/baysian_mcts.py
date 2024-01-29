@@ -1,17 +1,15 @@
-import chess
 from chesspp.i_mcts import *
 from chesspp.i_strategy import IStrategy
 from chesspp.util_gaussian import gaussian_ucb1, max_gaussian, min_gaussian
 from chesspp.eval import score_manual
-import numpy as np
-import math
 
 
 class BayesianMctsNode(IMctsNode):
-    def __init__(self, board: chess.Board, strategy: IStrategy, color: chess.Color, parent: Self | None, move: chess.Move | None,
+    def __init__(self, board: chess.Board, strategy: IStrategy, color: chess.Color, parent: Self | None,
+                 move: chess.Move | None,
                  random_state: random.Random, inherit_result: int | None = None, depth: int = 0):
         super().__init__(board, strategy, parent, move, random_state)
-        self.color = color # Color of the player whose turn it is
+        self.color = color  # Color of the player whose turn it is
         self.visits = 0
         self.result = inherit_result if inherit_result is not None else 0
         self._set_mu_sigma()
@@ -20,7 +18,8 @@ class BayesianMctsNode(IMctsNode):
     def _create_child(self, move: chess.Move) -> IMctsNode:
         copied_board = self.board.copy()
         copied_board.push(move)
-        return BayesianMctsNode(copied_board, self.strategy, not self.color, self, move, self.random_state, self.result, self.depth+1)
+        return BayesianMctsNode(copied_board, self.strategy, not self.color, self, move, self.random_state, self.result,
+                                self.depth + 1)
 
     def _set_mu_sigma(self) -> None:
         self.mu = self.result
@@ -74,7 +73,7 @@ class BayesianMctsNode(IMctsNode):
 
         return self._select_best_child()
 
-    def rollout(self, rollout_depth: int = 20) -> int:
+    def rollout(self, rollout_depth: int = 4) -> int:
         copied_board = self.board.copy()
         steps = self.depth
         for i in range(rollout_depth):
@@ -124,29 +123,29 @@ class BayesianMctsNode(IMctsNode):
             self.parent.backpropagate()
 
     def print(self, indent=0):
-        print("\t"*indent + f"move={self.move}, visits={self.visits}, mu={self.mu}, sigma={self.sigma}")
+        print("\t" * indent + f"move={self.move}, visits={self.visits}, mu={self.mu}, sigma={self.sigma}")
         for c in self.children:
-            c.print(indent+1)
+            c.print(indent + 1)
 
 
 class BayesianMcts(IMcts):
 
     def __init__(self, board: chess.Board, strategy: IStrategy, color: chess.Color, seed: int | None = None):
         super().__init__(board, strategy, seed)
-        self.root = BayesianMctsNode(board, strategy, color,None, None, self.random_state)
+        self.root = BayesianMctsNode(board, strategy, color, None, None, self.random_state)
         self.root.visits += 1
         self.color = color
 
     def sample(self, runs: int = 1000) -> None:
         for i in range(runs):
-            #print(f"sample {i}")
+            # print(f"sample {i}")
             leaf_node = self.root.select().expand()
             _ = leaf_node.rollout()
             leaf_node.backpropagate()
 
     def apply_move(self, move: chess.Move) -> None:
         self.board.push(move)
-        self.color = not self.color
+        self.color = self.board.turn
 
         # if a child node contains the move, set this child as new root
         for child in self.get_children():
