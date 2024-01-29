@@ -2,12 +2,14 @@ import random
 import time
 from abc import ABC, abstractmethod
 
+from torch import distributions as dist
 import chess
 import chess.engine
 
 from chesspp.baysian_mcts import BayesianMcts
 from chesspp.classic_mcts import ClassicMcts
 from chesspp.i_strategy import IStrategy
+from typing import Dict
 
 
 class Limit:
@@ -95,12 +97,19 @@ class BayesMctsEngine(Engine):
         if len(board.move_stack) != 0:  # apply previous move to mcts --> reuse previous simulation results
             self.mcts.apply_move(board.peek())
         limit.run(lambda: self.mcts.sample(1))
-        # limit.run(lambda: mcts_root.build_tree())
-        best_move = max(self.mcts.get_moves().items(), key=lambda x: x[1])[0] if board.turn == chess.WHITE else (
-            min(self.mcts.get_moves().items(), key=lambda x: x[1])[0])
-        print(best_move)
+        best_move = self.get_best_move(self.mcts.get_moves(), board.turn)
         self.mcts.apply_move(best_move)
         return chess.engine.PlayResult(move=best_move, ponder=None)
+
+    @staticmethod
+    def get_best_move(possible_moves: Dict[chess.Move, dist.Normal], color: chess.Color) -> chess.Move:
+        moves = {}
+        for m, d in possible_moves.items():
+            moves[m] = d.sample()
+
+        return max(moves.items(), key=lambda x: x[1])[0] if color == chess.WHITE else (
+            min(moves.items(), key=lambda x: x[1])[0])
+
 
 
 class ClassicMctsEngine(Engine):
@@ -112,9 +121,8 @@ class ClassicMctsEngine(Engine):
         return "ClassicMctsEngine"
 
     def play(self, board: chess.Board, limit: Limit) -> chess.engine.PlayResult:
-        mcts_root = ClassicMcts(board, self.color)
-        mcts_root.build_tree()
-        # limit.run(lambda: mcts_root.build_tree())
+        mcts_root = ClassicMcts(board, self.color, self.strategy)
+        limit.run(lambda: mcts_root.build_tree(1))
         best_move = max(mcts_root.children, key=lambda x: x.score).move if board.turn == chess.WHITE else (
             min(mcts_root.children, key=lambda x: x.score).move)
         return chess.engine.PlayResult(move=best_move, ponder=None)

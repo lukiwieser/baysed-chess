@@ -1,6 +1,7 @@
 import chess
 import random
 from chesspp.i_strategy import IStrategy
+from chesspp.eval import score_manual
 
 
 class RandomStrategy(IStrategy):
@@ -11,3 +12,6 @@ class RandomStrategy(IStrategy):
         if len(list(board.legal_moves)) == 0:
             return None
         return self.random_state.choice(list(board.legal_moves))
+
+    def analyze_board(self, board: chess.Board) -> int:
+        return score_manual(board)

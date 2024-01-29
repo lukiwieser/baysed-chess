@@ -1,19 +1,17 @@
 import chess
 import random
 import numpy as np
-
-
-from chesspp import eval
-from chesspp import util
+from chesspp.i_strategy import IStrategy
 
 
 class ClassicMcts:
 
-    def __init__(self, board: chess.Board, color: chess.Color, parent=None, move: chess.Move | None = None,
+    def __init__(self, board: chess.Board, color: chess.Color, strategy: IStrategy, parent=None, move: chess.Move | None = None,
                  random_state: int | None = None):
         self.random = random.Random(random_state)
         self.board = board
         self.color = color
+        self.strategy = strategy
         self.parent = parent
         self.move = move
         self.children = []
@@ -31,11 +29,11 @@ class ClassicMcts:
         self.untried_actions.remove(move)
         next_board = self.board.copy()
         next_board.push(move)
-        child_node = ClassicMcts(next_board, color=self.color, parent=self, move=move)
+        child_node = ClassicMcts(next_board, color=self.color, strategy=self.strategy, parent=self, move=move)
         self.children.append(child_node)
         return child_node
 
-    def _rollout(self, rollout_depth: int = 3) -> int:
+    def _rollout(self, rollout_depth: int = 4) -> int:
         """
         Rolls out the node by simulating a game for a given depth.
         Sometimes this step is called 'simulation' or 'playout'.
@@ -47,11 +45,11 @@ class ClassicMcts:
             if copied_board.is_game_over():
                 break
 
-            m = util.pick_move(copied_board)
+            m = self.strategy.pick_next_move(copied_board)
             copied_board.push(m)
             steps += 1
 
-        return eval.score_manual(copied_board) // steps
+        return self.strategy.analyze_board(copied_board) // steps
 
     def _backpropagate(self, score: float) -> None:
         """

@@ -173,16 +173,21 @@ def score_manual(board: chess.Board) -> int:
     return score
 
 
-def score_stockfish(board: chess.Board) -> chess.engine.PovScore:
+def score_stockfish(board: chess.Board, stockfish: chess.engine.SimpleEngine | None = None) -> int:
     """
     Calculate the score of the given board using stockfish
     :param board:
     :return:
     """
-    engine = chess.engine.SimpleEngine.popen_uci("/home/luke/projects/pp-project/chess-engine-pp/stockfish/stockfish-ubuntu-x86-64-avx2")
-    info = engine.analyse(board, chess.engine.Limit(depth=0))
-    engine.quit()
-    return info["score"]
+    if stockfish is None:
+        engine = chess.engine.SimpleEngine.popen_uci(
+            "/home/luke/projects/pp-project/chess-engine-pp/stockfish/stockfish-ubuntu-x86-64-avx2")
+        info = engine.analyse(board, chess.engine.Limit(depth=0))
+        engine.quit()
+        return info['score'].white().score(mate_score=100_000)
+    else:
+        info = stockfish.analyse(board, chess.engine.Limit(depth=0))
+        return info['score'].white().score(mate_score=100_000)
 
 
 def score_lc0(board: chess.Board) -> chess.engine.PovScore:

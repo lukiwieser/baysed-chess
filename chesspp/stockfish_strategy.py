@@ -1,14 +1,20 @@
 import os
 import chess
 from chesspp.i_strategy import IStrategy
+from chesspp.eval import score_stockfish
 import chess.engine
 
 _DIR = os.path.abspath(os.path.dirname(__file__))
+
 
 class StockFishStrategy(IStrategy):
 
     def __init__(self):
         self._stockfish = None
+
+    def __del__(self):
+        if self._stockfish is not None:
+            self._stockfish.quit()
 
     @property
     def stockfish(self) -> chess.engine.SimpleEngine:
@@ -22,6 +28,7 @@ class StockFishStrategy(IStrategy):
         self._stockfish = stockfish
 
     def pick_next_move(self, board: chess.Board) -> chess.Move | None:
-        move = self.stockfish.play(board, chess.engine.Limit(depth=4)).move
-        print("stockfish picked:", move)
-        return move
+        return self.stockfish.play(board, chess.engine.Limit(depth=4)).move
+
+    def analyze_board(self, board: chess.Board) -> int:
+        return score_stockfish(board, self.stockfish)

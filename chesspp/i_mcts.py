@@ -15,6 +15,7 @@ class IMctsNode(ABC):
         self.move = move
         self.legal_moves = list(board.legal_moves)
         self.random_state = random_state
+        self.depth = 0
 
     @abstractmethod
     def select(self) -> Self:

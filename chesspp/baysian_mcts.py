@@ -1,7 +1,9 @@
+import math
+
+import torch.distributions as dist
 from chesspp.i_mcts import *
 from chesspp.i_strategy import IStrategy
 from chesspp.util_gaussian import gaussian_ucb1, max_gaussian, min_gaussian
-from chesspp.eval import score_manual
 
 
 class BayesianMctsNode(IMctsNode):
@@ -61,8 +63,9 @@ class BayesianMctsNode(IMctsNode):
     def select(self) -> IMctsNode:
         if len(self.children) == 0:
             return self
-        else:
+        elif not self.board.is_game_over():
             return self._select_best_child().select()
+        return self
 
     def expand(self) -> IMctsNode:
         if self.visits == 0:
@@ -87,7 +90,8 @@ class BayesianMctsNode(IMctsNode):
             copied_board.push(m)
             steps += 1
 
-        score = score_manual(copied_board) // steps
+        steps = max(1, steps)
+        score = int(self.strategy.analyze_board(copied_board) / (math.log2(steps) + 1))
         self.result = score
         return score
 
@@ -138,7 +142,9 @@ class BayesianMcts(IMcts):
 
     def sample(self, runs: int = 1000) -> None:
         for i in range(runs):
-            # print(f"sample {i}")
+            if self.board.is_game_over():
+                break
+
             leaf_node = self.root.select().expand()
             _ = leaf_node.rollout()
             leaf_node.backpropagate()
@@ -151,6 +157,7 @@ class BayesianMcts(IMcts):
         for child in self.get_children():
             if child.move == move:
                 self.root = child
+                child.depth = 0
                 self.root.parent = None
                 return
 
@@ -160,10 +167,10 @@ class BayesianMcts(IMcts):
     def get_children(self) -> list[IMctsNode]:
         return self.root.children
 
-    def get_moves(self) -> Dict[chess.Move, int]:
+    def get_moves(self) -> Dict[chess.Move, dist.Normal]:
         res = {}
         for c in self.root.children:
-            res[c.move] = c.mu
+            res[c.move] = dist.Normal(c.mu, c.sigma)
         return res
 
     def print(self):

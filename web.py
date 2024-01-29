@@ -1,4 +1,3 @@
-import chesspp
 from chesspp import engine
 from chesspp import web
 

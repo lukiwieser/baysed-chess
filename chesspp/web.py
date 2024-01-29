@@ -1,6 +1,5 @@
 import os
 import asyncio
-import random
 
 import aiohttp
 from aiohttp import web
@@ -8,7 +7,6 @@ from aiohttp import web
 import chess
 from chesspp import engine
 from chesspp.stockfish_strategy import StockFishStrategy
-from chesspp.random_strategy import RandomStrategy
 
 _DIR = os.path.abspath(os.path.dirname(__file__))
 _DATA_DIR = os.path.abspath(os.path.join(_DIR, "static_data"))
@@ -103,6 +101,7 @@ class WebInterface:
         ])
         web.run_app(app)
 
+
 def run_sample():
-    limit = engine.Limit(time=0.5)
+    limit = engine.Limit(time=1)
     WebInterface(engine.BayesMctsEngine, engine.ClassicMctsEngine, limit).run_app()
