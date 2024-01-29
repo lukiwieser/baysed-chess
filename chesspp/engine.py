@@ -94,7 +94,7 @@ class BayesMctsEngine(Engine):
     def play(self, board: chess.Board, limit: Limit) -> chess.engine.PlayResult:
         if len(board.move_stack) != 0:  # apply previous move to mcts --> reuse previous simulation results
             self.mcts.apply_move(board.peek())
-        self.mcts.sample()
+        limit.run(lambda: self.mcts.sample(1))
         # limit.run(lambda: mcts_root.build_tree())
         best_move = max(self.mcts.get_moves().items(), key=lambda x: x[1])[0] if board.turn == chess.WHITE else (
             min(self.mcts.get_moves().items(), key=lambda x: x[1])[0])

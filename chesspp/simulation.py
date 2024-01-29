@@ -24,9 +24,6 @@ class EvaluationResult:
 def simulate_game(white: Engine, black: Engine, limit: Limit, board: chess.Board) -> chess.pgn.Game:
     is_white_playing = True
     while not board.is_game_over():
-        print("simulation board:\n", board)
-        print()
-        print("mcts board:\n", white.mcts.board)
         play_result = white.play(board, limit) if is_white_playing else black.play(board, limit)
         board.push(play_result.move)
         is_white_playing = not is_white_playing
@@ -38,26 +35,31 @@ def simulate_game(white: Engine, black: Engine, limit: Limit, board: chess.Board
 
 
 class Evaluation:
-    def __init__(self, engine_a: Engine.__class__, engine_b: Engine.__class__, limit: Limit):
+    def __init__(self, engine_a: Engine.__class__, strategy_a, engine_b: Engine.__class__, strategy_b, limit: Limit):
         self.engine_a = engine_a
+        self.strategy_a = strategy_a
         self.engine_b = engine_b
+        self.strategy_b = strategy_b
         self.limit = limit
 
     def run(self, n_games=100) -> List[EvaluationResult]:
         with mp.Pool(mp.cpu_count()) as pool:
-            args = [(self.engine_a, self.engine_b, self.limit) for i in range(n_games)]
+            args = [(self.engine_a, self.strategy_a, self.engine_b, self.strategy_b, self.limit) for i in range(n_games)]
             return pool.map(Evaluation._test_simulate, args)
 
     @staticmethod
     def _test_simulate(arg: Tuple[Engine.__class__, Engine.__class__, Limit]) -> EvaluationResult:
-        engine_a, engine_b, limit = arg
+        engine_a, strategy_a, engine_b, strategy_b, limit = arg
         flip_engines = bool(random.getrandbits(1))
-        if flip_engines:
-            black, white = engine_a(chess.BLACK), engine_b(chess.WHITE)
-        else:
-            white, black = engine_a(chess.WHITE), engine_b(chess.BLACK)
 
-        game = simulate_game(white, black, limit)
+        board = chess.Board()
+
+        if flip_engines:
+            black, white = engine_a(board.copy(), chess.BLACK, strategy_a), engine_b(board.copy(), chess.WHITE, strategy_b)
+        else:
+            white, black = engine_a(board.copy(), chess.WHITE, strategy_a), engine_b(board.copy(), chess.BLACK, strategy_b)
+
+        game = simulate_game(white, black, limit, board)
         winner = game.end().board().outcome().winner
 
         result = Winner.Draw

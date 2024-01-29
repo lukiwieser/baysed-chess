@@ -80,11 +80,11 @@ def analyze_results(moves: dict):
 
 
 def test_evaluation():
-    a = engine.ClassicMctsEngine
-    b = engine.RandomEngine
+    a = engine.BayesMctsEngine
+    b = engine.ClassicMctsEngine
     limit = engine.Limit(time=0.5)
-    evaluator = simulation.Evaluation(a, b, limit)
-    results = evaluator.run(1)
+    evaluator = simulation.Evaluation(a, StockFishStrategy(), b, RandomStrategy(random.Random()), limit)
+    results = evaluator.run(2)
     a_results = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_A, results))) / len(results) * 100
     b_results = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_B, results))) / len(results) * 100
     draws = len(list(filter(lambda x: x.winner == simulation.Winner.Draw, results))) / len(results) * 100
@@ -95,8 +95,8 @@ def test_evaluation():
 
 
 def main():
-    # test_evaluation()
-    test_simulate()
+    test_evaluation()
+    #test_simulate()
     # test_mcts()
     # test_stockfish()
     # test_stockfish_prob()

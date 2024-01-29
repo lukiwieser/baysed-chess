@@ -75,8 +75,8 @@ class WebInterface:
 
         async def turns():
             """ Simulates the game and sends the response to the client """
-            runner = Simulate(self.white(chess.Board(), chess.WHITE, RandomStrategy(random.Random())), self.black(
-                chess.Board(), chess.BLACK, RandomStrategy(random.Random()))).run(limit)
+            runner = Simulate(self.white(chess.Board(), chess.WHITE, StockFishStrategy()), self.black(
+                chess.Board(), chess.BLACK, StockFishStrategy())).run(self.limit)
             def sim():
                 return next(runner, None)
 
@@ -103,6 +103,6 @@ class WebInterface:
         ])
         web.run_app(app)
 
-if __name__ == '__main__':
+def run_sample():
     limit = engine.Limit(time=0.5)
     WebInterface(engine.BayesMctsEngine, engine.ClassicMctsEngine, limit).run_app()
