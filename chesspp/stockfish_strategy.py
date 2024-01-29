@@ -9,8 +9,9 @@ _DIR = os.path.abspath(os.path.dirname(__file__))
 
 class StockFishStrategy(IStrategy):
 
-    def __init__(self):
+    def __init__(self, path="../stockfish/stockfish-windows-x86-64-avx2"):
         self._stockfish = None
+        self.path = path
 
     def __del__(self):
         if self._stockfish is not None:
@@ -20,7 +21,7 @@ class StockFishStrategy(IStrategy):
     def stockfish(self) -> chess.engine.SimpleEngine:
         if self._stockfish is None:
             self._stockfish = self.stockfish = chess.engine.SimpleEngine.popen_uci(
-                os.path.join(_DIR, "../stockfish/stockfish-ubuntu-x86-64-avx2"))
+                os.path.join(_DIR, self.path))
         return self._stockfish
 
     @stockfish.setter

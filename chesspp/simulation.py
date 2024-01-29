@@ -43,8 +43,9 @@ class Evaluation:
         self.strategy_b = strategy_b
         self.limit = limit
 
-    def run(self, n_games=100) -> List[EvaluationResult]:
-        with mp.Pool(mp.cpu_count()) as pool:
+    def run(self, n_games=100, proc=mp.cpu_count()) -> List[EvaluationResult]:
+        proc = min(proc, mp.cpu_count())
+        with mp.Pool(proc) as pool:
             args = [(self.engine_a, self.strategy_a, self.engine_b, self.strategy_b, self.limit) for i in range(n_games)]
             return pool.map(Evaluation._test_simulate, args)
 
