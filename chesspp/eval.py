@@ -76,12 +76,12 @@ king_eval = [
 ]
 king_endgame_eval = [
     50, -30, -30, -30, -30, -30, -30, -50,
-    -30, -30,  0,  0,  0,  0, -30, -30,
+    -30, -30, 0, 0, 0, 0, -30, -30,
     -30, -10, 20, 30, 30, 20, -10, -30,
     -30, -10, 30, 40, 40, 30, -10, -30,
     -30, -10, 30, 40, 40, 30, -10, -30,
     -30, -10, 20, 30, 30, 20, -10, -30,
-    -30, -20, -10,  0,  0, -10, -20, -30,
+    -30, -20, -10, 0, 0, -10, -20, -30,
     -50, -40, -30, -20, -20, -30, -40, -50
 ]
 
@@ -124,18 +124,18 @@ def check_endgame(board: chess.Board) -> bool:
 
         if piece.piece_type == chess.QUEEN:
             if piece.color == chess.WHITE:
-                queens_white += 1 
+                queens_white += 1
             else:
                 queens_black += 1
 
         if piece.piece_type == chess.BISHOP or piece.piece_type == chess.KNIGHT:
             if piece.color == chess.WHITE:
-                minors_white += 1 
+                minors_white += 1
             else:
                 minors_black += 1
 
     return (queens_black == 0 and queens_white == 0) or ((queens_black >= 1 >= minors_black) or (
-                queens_white >= 1 >= minors_white))
+            queens_white >= 1 >= minors_white))
 
 
 def score_manual(board: chess.Board) -> int:
@@ -173,30 +173,38 @@ def score_manual(board: chess.Board) -> int:
     return score
 
 
-def score_stockfish(board: chess.Board, stockfish: chess.engine.SimpleEngine | None = None) -> int:
+def score_stockfish(board: chess.Board, stockfish: chess.engine.SimpleEngine | None = None,
+                    limit: chess.engine.Limit = chess.engine.Limit(depth=0)) -> int:
     """
     Calculate the score of the given board using stockfish
     :param board:
+    :param stockfish:
+    :param limit:
     :return:
     """
     if stockfish is None:
         engine = chess.engine.SimpleEngine.popen_uci(
             "/home/luke/projects/pp-project/chess-engine-pp/stockfish/stockfish-ubuntu-x86-64-avx2")
-        info = engine.analyse(board, chess.engine.Limit(depth=0))
+        info = engine.analyse(board, limit)
         engine.quit()
         return info['score'].white().score(mate_score=100_000)
     else:
-        info = stockfish.analyse(board, chess.engine.Limit(depth=0))
+        info = stockfish.analyse(board, limit)
         return info['score'].white().score(mate_score=100_000)
 
 
-def score_lc0(board: chess.Board) -> chess.engine.PovScore:
+def score_lc0(board: chess.Board, lc0: chess.engine.SimpleEngine | None = None,
+              limit: chess.engine.Limit= chess.engine.Limit(depth=0)) -> int:
     """
     Calculate the score of the given board using lc0
     :param board:
     :return:
     """
-    engine = chess.engine.SimpleEngine.popen_uci("/home/luke/projects/pp-project/chess-engine-pp/lc0/lc0")
-    info = engine.analyse(board, chess.engine.Limit(depth=4))
-    engine.quit()
-    return info["score"]
+    if lc0 is None:
+        engine = chess.engine.SimpleEngine.popen_uci("/home/luke/projects/pp-project/chess-engine-pp/lc0/lc0")
+        info = engine.analyse(board, limit)
+        engine.quit()
+        return info["score"]
+    else:
+        info = lc0.analyse(board, limit)
+        return info['score'].white().score(mate_score=100_000)

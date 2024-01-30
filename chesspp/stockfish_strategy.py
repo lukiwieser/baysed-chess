@@ -4,14 +4,15 @@ from chesspp.i_strategy import IStrategy
 from chesspp.eval import score_stockfish
 import chess.engine
 
-_DIR = os.path.abspath(os.path.dirname(__file__))
-
 
 class StockFishStrategy(IStrategy):
 
-    def __init__(self, path="../stockfish/stockfish-windows-x86-64-avx2"):
+    def __init__(self, path="../stockfish/stockfish-windows-x86-64-avx2", rollout_depth: int = 4,
+                 limit: chess.engine.Limit = chess.engine.Limit(depth=4)):
+        super().__init__(rollout_depth)
         self._stockfish = None
         self.path = path
+        self.limit = limit
 
     def __del__(self):
         if self._stockfish is not None:
@@ -20,8 +21,7 @@ class StockFishStrategy(IStrategy):
     @property
     def stockfish(self) -> chess.engine.SimpleEngine:
         if self._stockfish is None:
-            self._stockfish = self.stockfish = chess.engine.SimpleEngine.popen_uci(
-                os.path.join(_DIR, self.path))
+            self._stockfish = self.stockfish = chess.engine.SimpleEngine.popen_uci(self.path)
         return self._stockfish
 
     @stockfish.setter
@@ -29,7 +29,7 @@ class StockFishStrategy(IStrategy):
         self._stockfish = stockfish
 
     def pick_next_move(self, board: chess.Board) -> chess.Move | None:
-        return self.stockfish.play(board, chess.engine.Limit(depth=4)).move
+        return self.stockfish.play(board, self.limit).move
 
     def analyze_board(self, board: chess.Board) -> int:
         return score_stockfish(board, self.stockfish)
