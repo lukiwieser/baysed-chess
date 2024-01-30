@@ -5,6 +5,7 @@ from chesspp.lc0_strategy import Lc0Strategy
 from chesspp.random_strategy import RandomStrategy
 from chesspp.stockfish_strategy import StockFishStrategy
 from chesspp.random_stockfish_strategy import RandomStockfishStrategy
+from chesspp.eval_pesto import PestoStrategy
 from chesspp.i_strategy import IStrategy
 import chess
 
@@ -22,6 +23,7 @@ class StrategyEnum(Enum):
     Lc0 = 1
     Random = 2
     RandomStockfish = 3
+    Pestos = 4
 
 
 class EngineFactory:
@@ -37,6 +39,8 @@ class EngineFactory:
                 strategy = EngineFactory._get_random_strategy(rollout_depth)
             case StrategyEnum.RandomStockfish:
                 strategy = EngineFactory._get_random_stockfish_strategy(stockfish_path, rollout_depth)
+            case StrategyEnum.Pestos:
+                strategy = EngineFactory._get_pesto_strategy(rollout_depth)
 
         match engine_name:
             case EngineEnum.ClassicMcts:
@@ -82,3 +86,8 @@ class EngineFactory:
     @staticmethod
     def _get_lc0_strategy(engine_path: str, rollout_depth: int) -> IStrategy:
         return Lc0Strategy(engine_path, rollout_depth)
+
+    @staticmethod
+    def _get_pesto_strategy(rollout_depth: int) -> IStrategy:
+        return PestoStrategy(rollout_depth)
+
