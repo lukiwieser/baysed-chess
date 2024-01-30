@@ -1,7 +1,7 @@
 import math
 
 import torch.distributions as dist
-from chesspp.i_mcts import *
+from chesspp.mcts.i_mcts import *
 from chesspp.i_strategy import IStrategy
 from chesspp.util_gaussian import gaussian_ucb1, max_gaussian, min_gaussian
 

@@ -6,8 +6,8 @@ from torch import distributions as dist
 import chess
 import chess.engine
 
-from chesspp.baysian_mcts import BayesianMcts
-from chesspp.classic_mcts import ClassicMcts
+from chesspp.mcts.baysian_mcts import BayesianMcts
+from chesspp.mcts.classic_mcts import ClassicMcts
 from chesspp.i_strategy import IStrategy
 from typing import Dict
 

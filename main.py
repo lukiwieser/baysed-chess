@@ -4,8 +4,8 @@ import time
 import chess
 import chess.engine
 import chess.pgn
-from chesspp.classic_mcts import ClassicMcts
-from chesspp.baysian_mcts import BayesianMcts
+from chesspp.mcts.classic_mcts import ClassicMcts
+from chesspp.mcts.baysian_mcts import BayesianMcts
 from chesspp.random_strategy import RandomStrategy
 from chesspp.stockfish_strategy import StockFishStrategy
 from chesspp import engine
