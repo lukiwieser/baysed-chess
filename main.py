@@ -112,11 +112,11 @@ def read_arguments():
     strategies = {"Random": StrategyEnum.Random, "Stockfish": StrategyEnum.Stockfish, "Lc0": StrategyEnum.Lc0}
 
     if os.name == 'nt':
-        stockfish_default = "../stockfish/stockfish-windows-x86-64-avx2"
-        lc0_default = "../lc0/lc0.exe"
+        stockfish_default = "stockfish/stockfish-windows-x86-64-avx2"
+        lc0_default = "lc0/lc0.exe"
     else:
-        stockfish_default = "../stockfish/stockfish-ubuntu-x86-64-avx2"
-        lc0_default = "../lc0/lc0"
+        stockfish_default = "stockfish/stockfish-ubuntu-x86-64-avx2"
+        lc0_default = "lc0/lc0"
 
     parser.add_argument("--proc", default=2, help="Number of processors to use for simulation, default=1")
     parser.add_argument("--time", default=0.5, help="Time limit for each simulation step, default=0.5")
