@@ -1,6 +1,5 @@
 import random
 import time
-import os
 from abc import ABC, abstractmethod
 
 from torch import distributions as dist
@@ -47,6 +46,12 @@ class Limit:
         start = time.perf_counter_ns()
         while (time.perf_counter_ns() - start) / 1e9 < self.time:
             func(*args, **kwargs)
+
+    def translate_to_engine_limit(self) -> chess.engine.Limit:
+        if self.nodes:
+            return chess.engine.Limit(nodes=self.nodes)
+        elif self.time:
+            return chess.engine.Limit(time=self.time)
 
 
 class Engine(ABC):
@@ -147,7 +152,7 @@ class StockFishEngine(Engine):
         self.stockfish = chess.engine.SimpleEngine.popen_uci(path)
 
     def play(self, board: chess.Board, limit: Limit) -> chess.engine.PlayResult:
-        return self.stockfish.play(board, limit)
+        return self.stockfish.play(board, limit.translate_to_engine_limit())
 
     @staticmethod
     def get_name() -> str:
@@ -160,7 +165,7 @@ class Lc0Engine(Engine):
         self.lc0 = chess.engine.SimpleEngine.popen_uci(path)
 
     def play(self, board: chess.Board, limit: Limit) -> chess.engine.PlayResult:
-        return self.lc0.play(board, limit)
+        return self.lc0.play(board, limit.translate_to_engine_limit())
 
     @staticmethod
     def get_name() -> str:

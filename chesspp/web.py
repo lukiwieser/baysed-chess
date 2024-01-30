@@ -6,6 +6,7 @@ from aiohttp import web
 
 import chess
 from chesspp import engine
+from chesspp.engine_factory import EngineFactory
 from chesspp.stockfish_strategy import StockFishStrategy
 
 _DIR = os.path.abspath(os.path.dirname(__file__))
@@ -23,12 +24,7 @@ def load_index() -> str:
 
 class Simulate:
     """ Run a simulation of two engines"""
-    def __init__(self, engine_white=None, engine_black=None):
-        if engine_white is None:
-            engine_white = engine.ClassicMctsEngine(chess.WHITE)
-        if engine_black is None:
-            engine_black = engine.ClassicMctsEngine(chess.BLACK)
-
+    def __init__(self, engine_white, engine_black):
         self.white = engine_white
         self.black = engine_black
 
@@ -44,9 +40,13 @@ class Simulate:
 
 
 class WebInterface:
-    def __init__(self, white_engine: engine.Engine.__class__, black_engine: engine.Engine.__class__, limit: engine.Limit):
+    def __init__(self, white_engine, black_engine, strategy1, strategy2, stockfish_path, lc0_path, limit: engine.Limit):
         self.white = white_engine
         self.black = black_engine
+        self.strategy1 = strategy1
+        self.strategy2 = strategy2
+        self.stockfish_path = stockfish_path
+        self.lc0_path = lc0_path
         self.limit = limit
 
 
@@ -73,8 +73,9 @@ class WebInterface:
 
         async def turns():
             """ Simulates the game and sends the response to the client """
-            runner = Simulate(self.white(chess.Board(), chess.WHITE, StockFishStrategy()), self.black(
-                chess.Board(), chess.BLACK, StockFishStrategy())).run(self.limit)
+            white = EngineFactory.create_engine(self.white, self.strategy1, chess.WHITE, self.stockfish_path, self.lc0_path)
+            black = EngineFactory.create_engine(self.black, self.strategy1, chess.BLACK, self.stockfish_path, self.lc0_path)
+            runner = Simulate(white, black).run(self.limit)
             def sim():
                 return next(runner, None)
 
