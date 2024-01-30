@@ -1,12 +1,14 @@
 import math
+from typing import Tuple, Dict
+from functools import cache
 
 import torch
 import torch.distributions as dist
 from torch import exp
 
-F1: dict[float, float] = {}
-F2: dict[float, float] = {}
-CDF: dict[float, float] = {}
+F1: Dict[float, float] = {}
+F2: Dict[float, float] = {}
+CDF: Dict[float, float] = {}
 lookup_count = 0
 
 
@@ -15,7 +17,17 @@ def get_lookup_count():
     return lookup_count
 
 
-def max_gaussian(mu1, sigma1, mu2, sigma2) -> tuple[float, float]:
+@cache
+def calc_cdf(alpha: float) -> Tuple[float, float, float]:
+    normal = dist.Normal(0, 1)
+    cdf_alpha = normal.cdf(torch.tensor(alpha)).item()
+    pdf_alpha = exp(normal.log_prob(torch.tensor(alpha))).item()
+    f1 = alpha * cdf_alpha + pdf_alpha
+    f2 = alpha ** 2 * cdf_alpha * (1 - cdf_alpha) + (
+                    1 - 2 * cdf_alpha) * alpha * pdf_alpha - pdf_alpha ** 2
+    return cdf_alpha, f1, f2
+
+def max_gaussian(mu1, sigma1, mu2, sigma2) -> Tuple[float, float]:
     global lookup_count
     global F1
     global F2
@@ -31,33 +43,11 @@ def max_gaussian(mu1, sigma1, mu2, sigma2) -> tuple[float, float]:
     """
     # we assume independence of the two gaussians
     #print(mu1, sigma1, mu2, sigma2)
-    normal = dist.Normal(0, 1)
+    #normal = dist.Normal(0, 1)
     sigma_m = math.sqrt(sigma1 ** 2 + sigma2 ** 2)
-    alpha = (mu1 - mu2) / sigma_m
+    alpha = round((mu1 - mu2) / sigma_m, 2)
 
-    if alpha in CDF:
-        cdf_alpha = CDF[alpha]
-        lookup_count += 1
-    else:
-        cdf_alpha = normal.cdf(torch.tensor(alpha)).item()
-        CDF[alpha] = cdf_alpha
-
-    pdf_alpha = exp(normal.log_prob(torch.tensor(alpha))).item()
-
-    if alpha in F1:
-        f1_alpha = F1[alpha]
-        lookup_count += 1
-    else:
-        f1_alpha = alpha * cdf_alpha + pdf_alpha
-        F1[alpha] = f1_alpha
-
-    if alpha in F2:
-        f2_alpha = F2[alpha]
-        lookup_count += 1
-    else:
-        f2_alpha = alpha ** 2 * cdf_alpha * (1 - cdf_alpha) + (
-                    1 - 2 * cdf_alpha) * alpha * pdf_alpha - pdf_alpha ** 2
-        F2[alpha] = f2_alpha
+    cdf_alpha, f1_alpha, f2_alpha = calc_cdf(alpha)
 
     mu = mu2 + sigma_m * f1_alpha
     sigma = math.sqrt(sigma2 ** 2 + (sigma1 ** 2 - sigma2 ** 2) * cdf_alpha + sigma_m ** 2 * f2_alpha)

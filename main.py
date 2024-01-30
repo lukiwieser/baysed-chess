@@ -1,4 +1,5 @@
 import random
+import sys
 import time
 import chess
 import chess.engine
@@ -158,3 +159,8 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+    # Note: prevent endless wait on StockFish process
+    # by allowing for cleanup of objects (which closes stockfish)
+    import gc
+    gc.collect()
