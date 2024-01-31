@@ -15,13 +15,13 @@ from typing import Dict
 class Limit:
     """ Class to determine when to stop searching for moves """
 
-    time: float|None
+    time: float | None
     """ Search for `time` seconds """
 
-    nodes: int|None
+    nodes: int | None
     """ Search for a limited number of `nodes`"""
 
-    def __init__(self, time: float|None = None, nodes: int|None = None):
+    def __init__(self, time: float | None = None, nodes: int | None = None):
         self.time = time
         self.nodes = nodes
 
@@ -44,8 +44,14 @@ class Limit:
 
     def _run_time(self, func, *args, **kwargs):
         start = time.perf_counter_ns()
-        while (time.perf_counter_ns()-start)/1e9 < self.time:
+        while (time.perf_counter_ns() - start) / 1e9 < self.time:
             func(*args, **kwargs)
+
+    def translate_to_engine_limit(self) -> chess.engine.Limit:
+        if self.nodes:
+            return chess.engine.Limit(nodes=self.nodes)
+        elif self.time:
+            return chess.engine.Limit(time=self.time)
 
 
 class Engine(ABC):
@@ -56,7 +62,7 @@ class Engine(ABC):
     strategy: IStrategy
     """The strategy used to pick moves when simulating games."""
 
-    def __init__(self, board: chess.Board, color: chess.Color, strategy: IStrategy):
+    def __init__(self, board: chess.Board, color: chess.Color, strategy: IStrategy | None):
         self.board = board
         self.color = color
         self.strategy = strategy
@@ -138,3 +144,29 @@ class RandomEngine(Engine):
     def play(self, board: chess.Board, limit: Limit) -> chess.engine.PlayResult:
         move = random.choice(list(board.legal_moves))
         return chess.engine.PlayResult(move=move, ponder=None)
+
+
+class StockFishEngine(Engine):
+    def __init__(self, board: chess.Board, color: chess, path="../stockfish/stockfish-ubuntu-x86-64-avx2"):
+        super().__init__(board, color, None)
+        self.stockfish = chess.engine.SimpleEngine.popen_uci(path)
+
+    def play(self, board: chess.Board, limit: Limit) -> chess.engine.PlayResult:
+        return self.stockfish.play(board, limit.translate_to_engine_limit())
+
+    @staticmethod
+    def get_name() -> str:
+        return "Stockfish"
+
+
+class Lc0Engine(Engine):
+    def __init__(self, board: chess.Board, color: chess, path="../lc0/lc0"):
+        super().__init__(board, color, None)
+        self.lc0 = chess.engine.SimpleEngine.popen_uci(path)
+
+    def play(self, board: chess.Board, limit: Limit) -> chess.engine.PlayResult:
+        return self.lc0.play(board, limit.translate_to_engine_limit())
+
+    @staticmethod
+    def get_name() -> str:
+        return "Lc0"
