@@ -8,6 +8,7 @@ import chess
 from chesspp import engine
 from chesspp.engine_factory import EngineFactory
 from chesspp.stockfish_strategy import StockFishStrategy
+from chesspp.eval_pesto import PestoStrategy
 
 _DIR = os.path.abspath(os.path.dirname(__file__))
 _DATA_DIR = os.path.abspath(os.path.join(_DIR, "static_data"))

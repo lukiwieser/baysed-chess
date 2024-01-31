@@ -234,7 +234,7 @@ def score(board: chess.Board) -> int:
         pc = board.piece_at(sq)
         if pc is not None:
             color = 0 if pc.color == chess.WHITE else 1
-            piece_index = pc.piece_type-1
+            piece_index = (pc.piece_type-1)*2 + color
             mg[color] += mg_table[piece_index][sq]
             eg[color] += eg_table[piece_index][sq]
             game_phase += gamephaseInc[piece_index]
@@ -250,6 +250,49 @@ def score(board: chess.Board) -> int:
     eg_phase = 24 - mg_phase
     return (mg_score * mg_phase + eg_score * eg_phase) // 24
 
+flip = [
+    56, 57, 58, 59, 60, 61, 62, 63,
+    48, 49, 50, 51, 52, 53, 54, 55,
+    40, 41, 42, 43, 44, 45, 46, 47,
+    32, 33, 34, 35, 36, 37, 38, 39,
+    24, 25, 26, 27, 28, 29, 30, 31,
+    16, 17, 18, 19, 20, 21, 22, 23,
+    8, 9, 10, 11, 12, 13, 14, 15,
+    0, 1, 2, 3, 4, 5, 6, 7
+]
+
+
+def _init_tables():
+    global mg_table, eg_table
+
+    for i in range(64):
+        mg_table[WHITE_PAWN][i] = mg_pawn_table[i]
+        mg_table[BLACK_PAWN][i] = mg_pawn_table[flip[i]]
+        mg_table[WHITE_KNIGHT][i] = mg_knight_table[i]
+        mg_table[BLACK_KNIGHT][i] = mg_knight_table[flip[i]]
+        mg_table[WHITE_BISHOP][i] = mg_bishop_table[i]
+        mg_table[BLACK_BISHOP][i] = mg_bishop_table[flip[i]]
+        mg_table[WHITE_ROOK][i] = mg_rook_table[i]
+        mg_table[BLACK_ROOK][i] = mg_rook_table[flip[i]]
+        mg_table[WHITE_QUEEN][i] = mg_queen_table[i]
+        mg_table[BLACK_QUEEN][i] = mg_queen_table[flip[i]]
+        mg_table[WHITE_KING][i] = mg_king_table[i]
+        mg_table[BLACK_KING][i] = mg_knight_table[flip[i]]
+
+        eg_table[WHITE_PAWN][i] = eg_pawn_table[i]
+        eg_table[BLACK_PAWN][i] = eg_pawn_table[flip[i]]
+        eg_table[WHITE_KNIGHT][i] = eg_knight_table[i]
+        eg_table[BLACK_KNIGHT][i] = eg_knight_table[flip[i]]
+        eg_table[WHITE_BISHOP][i] = eg_bishop_table[i]
+        eg_table[BLACK_BISHOP][i] = eg_bishop_table[flip[i]]
+        eg_table[WHITE_ROOK][i] = eg_rook_table[i]
+        eg_table[BLACK_ROOK][i] = eg_rook_table[flip[i]]
+        eg_table[WHITE_QUEEN][i] = eg_queen_table[i]
+        eg_table[BLACK_QUEEN][i] = eg_queen_table[flip[i]]
+        eg_table[WHITE_KING][i] = eg_king_table[i]
+        eg_table[BLACK_KING][i] = eg_knight_table[flip[i]]
+
+_init_tables()
 
 class PestoStrategy(IStrategy):
     def __init__(self, rollout_depth: int = 4):
@@ -262,10 +305,28 @@ class PestoStrategy(IStrategy):
             return move, score(bc)
 
         moves = [score_move(move) for move in board.legal_moves]
-        if board.turn == chess.WHITE:
-            return max(moves, key=lambda m: m[1])[0]
+        ##print(board.turn, [m[1] for m in moves])
+        if board.turn != chess.WHITE:
+            best_move = max(moves, key=lambda m: m[1])
         else:
-            return min(moves, key=lambda m: m[1])[0]
+            best_move = min(moves, key=lambda m: m[1])
+        #print(best_move)
+        return best_move[0]
 
     def analyze_board(self, board: chess.Board) -> int:
         return score(board)
+
+#print("WHITE_PAWN", WHITE_PAWN)
+#print("BLACK_PAWN", BLACK_PAWN)
+#print("WHITE_KNIGHT", WHITE_KNIGHT)
+#print("BLACK_KNIGHT", BLACK_KNIGHT)
+#print("WHITE_BISHOP", WHITE_BISHOP)
+#print("BLACK_BISHOP", BLACK_BISHOP)
+#print("WHITE_ROOK", WHITE_ROOK)
+#print("BLACK_ROOK", BLACK_ROOK)
+#print("WHITE_QUEEN", WHITE_QUEEN)
+#print("BLACK_QUEEN", BLACK_QUEEN)
+#print("WHITE_KING", WHITE_KING)
+#print("BLACK_KING", BLACK_KING)
+#print("EMPTY", EMPTY)
+
