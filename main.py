@@ -1,19 +1,16 @@
 import argparse
 import os
 import random
-import sys
 import time
+
 import chess
 import chess.engine
 import chess.pgn
-from chesspp.classic_mcts import ClassicMcts
-from chesspp.baysian_mcts import BayesianMcts
-from chesspp.engine_factory import EngineEnum, StrategyEnum
-from chesspp.random_strategy import RandomStrategy
-from chesspp.stockfish_strategy import StockFishStrategy
+
 from chesspp import engine
 from chesspp import simulation, eval
 from chesspp import util
+from chesspp.engine_factory import EngineEnum, StrategyEnum
 from chesspp.mcts.baysian_mcts import BayesianMcts
 from chesspp.mcts.classic_mcts import ClassicMcts
 from chesspp.random_strategy import RandomStrategy
@@ -108,8 +105,8 @@ def test_evaluation():
     reject_h0 = test_result['pvalue'] < alpha
 
     print(f"{games_played} games played")
-    print(f"Engine {a.get_name()} won {a_wins} games ({a_wins / games_played:.2%})")
-    print(f"Engine {b.get_name()} won {b_wins} games ({b_wins / games_played:.2%})")
+    print(f"Engine {a} won {a_wins} games ({a_wins / games_played:.2%})")
+    print(f"Engine {b} won {b_wins} games ({b_wins / games_played:.2%})")
     print(f"{draws} games ({draws / games_played:.2%}) resulted in a draw")
     print(f"Hypothesis test: trials={test_result['trials']}, pvalue={test_result['pvalue']:2.10f}, statistic={test_result['statistic']:2.4f}, reject_h0={reject_h0}")
 
