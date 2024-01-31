@@ -13,7 +13,8 @@ from typing import Any
 import logging
 
 import chesspp
-from chesspp.engine import ClassicMctsEngine, BayesMctsEngine
+from chesspp.engine import ClassicMctsEngine, Engine
+from chesspp.engine_factory import EngineFactory, EngineEnum, StrategyEnum
 
 # Use this logger variable to print messages to the console or log files.
 # logger.info("message") will always print "message" to the console or log file.
@@ -128,11 +129,27 @@ class MctsEngine(MinimalEngine):
 
 
 class MyBayesMctsEngine(MinimalEngine):
+    def __init__(self, commands: COMMANDS_TYPE, options: OPTIONS_TYPE, stderr: Optional[int],
+                 draw_or_resign: Configuration, name: Optional[str] = None, **popen_args: str) -> None:
+        """
+        Initialize the values of the engine that all homemade engines inherit.
+
+        :param options: The options to send to the engine.
+        :param draw_or_resign: Options on whether the bot should resign or offer draws.
+        """
+        super().__init__(commands, options, stderr, draw_or_resign, name, **popen_args)
+        self._engine = None
+
+    def get_engine(self, color: chess.Color) -> chess.engine:
+        if self._engine is None:
+            self._engine = EngineFactory.create_engine(EngineEnum.BayesianMcts, StrategyEnum.Stockfish, color,
+                                                       "/home/luke/projects/pp-project/chess-engine-pp/stockfish/stockfish-ubuntu-x86-64-avx2",
+                                                       "", 1500, 4)
+
+        return self._engine
+
     def search(self, board: chess.Board, time_limit: chess.engine.Limit, ponder: bool, draw_offered: bool,
                root_moves: MOVE) -> chess.engine.PlayResult:
-        my_engine = BayesMctsEngine(board.turn)
-        r = my_engine.play(board.copy(), chesspp.engine.Limit(0.5))
-        print("Color:", board.turn)
-        print("engine play result: ", r)
-        print("Engine name", my_engine)
+        my_engine = self.get_engine(board.turn)
+        r = my_engine.play(board.copy(), chesspp.engine.Limit(2))
         return r
