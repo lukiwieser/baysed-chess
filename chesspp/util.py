@@ -1,8 +1,12 @@
+from typing import TypedDict
+
 import chess
 import chess.engine
 from stockfish import Stockfish
 import numpy as np
 import random
+
+from scipy.stats import binomtest
 
 
 def pick_move(board: chess.Board) -> chess.Move | None:
@@ -77,3 +81,38 @@ def simulate_stockfish_prob(board: chess.Board, move: chess.Move, games: int = 1
     print(scores)
     # TODO: return distribution here?
     return np.array(scores).mean(), np.array(scores).std()
+
+
+HypothesisTestResult = TypedDict('HypothesisTestResult', {"trials": int, "pvalue": float, "statistic": float})
+
+
+def hypothesis_test(wins: int, draws: int, losses: int) -> HypothesisTestResult:
+    """
+    Hypothesis test using Binomial distributions.
+
+    Null Hypothesis: Both engines have the same strength, aka they win on average half of the games.
+    Alternative Hypothesis: Both engines have different strength.
+
+    :returns: tuple of trials, pvalue, test-statistic
+    """
+
+    # wins give 1 point, and draws give 1/2 points
+    score = wins + draws // 2
+
+    # number of games
+    trials = wins + draws + losses
+
+    # due to rounding down the variable score, if draws are even, we have to reduce trials by one.
+    if draws % 2 != 0:
+        trials -= 1
+
+    # we expect that if both engines have the same strength, that they "win" on 50% on average
+    expected_success_rate = 0.5
+
+    result = binomtest(score, trials, expected_success_rate, alternative='two-sided')
+
+    return {
+        "trials": trials,
+        "pvalue": result.pvalue,
+        "statistic": result.statistic
+    }

@@ -1,18 +1,20 @@
+import argparse
+import os
 import random
 import time
 
 import chess
 import chess.engine
 import chess.pgn
-from chesspp.mcts.classic_mcts import ClassicMcts
+
+from chesspp import engine
+from chesspp import simulation, eval
+from chesspp import util
 from chesspp.mcts.baysian_mcts import BayesianMcts
+from chesspp.mcts.classic_mcts import ClassicMcts
 from chesspp.random_strategy import RandomStrategy
 from chesspp.stockfish_strategy import StockFishStrategy
-from chesspp import engine
-from chesspp import util
-from chesspp import simulation, eval
-import argparse
-import os
+from chesspp.util import hypothesis_test
 
 
 def test_simulate():
@@ -44,7 +46,7 @@ def test_bayes_mcts():
     t1 = time.time_ns()
     mcts.sample(1)
     t2 = time.time_ns()
-    print ((t2 - t1)/1e6)
+    print((t2 - t1) / 1e6)
     mcts.print()
     for move, score in mcts.get_moves().items():
         print("move (mcts):", move, " with score:", score)
@@ -106,10 +108,15 @@ def test_evaluation():
     b_wins = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_B, results)))
     draws = len(list(filter(lambda x: x.winner == simulation.Winner.Draw, results)))
 
+    alpha = 0.001
+    test_result = hypothesis_test(a_wins, draws, b_wins)
+    reject_h0 = test_result['pvalue'] < alpha
+
     print(f"{games_played} games played")
-    print(f"Engine {a.get_name()} won {a_wins} games ({a_wins/games_played:.2%})")
-    print(f"Engine {b.get_name()} won {b_wins} games ({b_wins/games_played:.2%})")
-    print(f"{draws} games ({draws/games_played:.2%}) resulted in a draw")
+    print(f"Engine {a.get_name()} won {a_wins} games ({a_wins / games_played:.2%})")
+    print(f"Engine {b.get_name()} won {b_wins} games ({b_wins / games_played:.2%})")
+    print(f"{draws} games ({draws / games_played:.2%}) resulted in a draw")
+    print(f"Hypothesis test: trials={test_result['trials']}, pvalue={test_result['pvalue']:2.10f}, statistic={test_result['statistic']:2.4f}, reject_h0={reject_h0}")
 
 
 def read_arguments():
@@ -118,7 +125,8 @@ def read_arguments():
         description='Compare two engines by playing multiple games against each other'
     )
 
-    engines = {"ClassicMCTS": engine.ClassicMctsEngine, "BayesianMCTS": engine.BayesMctsEngine, "Random": engine.RandomEngine}
+    engines = {"ClassicMCTS": engine.ClassicMctsEngine, "BayesianMCTS": engine.BayesMctsEngine,
+               "Random": engine.RandomEngine}
     strategies = {"Random": RandomStrategy, "Stockfish": StockFishStrategy}
 
     if os.name == 'nt':
