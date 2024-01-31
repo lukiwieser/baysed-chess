@@ -97,8 +97,8 @@ class BayesianMctsNode(IMctsNode):
             copied_board.push(m)
             steps += 1
 
-        steps = max(1, steps)
-        score = int(self.strategy.analyze_board(copied_board) / (math.log2(steps) + 1))
+        steps = max(2, steps)
+        score = int(self.strategy.analyze_board(copied_board) / math.log2(steps))
         self.result = score
         return score
 
