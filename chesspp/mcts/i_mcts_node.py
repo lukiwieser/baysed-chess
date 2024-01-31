@@ -6,6 +6,7 @@ import chess
 
 from chesspp.i_strategy import IStrategy
 
+
 class IMctsNode(ABC):
     def __init__(self, board: chess.Board, strategy: IStrategy, parent: Self | None, move: chess.Move | None,
                  random_state: random.Random):
@@ -16,7 +17,6 @@ class IMctsNode(ABC):
         self.move = move
         self.legal_moves = list(board.legal_moves)
         self.random_state = random_state
-        self.depth = 0
 
     @abstractmethod
     def select(self) -> Self:

@@ -29,7 +29,7 @@ class ClassicMcts:
         self.untried_actions.remove(move)
         next_board = self.board.copy()
         next_board.push(move)
-        child_node = ClassicMcts(next_board, color=self.color, strategy=self.strategy, parent=self, move=move)
+        child_node = ClassicMcts(next_board, color=not self.color, strategy=self.strategy, parent=self, move=move)
         self.children.append(child_node)
         return child_node
 
