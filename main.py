@@ -101,13 +101,15 @@ def test_evaluation():
 
     evaluator = simulation.Evaluation(a, strat1, b, strat2, limit)
     results = evaluator.run(n, proc)
-    a_results = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_A, results))) / len(results) * 100
-    b_results = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_B, results))) / len(results) * 100
-    draws = len(list(filter(lambda x: x.winner == simulation.Winner.Draw, results))) / len(results) * 100
+    games_played = len(results)
+    a_wins = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_A, results)))
+    b_wins = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_B, results)))
+    draws = len(list(filter(lambda x: x.winner == simulation.Winner.Draw, results)))
 
-    print(f"Engine {a.get_name()} won {a_results}% of games")
-    print(f"Engine {b.get_name()} won {b_results}% of games")
-    print(f"{draws}% of games resulted in a draw")
+    print(f"{games_played} games played")
+    print(f"Engine {a.get_name()} won {a_wins} games ({a_wins/games_played:.2%})")
+    print(f"Engine {b.get_name()} won {b_wins} games ({b_wins/games_played:.2%})")
+    print(f"{draws} games ({draws/games_played:.2%}) resulted in a draw")
 
 
 def read_arguments():
