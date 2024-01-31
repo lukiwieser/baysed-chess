@@ -44,7 +44,7 @@ def test_bayes_mcts():
     t1 = time.time_ns()
     mcts.sample(1)
     t2 = time.time_ns()
-    print ((t2 - t1)/1e6)
+    print((t2 - t1) / 1e6)
     mcts.print()
     for move, score in mcts.get_moves().items():
         print("move (mcts):", move, " with score:", score)
@@ -109,7 +109,8 @@ def read_arguments():
 
     engines = {"ClassicMCTS": EngineEnum.ClassicMcts, "BayesianMCTS": EngineEnum.BayesianMcts,
                "Random": EngineEnum.Random, "Stockfish": EngineEnum.Stockfish, "Lc0": EngineEnum.Lc0}
-    strategies = {"Random": StrategyEnum.Random, "Stockfish": StrategyEnum.Stockfish, "Lc0": StrategyEnum.Lc0}
+    strategies = {"Random": StrategyEnum.Random, "Stockfish": StrategyEnum.Stockfish, "Lc0": StrategyEnum.Lc0,
+                  "RandomStockfish": StrategyEnum.RandomStockfish}
 
     if os.name == 'nt':
         stockfish_default = "stockfish/stockfish-windows-x86-64-avx2"
@@ -140,8 +141,10 @@ def read_arguments():
     strategy1 = strategies[args.strategy1]
     strategy2 = strategies[args.strategy2]
 
-    print(engine1, engine2, strategy1, strategy2, int(args.n), float(args.time), args.stockfish_path, args.lc0_path, int(args.proc))
-    return engine1, engine2, strategy1, strategy2, int(args.n), float(args.time), args.stockfish_path, args.lc0_path, int(args.proc)
+    print(engine1, engine2, strategy1, strategy2, int(args.n), float(args.time), args.stockfish_path, args.lc0_path,
+          int(args.proc))
+    return engine1, engine2, strategy1, strategy2, int(args.n), float(
+        args.time), args.stockfish_path, args.lc0_path, int(args.proc)
 
 
 def main():

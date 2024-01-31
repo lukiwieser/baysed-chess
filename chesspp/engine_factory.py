@@ -4,6 +4,7 @@ from chesspp.engine import *
 from chesspp.lc0_strategy import Lc0Strategy
 from chesspp.random_strategy import RandomStrategy
 from chesspp.stockfish_strategy import StockFishStrategy
+from chesspp.random_stockfish_strategy import RandomStockfishStrategy
 from chesspp.i_strategy import IStrategy
 import chess
 
@@ -20,6 +21,7 @@ class StrategyEnum(Enum):
     Stockfish = 0
     Lc0 = 1
     Random = 2
+    RandomStockfish = 3
 
 
 class EngineFactory:
@@ -33,6 +35,8 @@ class EngineFactory:
                 strategy = EngineFactory._get_lc0_strategy(lc0_path, rollout_depth)
             case StrategyEnum.Random:
                 strategy = EngineFactory._get_random_strategy(rollout_depth)
+            case StrategyEnum.RandomStockfish:
+                strategy = EngineFactory._get_random_stockfish_strategy(stockfish_path, rollout_depth)
 
         match engine_name:
             case EngineEnum.ClassicMcts:
@@ -70,6 +74,10 @@ class EngineFactory:
     @staticmethod
     def _get_stockfish_strategy(engine_path: str, rollout_depth: int) -> IStrategy:
         return StockFishStrategy(engine_path, rollout_depth)
+
+    @staticmethod
+    def _get_random_stockfish_strategy(engine_path: str, rollout_depth: int) -> IStrategy:
+        return RandomStockfishStrategy(rollout_depth, engine_path)
 
     @staticmethod
     def _get_lc0_strategy(engine_path: str, rollout_depth: int) -> IStrategy:

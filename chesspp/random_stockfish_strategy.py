@@ -1,17 +1,19 @@
+import random
+
 import chess
-from chesspp.i_strategy import IStrategy
-from chesspp.eval import score_stockfish
 import chess.engine
 
+from chesspp.i_strategy import IStrategy
+from chesspp.eval import score_stockfish
 
-class StockFishStrategy(IStrategy):
 
-    def __init__(self, path="../stockfish/stockfish-windows-x86-64-avx2", rollout_depth: int = 4,
-                 limit: chess.engine.Limit = chess.engine.Limit(depth=4)):
+class RandomStockfishStrategy(IStrategy):
+    def __init__(self, rollout_depth: int, path="../stockfish/stockfish-windows-x86-64-avx2",
+                 random_seed: random.Random = random.Random()) -> None:
         super().__init__(rollout_depth)
         self._stockfish = None
         self.path = path
-        self.limit = limit
+        self.random_seed = random_seed
 
     def __del__(self):
         if self._stockfish is not None:
@@ -27,8 +29,8 @@ class StockFishStrategy(IStrategy):
     def stockfish(self, stockfish):
         self._stockfish = stockfish
 
-    def pick_next_move(self, board: chess.Board) -> chess.Move | None:
-        return self.stockfish.play(board, self.limit).move
+    def pick_next_move(self, board: chess.Board) -> chess.Move:
+        return self.random_seed.choice(list(board.legal_moves))
 
     def analyze_board(self, board: chess.Board) -> int:
         return score_stockfish(board, self.stockfish)
