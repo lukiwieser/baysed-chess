@@ -229,6 +229,13 @@ def score(board: chess.Board) -> int:
     eg = [0, 0]
     game_phase = 0
 
+    if board.outcome() is not None:
+        winner = board.outcome().winner
+        if winner is not None:
+            if winner == chess.WHITE:
+                return 100_000
+            else:
+                return -100_000
     # evaluate each piece
     for sq in range(64):
         pc = board.piece_at(sq)

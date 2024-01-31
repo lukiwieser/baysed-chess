@@ -37,7 +37,7 @@ def simulate_game(white: Engine, black: Engine, limit: Limit, board: chess.Board
 
 class Evaluation:
     def __init__(self, engine_a: EngineEnum, strategy_a, engine_b: EngineEnum, strategy_b, limit: Limit,
-                 stockfish_path: str, lc0_path: str):
+                 stockfish_path: str, lc0_path: str, stockfish_elo: int):
         self.engine_a = engine_a
         self.strategy_a = strategy_a
         self.engine_b = engine_b
@@ -45,10 +45,11 @@ class Evaluation:
         self.stockfish_path = stockfish_path
         self.lc0_path = lc0_path
         self.limit = limit
+        self.stockfish_elo = stockfish_elo
 
     def run(self, n_games=100, proc=mp.cpu_count()) -> List[EvaluationResult]:
         proc = min(proc, mp.cpu_count())
-        arg = (self.engine_a, self.strategy_a, self.engine_b, self.strategy_b, self.limit, self.stockfish_path, self.lc0_path)
+        arg = (self.engine_a, self.strategy_a, self.engine_b, self.strategy_b, self.limit, self.stockfish_path, self.lc0_path, self.stockfish_elo)
         if proc > 1:
             with mp.Pool(proc) as pool:
                 args = [arg for i in range(n_games)]
@@ -59,18 +60,18 @@ class Evaluation:
         ]
 
     @staticmethod
-    def _test_simulate(arg: Tuple[EngineEnum, StrategyEnum, EngineEnum, StrategyEnum, Limit, str, str]) -> EvaluationResult:
-        engine_a, strategy_a, engine_b, strategy_b, limit, stockfish_path, lc0_path = arg
+    def _test_simulate(arg: Tuple[EngineEnum, StrategyEnum, EngineEnum, StrategyEnum, Limit, str, str, int]) -> EvaluationResult:
+        engine_a, strategy_a, engine_b, strategy_b, limit, stockfish_path, lc0_path, stockfish_elo = arg
         flip_engines = bool(random.getrandbits(1))
 
         if flip_engines:
             black, white = EngineFactory.create_engine(engine_a, strategy_a, chess.BLACK,
-                                                       stockfish_path, lc0_path), EngineFactory.create_engine(
-                engine_b, strategy_b, chess.WHITE, stockfish_path, lc0_path)
+                                                       stockfish_path, lc0_path, stockfish_elo), EngineFactory.create_engine(
+                engine_b, strategy_b, chess.WHITE, stockfish_path, lc0_path, stockfish_elo)
         else:
             white, black = EngineFactory.create_engine(engine_a, strategy_a, chess.WHITE,
-                                                       stockfish_path, lc0_path), EngineFactory.create_engine(
-                engine_b, strategy_b, chess.BLACK, stockfish_path, lc0_path)
+                                                       stockfish_path, lc0_path, stockfish_elo), EngineFactory.create_engine(
+                engine_b, strategy_b, chess.BLACK, stockfish_path, lc0_path, stockfish_elo)
 
         game = simulate_game(white, black, limit, chess.Board())
         winner = game.end().board().outcome().winner

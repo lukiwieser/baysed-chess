@@ -5,6 +5,7 @@ from abc import ABC, abstractmethod
 from torch import distributions as dist
 import chess
 import chess.engine
+from stockfish import Stockfish
 
 from chesspp.mcts.baysian_mcts import BayesianMcts
 from chesspp.mcts.classic_mcts import ClassicMcts
@@ -147,12 +148,15 @@ class RandomEngine(Engine):
 
 
 class StockFishEngine(Engine):
-    def __init__(self, board: chess.Board, color: chess, path="../stockfish/stockfish-ubuntu-x86-64-avx2"):
+    def __init__(self, board: chess.Board, color: chess, stockfish_elo: int, path="../stockfish/stockfish-ubuntu-x86-64-avx2"):
         super().__init__(board, color, None)
-        self.stockfish = chess.engine.SimpleEngine.popen_uci(path)
+        self.stockfish = Stockfish(path)
+        self.stockfish.set_elo_rating(stockfish_elo)
 
     def play(self, board: chess.Board, limit: Limit) -> chess.engine.PlayResult:
-        return self.stockfish.play(board, limit.translate_to_engine_limit())
+        self.stockfish.set_fen_position(board.fen())
+        m = chess.Move.from_uci(self.stockfish.get_best_move())
+        return chess.engine.PlayResult(move=m, ponder=None)
 
     @staticmethod
     def get_name() -> str:

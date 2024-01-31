@@ -25,6 +25,7 @@ def load_index() -> str:
 
 class Simulate:
     """ Run a simulation of two engines"""
+
     def __init__(self, engine_white, engine_black):
         self.white = engine_white
         self.black = engine_black
@@ -41,7 +42,8 @@ class Simulate:
 
 
 class WebInterface:
-    def __init__(self, white_engine, black_engine, strategy1, strategy2, stockfish_path, lc0_path, limit: engine.Limit):
+    def __init__(self, white_engine, black_engine, strategy1, strategy2, stockfish_path, lc0_path, limit: engine.Limit,
+                 stockfish_elo: int):
         self.white = white_engine
         self.black = black_engine
         self.strategy1 = strategy1
@@ -49,18 +51,16 @@ class WebInterface:
         self.stockfish_path = stockfish_path
         self.lc0_path = lc0_path
         self.limit = limit
-
+        self.stockfish_elo = stockfish_elo
 
     async def handle_index(self, request) -> web.Response:
         """ Entry point of webpage, returns the index html"""
         return web.Response(text=load_index(), content_type='text/html')
 
-
     async def handle_websocket(self, request):
         """ Handles a websocket connection to the frontend"""
         ws = web.WebSocketResponse()
         await ws.prepare(request)
-
 
         async def wait_msg():
             """ Handles messages from client """
@@ -71,12 +71,14 @@ class WebInterface:
                 elif msg.type == aiohttp.WSMsgType.ERROR:
                     print(f'ws connection closed with exception {ws.exception()}')
 
-
         async def turns():
             """ Simulates the game and sends the response to the client """
-            white = EngineFactory.create_engine(self.white, self.strategy1, chess.WHITE, self.stockfish_path, self.lc0_path)
-            black = EngineFactory.create_engine(self.black, self.strategy2, chess.BLACK, self.stockfish_path, self.lc0_path)
+            white = EngineFactory.create_engine(self.white, self.strategy1, chess.WHITE, self.stockfish_path,
+                                                self.lc0_path, self.stockfish_elo)
+            black = EngineFactory.create_engine(self.black, self.strategy2, chess.BLACK, self.stockfish_path,
+                                                self.lc0_path, self.stockfish_elo)
             runner = Simulate(white, black).run(self.limit)
+
             def sim():
                 return next(runner, None)
 
@@ -85,11 +87,9 @@ class WebInterface:
                 await ws.send_str(board.fen())
                 board = await asyncio.to_thread(sim)
 
-
         async with asyncio.TaskGroup() as tg:
             tg.create_task(wait_msg())
             tg.create_task(turns())
-
 
         print('websocket connection closed')
         return ws

@@ -29,7 +29,8 @@ class StrategyEnum(Enum):
 class EngineFactory:
 
     @staticmethod
-    def create_engine(engine_name: EngineEnum, strategy_name: StrategyEnum, color: chess.Color, stockfish_path: str, lc0_path: str, rollout_depth: int = 4) -> Engine:
+    def create_engine(engine_name: EngineEnum, strategy_name: StrategyEnum, color: chess.Color, stockfish_path: str,
+                      lc0_path: str, stockfish_elo: int, rollout_depth: int = 4) -> Engine:
         match strategy_name:
             case StrategyEnum.Stockfish:
                 strategy = EngineFactory._get_stockfish_strategy(stockfish_path, rollout_depth)
@@ -50,14 +51,14 @@ class EngineFactory:
                 return EngineFactory.bayesian_mcts(color, strategy)
 
             case EngineEnum.Stockfish:
-                return EngineFactory.stockfish_engine(color, stockfish_path)
+                return EngineFactory.stockfish_engine(color, stockfish_path, stockfish_elo)
 
             case EngineEnum.Lc0:
                 return EngineFactory.lc0_engine(color, lc0_path)
 
     @staticmethod
-    def stockfish_engine(color: chess.Color, engine_path: str, board: chess.Board | None = chess.Board()) -> Engine:
-        return StockFishEngine(board, color, engine_path)
+    def stockfish_engine(color: chess.Color, engine_path: str, stockfish_elo: int, board: chess.Board | None = chess.Board()) -> Engine:
+        return StockFishEngine(board, color, stockfish_elo, engine_path)
 
     @staticmethod
     def lc0_engine(color: chess.Color, engine_path: str, board: chess.Board | None = chess.Board()) -> Engine:
@@ -90,4 +91,3 @@ class EngineFactory:
     @staticmethod
     def _get_pesto_strategy(rollout_depth: int) -> IStrategy:
         return PestoStrategy(rollout_depth)
-

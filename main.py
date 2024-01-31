@@ -90,10 +90,10 @@ def analyze_results(moves: dict):
 
 
 def test_evaluation():
-    a, b, s1, s2, n, limit, stockfish_path, lc0_path, proc = read_arguments()
-    limit = engine.Limit(time=limit)
+    a, b, s1, s2, n, limit, stockfish_path, lc0_path, proc, nodes, stockfish_elo = read_arguments()
+    limit = engine.Limit(time=limit) if limit != -1 else engine.Limit(nodes=nodes)
 
-    evaluator = simulation.Evaluation(a, s1, b, s2, limit, stockfish_path, lc0_path)
+    evaluator = simulation.Evaluation(a, s1, b, s2, limit, stockfish_path, lc0_path, stockfish_elo)
     results = evaluator.run(n, proc)
     games_played = len(results)
     a_wins = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_A, results)))
@@ -130,10 +130,12 @@ def read_arguments():
         lc0_default = "lc0/lc0"
 
     parser.add_argument("--proc", default=2, help="Number of processors to use for simulation, default=1")
-    parser.add_argument("--time", default=0.5, help="Time limit for each simulation step, default=0.5")
+    parser.add_argument("--time", default=-1, help="Time limit for each simulation step, default=-1")
+    parser.add_argument("--nodes", default=-1, help="Node limit for each simulation step, default=-1")
     parser.add_argument("-n", default=100, help="Number of games to simulate, default=100")
     parser.add_argument("--stockfish_path", default=stockfish_default,
                         help=f"Path for engine executable, default='{stockfish_default}'")
+    parser.add_argument("--stockfish_elo", default=1500, help="Elo for stockfish engine, default=1500")
     parser.add_argument("--lc0_path", default=lc0_default,
                         help=f"Path for engine executable, default='{stockfish_default}'")
     parser.add_argument("--engine1", "--e1", help="Engine A for the simulation", choices=engines.keys(), required=True)
@@ -151,10 +153,10 @@ def read_arguments():
     strategy1 = strategies[args.strategy1]
     strategy2 = strategies[args.strategy2]
 
-    print(engine1, engine2, strategy1, strategy2, int(args.n), float(args.time), args.stockfish_path, args.lc0_path,
-          int(args.proc))
-    return engine1, engine2, strategy1, strategy2, int(args.n), float(
-        args.time), args.stockfish_path, args.lc0_path, int(args.proc)
+    print(engine1, engine2, strategy1, strategy2, int(args.n), args.time, args.stockfish_path, args.lc0_path,
+          int(args.proc), int(args.nodes), int(args.stockfish_elo))
+    return (engine1, engine2, strategy1, strategy2, int(args.n), float(args.time),
+            args.stockfish_path, args.lc0_path, int(args.proc), int(args.nodes), int(args.stockfish_elo))
 
 
 def main():
