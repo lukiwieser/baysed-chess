@@ -57,20 +57,20 @@ class EngineFactory:
                 return EngineFactory.lc0_engine(color, lc0_path)
 
     @staticmethod
-    def stockfish_engine(color: chess.Color, engine_path: str, stockfish_elo: int, board: chess.Board | None = chess.Board()) -> Engine:
-        return StockFishEngine(board, color, stockfish_elo, engine_path)
+    def stockfish_engine(color: chess.Color, engine_path: str, stockfish_elo: int) -> Engine:
+        return StockFishEngine(chess.Board(), color, stockfish_elo, engine_path)
 
     @staticmethod
-    def lc0_engine(color: chess.Color, engine_path: str, board: chess.Board | None = chess.Board()) -> Engine:
-        return Lc0Engine(board, color, engine_path)
+    def lc0_engine(color: chess.Color, engine_path: str) -> Engine:
+        return Lc0Engine(chess.Board(), color, engine_path)
 
     @staticmethod
-    def bayesian_mcts(color: chess.Color, strategy: IStrategy, board: chess.Board | None = chess.Board()) -> Engine:
-        return BayesMctsEngine(board, color, strategy)
+    def bayesian_mcts(color: chess.Color, strategy: IStrategy) -> Engine:
+        return BayesMctsEngine(chess.Board(), color, strategy)
 
     @staticmethod
-    def classic_mcts(color: chess.Color, strategy: IStrategy, board: chess.Board | None = chess.Board()) -> Engine:
-        return ClassicMctsEngine(board, color, strategy)
+    def classic_mcts(color: chess.Color, strategy: IStrategy) -> Engine:
+        return ClassicMctsEngine(chess.Board(), color, strategy)
 
     @staticmethod
     def _get_random_strategy(rollout_depth: int) -> IStrategy:
@@ -91,3 +91,4 @@ class EngineFactory:
     @staticmethod
     def _get_pesto_strategy(rollout_depth: int) -> IStrategy:
         return PestoStrategy(rollout_depth)
+
