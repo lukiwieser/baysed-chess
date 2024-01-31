@@ -25,6 +25,7 @@ class Limit:
     def __init__(self, time: float | None = None, nodes: int | None = None):
         self.time = time
         self.nodes = nodes
+        self.node_count = 0
 
     def run(self, func, *args, **kwargs):
         """
@@ -36,6 +37,7 @@ class Limit:
 
         if self.nodes:
             self._run_nodes(func, *args, **kwargs)
+            self.node_count = self.nodes
         elif self.time:
             self._run_time(func, *args, **kwargs)
 
@@ -47,6 +49,7 @@ class Limit:
         start = time.perf_counter_ns()
         while (time.perf_counter_ns() - start) / 1e9 < self.time:
             func(*args, **kwargs)
+            self.node_count += 1
 
     def translate_to_engine_limit(self) -> chess.engine.Limit:
         if self.nodes:
@@ -95,6 +98,7 @@ class BayesMctsEngine(Engine):
     def __init__(self, board: chess.Board, color: chess.Color, strategy: IStrategy):
         super().__init__(board, color, strategy)
         self.mcts = BayesianMcts(board, self.strategy, self.color)
+        self.node_counts = []
 
     @staticmethod
     def get_name() -> str:
@@ -103,7 +107,16 @@ class BayesMctsEngine(Engine):
     def play(self, board: chess.Board, limit: Limit) -> chess.engine.PlayResult:
         if len(board.move_stack) != 0:  # apply previous move to mcts --> reuse previous simulation results
             self.mcts.apply_move(board.peek())
-        limit.run(lambda: self.mcts.sample(1))
+
+        node_count = 0
+
+        def do():
+            nonlocal node_count
+            self.mcts.sample(1)
+            node_count += 1
+
+        limit.run(do)
+        self.node_counts.append(node_count)
         best_move = self.get_best_move(self.mcts.get_moves(), board.turn)
         self.mcts.apply_move(best_move)
         return chess.engine.PlayResult(move=best_move, ponder=None)
@@ -121,6 +134,7 @@ class BayesMctsEngine(Engine):
 class ClassicMctsEngine(Engine):
     def __init__(self, board: chess.Board, color: chess.Color, strategy: IStrategy):
         super().__init__(board, color, strategy)
+        self.node_counts = []
 
     @staticmethod
     def get_name() -> str:
@@ -128,7 +142,15 @@ class ClassicMctsEngine(Engine):
 
     def play(self, board: chess.Board, limit: Limit) -> chess.engine.PlayResult:
         mcts_root = ClassicMcts(board, self.color, self.strategy)
-        limit.run(lambda: mcts_root.build_tree(1))
+        node_count = 0
+
+        def do():
+            nonlocal node_count
+            mcts_root.build_tree(1)
+            node_count += 1
+
+        limit.run(do)
+        self.node_counts.append(node_count)
         best_move = max(mcts_root.children, key=lambda x: x.score).move if board.turn == chess.WHITE else (
             min(mcts_root.children, key=lambda x: x.score).move)
         return chess.engine.PlayResult(move=best_move, ponder=None)

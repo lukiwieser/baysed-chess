@@ -1,5 +1,6 @@
 import multiprocessing as mp
 import random
+import time
 import chess
 import chess.pgn
 from typing import Tuple, List
@@ -17,22 +18,60 @@ class Winner(Enum):
 
 
 @dataclass
+class GameStatistics:
+    white: str
+    black: str
+    average_time_white: float
+    average_time_black: float
+    nodes_white: int
+    nodes_black: int
+    length: int
+
+@dataclass
 class EvaluationResult:
     winner: Winner
     game: str
+    statistics: GameStatistics
 
 
-def simulate_game(white: Engine, black: Engine, limit: Limit, board: chess.Board) -> chess.pgn.Game:
+def simulate_game(white: Engine, black: Engine, limit: Limit, board: chess.Board) -> (chess.pgn.Game, GameStatistics):
     is_white_playing = True
+    times_white = []
+    times_black = []
+    game_length = 0
     while not board.is_game_over():
+        start = time.time()
         play_result = white.play(board, limit) if is_white_playing else black.play(board, limit)
+        end = time.time()
+        times_white.append(end - start) if is_white_playing else times_black.append(end - start)
         board.push(play_result.move)
         is_white_playing = not is_white_playing
+        game_length += 1
 
     game = chess.pgn.Game.from_board(board)
     game.headers['White'] = white.get_name()
     game.headers['Black'] = black.get_name()
-    return game
+
+    if hasattr(white, "node_counts"):
+        white_nodes = sum(white.node_counts) // len(white.node_counts)
+    else:
+        white_nodes = 0
+
+    if hasattr(black, "node_counts"):
+        black_nodes = sum(black.node_counts) // len(black.node_counts)
+    else:
+        black_nodes = 0
+
+    statistics = GameStatistics(white=white.get_name(),
+                                black=black.get_name(),
+                                average_time_white=(sum(times_white)/len(times_white)),
+                                average_time_black=(sum(times_black)/len(times_black)),
+                                nodes_white=white_nodes,
+                                nodes_black=black_nodes,
+                                length=game_length
+                                )
+
+    return game, statistics
 
 
 class Evaluation:
@@ -73,7 +112,7 @@ class Evaluation:
                                                        stockfish_path, lc0_path, stockfish_elo), EngineFactory.create_engine(
                 engine_b, strategy_b, chess.BLACK, stockfish_path, lc0_path, stockfish_elo)
 
-        game = simulate_game(white, black, limit, chess.Board())
+        game, statistics = simulate_game(white, black, limit, chess.Board())
         winner = game.end().board().outcome().winner
 
         result = Winner.Draw
@@ -87,4 +126,4 @@ class Evaluation:
             case (chess.BLACK, False):
                 result = Winner.Engine_B
 
-        return EvaluationResult(result, str(game))
+        return EvaluationResult(result, str(game), statistics)

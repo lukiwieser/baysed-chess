@@ -95,6 +95,21 @@ def test_evaluation():
 
     evaluator = simulation.Evaluation(a, s1, b, s2, limit, stockfish_path, lc0_path, stockfish_elo)
     results = evaluator.run(n, proc)
+
+    for r in results:
+        stats = r.statistics
+        print("====================================")
+        print(f"Game length: {stats.length} moves")
+        print(f"{stats.white} (White):")
+        print(f"Average node count: {stats.nodes_white}")
+        print(f"Average simulation time: {stats.average_time_white}")
+        print()
+        print(f"{stats.black} (Black):")
+        print(f"Average node count: {stats.nodes_black}")
+        print(f"Average simulation time: {stats.average_time_black}")
+        print("====================================")
+        print()
+
     games_played = len(results)
     a_wins = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_A, results)))
     b_wins = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_B, results)))
