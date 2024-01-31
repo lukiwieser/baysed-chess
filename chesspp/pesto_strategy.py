@@ -226,37 +226,6 @@ eg_table = [
 ]
 
 
-#import chess
-import sys
-
-
-def minimax(depth, board, alpha, beta, is_maximizing):
-    if depth == 0 or board.is_game_over():
-        return score(board)
-
-    if is_maximizing:
-        best_move = -9999
-        for move in board.legal_moves:
-            board.push(move)
-            best_move = max(best_move, minimax(depth - 1, board, alpha, beta, not is_maximizing))
-            board.pop()
-            alpha = max(alpha, best_move)
-            if beta <= alpha:
-                return best_move
-        return best_move
-    else:
-        best_move = 9999
-        for x in board.legal_moves:
-            move = chess.Move.from_uci(str(x))
-            board.push(move)
-            best_move = min(best_move, minimax(depth - 1, board, alpha, beta, not is_maximizing))
-            board.pop()
-            beta = min(beta, best_move)
-            if beta <= alpha:
-                return best_move
-        return best_move
-
-
 def score(board: chess.Board) -> int:
     mg = [0, 0]
     eg = [0, 0]
@@ -324,6 +293,11 @@ def _init_tables():
         eg_table[BLACK_QUEEN][i] = eg_queen_table[flip[i]]
         eg_table[WHITE_KING][i] = eg_king_table[i]
         eg_table[BLACK_KING][i] = eg_knight_table[flip[i]]
+
+    for piece in range(6):
+        for field in range(64):
+            mg_table[piece][field] += mg_value[piece]
+            eg_table[piece][field] += eg_value[piece]
 
 _init_tables()
 
