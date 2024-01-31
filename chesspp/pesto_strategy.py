@@ -1,7 +1,9 @@
 import chess.engine
 import chess
-from chesspp.i_strategy import IStrategy
+from functools import cache
 
+from chesspp.i_strategy import IStrategy
+import numba
 
 # Scoring based on PeSTO (Piece-Square Tables Only) Evaluation Functions
 # https://www.chessprogramming.org/PeSTO%27s_Evaluation_Function
@@ -222,6 +224,37 @@ eg_table = [
     [-74, -35, -18, -18, -11, 15, 4, -17, -12, 17, 14, 17, 17, 38, 23, 11, 10, 17, 23, 15, 20, 45, 44, 13, -8, 22, 24, 27, 26, 33, 26, 3, -18, -4, 21, 24, 27, 23, 9, -11, -19, -3, 11, 21, 23, 16, 7, -9, -27, -11, 4, 13, 14, 4, -5, -17, -53, -34, -21, -11, -28, -14, -24, -43, ],
     [-53, -34, -21, -11, -28, -14, -24, -43, -27, -11, 4, 13, 14, 4, -5, -17, -19, -3, 11, 21, 23, 16, 7, -9, -18, -4, 21, 24, 27, 23, 9, -11, -8, 22, 24, 27, 26, 33, 26, 3, 10, 17, 23, 15, 20, 45, 44, 13, -12, 17, 14, 17, 17, 38, 23, 11, -74, -35, -18, -18, -11, 15, 4, -17, ]
 ]
+
+
+#import chess
+import sys
+
+
+def minimax(depth, board, alpha, beta, is_maximizing):
+    if depth == 0 or board.is_game_over():
+        return score(board)
+
+    if is_maximizing:
+        best_move = -9999
+        for move in board.legal_moves:
+            board.push(move)
+            best_move = max(best_move, minimax(depth - 1, board, alpha, beta, not is_maximizing))
+            board.pop()
+            alpha = max(alpha, best_move)
+            if beta <= alpha:
+                return best_move
+        return best_move
+    else:
+        best_move = 9999
+        for x in board.legal_moves:
+            move = chess.Move.from_uci(str(x))
+            board.push(move)
+            best_move = min(best_move, minimax(depth - 1, board, alpha, beta, not is_maximizing))
+            board.pop()
+            beta = min(beta, best_move)
+            if beta <= alpha:
+                return best_move
+        return best_move
 
 
 def score(board: chess.Board) -> int:

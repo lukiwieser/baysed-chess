@@ -5,7 +5,7 @@ from chesspp.lc0_strategy import Lc0Strategy
 from chesspp.random_strategy import RandomStrategy
 from chesspp.stockfish_strategy import StockFishStrategy
 from chesspp.random_stockfish_strategy import RandomStockfishStrategy
-from chesspp.eval_pesto import PestoStrategy
+from chesspp.pesto_strategy import PestoStrategy
 from chesspp.i_strategy import IStrategy
 import chess
 

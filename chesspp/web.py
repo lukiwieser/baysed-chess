@@ -8,7 +8,7 @@ import chess
 from chesspp import engine
 from chesspp.engine_factory import EngineFactory
 from chesspp.stockfish_strategy import StockFishStrategy
-from chesspp.eval_pesto import PestoStrategy
+from chesspp.pesto_strategy import PestoStrategy
 
 _DIR = os.path.abspath(os.path.dirname(__file__))
 _DATA_DIR = os.path.abspath(os.path.join(_DIR, "static_data"))
@@ -75,7 +75,7 @@ class WebInterface:
         async def turns():
             """ Simulates the game and sends the response to the client """
             white = EngineFactory.create_engine(self.white, self.strategy1, chess.WHITE, self.stockfish_path, self.lc0_path)
-            black = EngineFactory.create_engine(self.black, self.strategy1, chess.BLACK, self.stockfish_path, self.lc0_path)
+            black = EngineFactory.create_engine(self.black, self.strategy2, chess.BLACK, self.stockfish_path, self.lc0_path)
             runner = Simulate(white, black).run(self.limit)
             def sim():
                 return next(runner, None)
@@ -102,8 +102,3 @@ class WebInterface:
             web.static('/img/chesspieces/wikipedia/', _DATA_DIR),
         ])
         web.run_app(app)
-
-
-def run_sample():
-    limit = engine.Limit(time=1)
-    WebInterface(engine.BayesMctsEngine, engine.ClassicMctsEngine, limit).run_app()
