@@ -174,7 +174,7 @@ class ClassicMctsEngineV2(Engine):
 
         def do():
             nonlocal node_count
-            mcts.build_tree(1)
+            mcts.sample(1)
             node_count += 1
 
         limit.run(do)
