@@ -17,7 +17,9 @@ class BayesianMctsNode(IMctsNode):
         self.color = color  # Color of the player whose turn it is
         self.visits = visits
         self.result = inherit_result if inherit_result is not None else 0
-        self._set_mu_sigma()
+        # set priors
+        self.mu = self.result
+        self.sigma = 1
         self.depth = depth
 
     def _create_child(self, move: chess.Move) -> IMctsNode:
@@ -25,10 +27,6 @@ class BayesianMctsNode(IMctsNode):
         copied_board.push(move)
         return BayesianMctsNode(copied_board, self.strategy, not self.color, self, move, self.random_state, self.result,
                                 self.depth + 1)
-
-    def _set_mu_sigma(self) -> None:
-        self.mu = self.result
-        self.sigma = 1
 
     def _is_new_ucb1_better(self, current, new) -> bool:
         if self.color == chess.WHITE:
@@ -116,7 +114,20 @@ class BayesianMctsNode(IMctsNode):
 
         if len(self.children) == 0:
             # leaf node
-            self._set_mu_sigma()
+            # prior
+            mu_pri = self.mu
+            sig_pri = self.sigma
+
+            # likelyhood
+            mu_li = self.result
+            sig_li = 1
+
+            # posterior
+            sig_pos = math.sqrt(sig_pri**2 + sig_li**2)
+            mu_pos = (sig_pri**2 * mu_li + sig_li**2 * mu_pri) / (sig_pri**2 + sig_li**2)
+
+            self.mu = mu_pos
+            self.sigma = sig_pos
         else:
             # interior node
             shuffled_children = self.random_state.sample(self.children, len(self.children))

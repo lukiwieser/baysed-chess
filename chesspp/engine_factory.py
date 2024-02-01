@@ -77,8 +77,8 @@ class EngineFactory:
         return ClassicMctsEngine(chess.Board(), color, strategy)
 
     @staticmethod
-    def classic_mcts_v2(color: chess.Color, strategy: IStrategy, board: chess.Board | None = chess.Board()) -> Engine:
-        return ClassicMctsEngineV2(board, color, strategy)
+    def classic_mcts_v2(color: chess.Color, strategy: IStrategy) -> Engine:
+        return ClassicMctsEngineV2(chess.Board(), color, strategy)
 
     @staticmethod
     def _get_random_strategy(rollout_depth: int) -> IStrategy:
