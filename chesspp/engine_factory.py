@@ -16,6 +16,7 @@ class EngineEnum(Enum):
     Stockfish = 2
     Lc0 = 3
     Random = 4
+    ClassicMctsV2 = 5
 
 
 class StrategyEnum(Enum):
@@ -47,6 +48,9 @@ class EngineFactory:
             case EngineEnum.ClassicMcts:
                 return EngineFactory.classic_mcts(color, strategy)
 
+            case EngineEnum.ClassicMctsV2:
+                return EngineFactory.classic_mcts_v2(color, strategy)
+
             case EngineEnum.BayesianMcts:
                 return EngineFactory.bayesian_mcts(color, strategy)
 
@@ -73,6 +77,10 @@ class EngineFactory:
         return ClassicMctsEngine(chess.Board(), color, strategy)
 
     @staticmethod
+    def classic_mcts_v2(color: chess.Color, strategy: IStrategy, board: chess.Board | None = chess.Board()) -> Engine:
+        return ClassicMctsEngineV2(board, color, strategy)
+
+    @staticmethod
     def _get_random_strategy(rollout_depth: int) -> IStrategy:
         return RandomStrategy(random.Random(), rollout_depth)
 
@@ -91,4 +99,3 @@ class EngineFactory:
     @staticmethod
     def _get_pesto_strategy(rollout_depth: int) -> IStrategy:
         return PestoStrategy(rollout_depth)
-

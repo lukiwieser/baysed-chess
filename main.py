@@ -132,7 +132,7 @@ def read_arguments():
         description='Compare two engines by playing multiple games against each other'
     )
 
-    engines = {"ClassicMCTS": EngineEnum.ClassicMcts, "BayesianMCTS": EngineEnum.BayesianMcts,
+    engines = {"ClassicMCTS": EngineEnum.ClassicMcts, "BayesianMCTS": EngineEnum.BayesianMcts, "ClassicMCTSV2": EngineEnum.ClassicMctsV2,
                "Random": EngineEnum.Random, "Stockfish": EngineEnum.Stockfish, "Lc0": EngineEnum.Lc0}
     strategies = {"Random": StrategyEnum.Random, "Stockfish": StrategyEnum.Stockfish, "Lc0": StrategyEnum.Lc0,
                   "RandomStockfish": StrategyEnum.RandomStockfish, "PESTO": StrategyEnum.Pestos}

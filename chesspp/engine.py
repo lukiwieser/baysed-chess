@@ -10,7 +10,10 @@ from stockfish import Stockfish
 from chesspp.mcts.baysian_mcts import BayesianMcts
 from chesspp.mcts.classic_mcts import ClassicMcts
 from chesspp.i_strategy import IStrategy
+
 from typing import Dict
+
+from chesspp.mcts.classic_mcts_v2 import ClassicMctsV2
 
 
 class Limit:
@@ -156,6 +159,31 @@ class ClassicMctsEngine(Engine):
         return chess.engine.PlayResult(move=best_move, ponder=None)
 
 
+class ClassicMctsEngineV2(Engine):
+    def __init__(self, board: chess.Board, color: chess.Color, strategy: IStrategy):
+        super().__init__(board, color, strategy)
+        self.node_counts = []
+
+    @staticmethod
+    def get_name() -> str:
+        return "ClassicMctsEngine V2"
+
+    def play(self, board: chess.Board, limit: Limit) -> chess.engine.PlayResult:
+        mcts = ClassicMctsV2(board, self.color, self.strategy)
+        node_count = 0
+
+        def do():
+            nonlocal node_count
+            mcts.build_tree(1)
+            node_count += 1
+
+        limit.run(do)
+        self.node_counts.append(node_count)
+        best_move = max(mcts.root.children, key=lambda x: x.score).move if board.turn == chess.WHITE else (
+            min(mcts.root.children, key=lambda x: x.score).move)
+        return chess.engine.PlayResult(move=best_move, ponder=None)
+
+
 class RandomEngine(Engine):
     def __init__(self, board: chess.Board, color: chess.Color, strategy: IStrategy):
         super().__init__(board, color, strategy)
@@ -170,7 +198,8 @@ class RandomEngine(Engine):
 
 
 class StockFishEngine(Engine):
-    def __init__(self, board: chess.Board, color: chess, stockfish_elo: int, path="../stockfish/stockfish-ubuntu-x86-64-avx2"):
+    def __init__(self, board: chess.Board, color: chess, stockfish_elo: int,
+                 path="../stockfish/stockfish-ubuntu-x86-64-avx2"):
         super().__init__(board, color, None)
         self.stockfish = Stockfish(path)
         self.stockfish.set_elo_rating(stockfish_elo)
