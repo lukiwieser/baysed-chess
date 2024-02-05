@@ -110,8 +110,18 @@ You can customize with the same command-line arguments as `main.py`.
 
 A bot you can play against on the website [lichess](https://lichess.org/). 
 
-The code for the bot is contained in `/lichess_bot`, and uses the [lichess-bot](https://github.com/lichess-bot-devs/lichess-bot) as a basis.
-Our is bot implementation is defined in `/lichess_bot/lib/strategies.py`.
+The code for the bot is contained in `/lichess_bot`, and uses the repository from [lichess-bot](https://github.com/lichess-bot-devs/lichess-bot) as a basis.
+Our bot implementation is defined in `/lichess_bot/lib/strategies.py`.
+
+Start the bot by running the following in `/lichess_bot`:
+
+```
+python lichess-bot.py
+```
+
+The bot should then be up and running. 
+For more information look at the GitHub from the [lichess-bot](https://github.com/lichess-bot-devs/lichess-bot).
+
 
 ### Interactive Geogebra File
 
