@@ -1,6 +1,7 @@
 # Python
 __pycache__
 .venv
+*.egg-info/
 
 # IDE's
 .idea
