@@ -37,6 +37,7 @@ Optionally, if you also want to set up the lichess bot, follow these steps:
    Get an API key from [lichess](https://lichess.org/). And set the `token` in `lichess_bot/config.yml` to this API key.
 
 3. **Install Lichess specific Dependencies:**
+
    Install the Python dependencies of the lichess bot by executing in the folder `/lichess_bot`:
     ```
     pip install -r requirements.txt
