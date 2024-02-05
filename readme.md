@@ -3,7 +3,7 @@
 *A Bayesian Approach to Chessbots.*
 
 We implement a traditional Monte-Carlo Tree Search (MCTS) and a bayesian variant inspired by the paper *Bayesian Inference in Monte-Carlo Tree Search* by *Gerald Tesauro, VT Rajan, and Richard Segal*.
-Our implementation is focused on the game chess, and is designed for flexibly, allowing different strategies to be used in the rollout phase.
+Our implementation is focused on the game chess, and is designed with flexibility in mind, allowing different strategies to be used in the rollout phase.
 
 ## Installation
 
@@ -34,7 +34,7 @@ Optionally, if you also want to set up the lichess bot, follow these steps:
    
 2. **Set the API Key**
 
-   Get an API key from [lichess](https://lichess.org/). And set the `token` in `lichess_bot/config.yml` to the API key.
+   Get an API key from [lichess](https://lichess.org/). And set the `token` in `lichess_bot/config.yml` to this API key.
 
 ## Main Functionalities
 
@@ -49,16 +49,16 @@ python main.py --e1 BayesianMCTS --s1 Stockfish --e2 ClassicMCTS --s2 Stockfish 
 You can customize with the following command-line arguments:
 
 * `--e1`:
-  * Engine 1
+  * Engine 1.
   * Possible Values:
-    * `ClassicMCTS`: Our MCTS implementation 
-    * `BayesianMCTS`: Our bayesian MCTS implementation
+    * `ClassicMCTS`: Our MCTS implementation .
+    * `BayesianMCTS`: Our bayesian MCTS implementation.
     * `Random`: Plays completely random.
-    * `Stockfish`: Plays with stockfish
-    * `Lc0`: Plays with Lc0
+    * `Stockfish`: Plays with stockfish.
+    * `Lc0`: Plays with Lc0.
 * `--e2`:
-  * Engine 2
-  * Possible Values: The same ones as Engine 1
+  * Engine 2.
+  * Possible Values: The same ones as Engine 1.
 * `--s1`:
   * Strategy that Engine 1 uses for the rollout, when set to `ClassicMCTS` or `BayesianMCTS`. 
   * Possible Values:
@@ -68,25 +68,25 @@ You can customize with the following command-line arguments:
     * `RandomStockfish`: Plays the rollout randomly. Evaluates the terminal state with stockfish.
     * `PESTO`:  Plays the rollout according to PESTOs board evaluation. Evaluates the terminal state with PESTOs board evaluation.
 * `--s2`:
-  * Strategy for Engine 2 for the rollout
-  * Possible Values: The same ones as Strategy 1
+  * Strategy for Engine 2 for the rollout.
+  * Possible Values: The same ones as Strategy 1.
 * `-n`:
-  * Number of games to play
+  * Number of games to play.
 * `--proc`:
-  * Number of processor cores to use
+  * Number of processor cores to use.
 * `--time`:
-  * Amount of second each engine has foreach turn
+  * Amount of second each engine has foreach turn.
 * `--nodes`:
-  * Number of nodes each engine can compute each turn
+  * Number of nodes each engine can compute each turn.
 * `--stockfish_elo`:
-  * Elo for stockfish engine
-  * Default is 1500
+  * Elo for stockfish engine.
+  * Default is 1500.
 * `--stockfish_path`:
-  * Path for the stockfish engine executable
-  * Default is `/stockfish`
+  * Path for the stockfish engine executable.
+  * Default is `/stockfish`.
 * `--lc0_path`:
-   * Path for the lc0 engine executable
-   * Default is `/lc0`
+   * Path for the lc0 engine executable.
+   * Default is `/lc0`.
 * `-h`:
   * Show the help message.
 
