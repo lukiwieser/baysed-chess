@@ -95,8 +95,10 @@ You can customize with the following command-line arguments:
 A web interface for watching two chess engines play against each other.
 
 ```
-python web.py
+python web.py --e1 BayesianMCTS --s1 Stockfish --e2 ClassicMCTS --s2 Stockfish
 ```
+
+You can customize with the same command-line arguments as `main.py`.
 
 ### Lichess Bot
 
