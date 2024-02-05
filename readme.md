@@ -36,6 +36,12 @@ Optionally, if you also want to set up the lichess bot, follow these steps:
 
    Get an API key from [lichess](https://lichess.org/). And set the `token` in `lichess_bot/config.yml` to this API key.
 
+3. **Install Lichess specific Dependencies:**
+   Install the Python dependencies of the lichess bot by executing in the folder `/lichess_bot`:
+    ```
+    pip install -r requirements.txt
+    ```
+
 ## Main Functionalities
 
 ### Engine Matches
@@ -102,7 +108,10 @@ You can customize with the same command-line arguments as `main.py`.
 
 ### Lichess Bot
 
-A bot you can play against on the website [lichess](https://lichess.org/). The code for the bot is contained in `lichess_bot`.
+A bot you can play against on the website [lichess](https://lichess.org/). 
+
+The code for the bot is contained in `/lichess_bot`, and uses the [lichess-bot](https://github.com/lichess-bot-devs/lichess-bot) as a basis.
+Our is bot implementation is defined in `/lichess_bot/lib/strategies.py`.
 
 ### Interactive Geogebra File
 
