@@ -1,7 +1,7 @@
 import chess
 import chess.engine
 
-from chesspp.i_strategy import IStrategy
+from chesspp.strategies.i_strategy import IStrategy
 
 # Scoring based on PeSTO (Piece-Square Tables Only) Evaluation Functions
 # https://www.chessprogramming.org/PeSTO%27s_Evaluation_Function

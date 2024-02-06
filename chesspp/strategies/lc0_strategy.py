@@ -2,7 +2,7 @@ import chess
 import chess.engine
 import os
 
-from chesspp.i_strategy import IStrategy
+from chesspp.strategies.i_strategy import IStrategy
 from chesspp.eval import score_lc0
 
 _DIR = os.path.abspath(os.path.dirname(__file__))

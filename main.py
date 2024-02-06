@@ -13,8 +13,8 @@ from chesspp import util
 from chesspp.engine_factory import EngineEnum, StrategyEnum
 from chesspp.mcts.baysian_mcts import BayesianMcts
 from chesspp.mcts.classic_mcts import ClassicMcts
-from chesspp.random_strategy import RandomStrategy
-from chesspp.stockfish_strategy import StockFishStrategy
+from chesspp.strategies.random_strategy import RandomStrategy
+from chesspp.strategies.stockfish_strategy import StockFishStrategy
 from chesspp.util import hypothesis_test
 
 

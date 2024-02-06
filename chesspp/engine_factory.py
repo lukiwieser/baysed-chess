@@ -1,12 +1,12 @@
 from enum import Enum
 
 from chesspp.engine import *
-from chesspp.lc0_strategy import Lc0Strategy
-from chesspp.random_strategy import RandomStrategy
-from chesspp.stockfish_strategy import StockFishStrategy
-from chesspp.random_stockfish_strategy import RandomStockfishStrategy
-from chesspp.pesto_strategy import PestoStrategy
-from chesspp.i_strategy import IStrategy
+from chesspp.strategies.lc0_strategy import Lc0Strategy
+from chesspp.strategies.random_strategy import RandomStrategy
+from chesspp.strategies.stockfish_strategy import StockFishStrategy
+from chesspp.strategies.random_stockfish_strategy import RandomStockfishStrategy
+from chesspp.strategies.pesto_strategy import PestoStrategy
+from chesspp.strategies.i_strategy import IStrategy
 import chess
 
 

@@ -1,5 +1,5 @@
 import chess
-from chesspp.i_strategy import IStrategy
+from chesspp.strategies.i_strategy import IStrategy
 from chesspp.eval import score_stockfish
 import chess.engine
 

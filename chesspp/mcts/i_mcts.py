@@ -4,7 +4,7 @@ from typing import Dict
 
 import chess
 
-from chesspp.i_strategy import IStrategy
+from chesspp.strategies.i_strategy import IStrategy
 from chesspp.mcts.i_mcts_node import IMctsNode
 
 

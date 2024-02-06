@@ -1,5 +1,5 @@
 import chess
-from chesspp.i_strategy import IStrategy
+from chesspp.strategies.i_strategy import IStrategy
 from chesspp.mcts.classic_mcts_node_v2 import ClassicMctsNodeV2
 from chesspp.mcts.i_mcts import IMcts
 from chesspp.mcts.i_mcts_node import IMctsNode

@@ -1,7 +1,7 @@
 import chess
 import torch.distributions as dist
 
-from chesspp.i_strategy import IStrategy
+from chesspp.strategies.i_strategy import IStrategy
 from chesspp.mcts.baysian_mcts_node import BayesianMctsNode
 from chesspp.mcts.i_mcts import IMcts
 from chesspp.mcts.i_mcts_node import IMctsNode

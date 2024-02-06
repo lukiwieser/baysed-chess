@@ -9,7 +9,7 @@ from stockfish import Stockfish
 
 from chesspp.mcts.baysian_mcts import BayesianMcts
 from chesspp.mcts.classic_mcts import ClassicMcts
-from chesspp.i_strategy import IStrategy
+from chesspp.strategies.i_strategy import IStrategy
 
 from typing import Dict
 

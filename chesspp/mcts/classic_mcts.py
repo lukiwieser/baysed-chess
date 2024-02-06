@@ -3,7 +3,7 @@ import math
 import chess
 import random
 import numpy as np
-from chesspp.i_strategy import IStrategy
+from chesspp.strategies.i_strategy import IStrategy
 
 
 class ClassicMcts:

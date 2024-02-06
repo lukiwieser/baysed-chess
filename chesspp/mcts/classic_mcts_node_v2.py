@@ -5,7 +5,7 @@ from typing import Self
 import chess
 import numpy as np
 
-from chesspp.i_strategy import IStrategy
+from chesspp.strategies.i_strategy import IStrategy
 from chesspp.mcts.i_mcts_node import IMctsNode
 
 
