@@ -8,7 +8,8 @@ from enum import Enum
 from dataclasses import dataclass
 
 from chesspp.engine_factory import StrategyEnum, EngineFactory, EngineEnum
-from chesspp.engine import Engine, Limit
+from chesspp.limit import Limit
+from chesspp.engine.i_engine import IEngine
 
 
 class Winner(Enum):
@@ -34,7 +35,7 @@ class EvaluationResult:
     statistics: GameStatistics
 
 
-def simulate_game(white: Engine, black: Engine, limit: Limit, board: chess.Board) -> (chess.pgn.Game, GameStatistics):
+def simulate_game(white: IEngine, black: IEngine, limit: Limit, board: chess.Board) -> (chess.pgn.Game, GameStatistics):
     is_white_playing = True
     times_white = []
     times_black = []

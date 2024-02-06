@@ -7,7 +7,9 @@ import chess
 import chess.engine
 import chess.pgn
 
-from chesspp import engine
+import chesspp.engine.bayes_mcts_engine
+import chesspp.engine.random_engine
+import chesspp.limit
 from chesspp import simulation, eval
 from chesspp import util
 from chesspp.engine_factory import EngineEnum, StrategyEnum
@@ -21,9 +23,9 @@ from chesspp.util import hypothesis_test
 def test_simulate():
     board = chess.Board()
     strategy = StockFishStrategy()
-    white = engine.BayesMctsEngine(board.copy(), chess.WHITE, strategy)
-    black = engine.RandomEngine(board.copy(), chess.BLACK, RandomStrategy(random.Random()))
-    game = simulation.simulate_game(white, black, engine.Limit(time=0.5), board)
+    white = chesspp.engine.bayes_mcts_engine.BayesMctsEngine(board.copy(), chess.WHITE, strategy)
+    black = chesspp.engine.random_engine.RandomEngine(board.copy(), chess.BLACK, RandomStrategy(random.Random()))
+    game = simulation.simulate_game(white, black, chesspp.limit.Limit(time=0.5), board)
     print(game)
 
 
@@ -91,7 +93,7 @@ def analyze_results(moves: dict):
 
 def test_evaluation():
     a, b, s1, s2, n, limit, stockfish_path, lc0_path, proc, nodes, stockfish_elo = read_arguments()
-    limit = engine.Limit(time=limit) if limit != -1 else engine.Limit(nodes=nodes)
+    limit = chesspp.limit.Limit(time=limit) if limit != -1 else chesspp.limit.Limit(nodes=nodes)
 
     evaluator = simulation.Evaluation(a, s1, b, s2, limit, stockfish_path, lc0_path, stockfish_elo)
     results = evaluator.run(n, proc)

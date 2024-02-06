@@ -5,7 +5,8 @@ import aiohttp
 from aiohttp import web
 
 import chess
-from chesspp import engine
+
+import chesspp.limit
 from chesspp.engine_factory import EngineFactory
 from chesspp.strategies.stockfish_strategy import StockFishStrategy
 from chesspp.strategies.pesto_strategy import PestoStrategy
@@ -30,7 +31,7 @@ class Simulate:
         self.white = engine_white
         self.black = engine_black
 
-    def run(self, limit: engine.Limit):
+    def run(self, limit: chesspp.limit.Limit):
         board = chess.Board()
 
         is_white_playing = True
@@ -42,7 +43,7 @@ class Simulate:
 
 
 class WebInterface:
-    def __init__(self, white_engine, black_engine, strategy1, strategy2, stockfish_path, lc0_path, limit: engine.Limit,
+    def __init__(self, white_engine, black_engine, strategy1, strategy2, stockfish_path, lc0_path, limit: chesspp.limit.Limit,
                  stockfish_elo: int):
         self.white = white_engine
         self.black = black_engine
