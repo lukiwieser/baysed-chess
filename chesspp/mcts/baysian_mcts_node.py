@@ -6,7 +6,7 @@ import chess
 
 from chesspp.strategies.i_strategy import IStrategy
 from chesspp.mcts.i_mcts_node import IMctsNode
-from chesspp.util_gaussian import gaussian_ucb1, max_gaussian, min_gaussian
+from chesspp.mcts.gaussian_utils import gaussian_ucb1, max_gaussian, min_gaussian
 
 
 class BayesianMctsNode(IMctsNode):

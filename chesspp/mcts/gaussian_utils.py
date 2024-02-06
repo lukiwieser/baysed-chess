@@ -9,11 +9,6 @@ total_count = 0
 calculation_count = 0
 
 
-def get_lookup_count():
-    global total_count, calculation_count
-    return total_count - calculation_count
-
-
 @cache
 def calc_cdf(alpha: float) -> tuple[float, float, float]:
     """
@@ -84,17 +79,6 @@ def min_gaussian(mu1, sigma1, mu2, sigma2) -> tuple[float, float]:
         return mu, sigma
     except ValueError:
         print(mu1, sigma1, mu2, sigma2)
-
-
-def beta_mean(alpha, beta):
-    return alpha / (alpha + beta)
-
-
-def beta_std(alpha, beta):
-    try:
-        return math.sqrt((alpha * beta) / ((alpha * beta) ** 2 * (alpha + beta + 1)))
-    except ZeroDivisionError:
-        print(alpha, beta)
 
 
 def gaussian_ucb1(mu, sigma, N) -> float:
