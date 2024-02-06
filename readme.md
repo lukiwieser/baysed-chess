@@ -126,7 +126,7 @@ For more information look at the GitHub from the [lichess-bot](https://github.co
 
 ### Interactive Geogebra File
 
-A Geogebra file `Mean_max.gbb` for exploring how to get the minimum and maximum of two gaussian distributions.
+A Geogebra file `min_max_of_gaussians.gbb` for exploring how to get the minimum and maximum of two gaussian distributions.
 
 These two papers have been quite helpful for this part:
 
