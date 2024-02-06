@@ -1,15 +1,12 @@
-import os
 import asyncio
+import os
 
 import aiohttp
-from aiohttp import web
-
 import chess
+from aiohttp import web
 
 import chesspp.limit
 from chesspp.engine_factory import EngineFactory
-from chesspp.strategies.stockfish_strategy import StockFishStrategy
-from chesspp.strategies.pesto_strategy import PestoStrategy
 
 _DIR = os.path.abspath(os.path.dirname(__file__))
 _DATA_DIR = os.path.abspath(os.path.join(_DIR, "static_data"))
