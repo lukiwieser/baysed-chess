@@ -136,4 +136,4 @@ These two papers have been quite helpful for this part:
 
 ## Credits
 
-Lukas Kuess, Stefan Steiniger, Theo Haslinger, Lukas Wieser
+Lukas Kuess, Theo Haslinger, Stefan Steiniger, Lukas Wieser
