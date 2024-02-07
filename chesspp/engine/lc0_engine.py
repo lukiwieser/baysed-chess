@@ -10,6 +10,9 @@ class Lc0Engine(IEngine):
         super().__init__(board, color, None)
         self.lc0 = chess.engine.SimpleEngine.popen_uci(path)
 
+    def __del__(self):
+        self.lc0.quit()
+
     def play(self, board: chess.Board, limit: Limit) -> chess.engine.PlayResult:
         return self.lc0.play(board, limit.translate_to_engine_limit())
 
