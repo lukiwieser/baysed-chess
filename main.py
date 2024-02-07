@@ -26,15 +26,6 @@ def read_arguments() -> tuple[EngineEnum, EngineEnum, StrategyEnum, StrategyEnum
         stockfish_default = "stockfish/stockfish-ubuntu-x86-64-avx2"
         lc0_default = "lc0/lc0"
 
-    parser.add_argument("--proc", default=2, help="Number of processors to use for simulation, default=1")
-    parser.add_argument("--time", default=-1, help="Time limit for each simulation step, default=-1")
-    parser.add_argument("--nodes", default=-1, help="Node limit for each simulation step, default=-1")
-    parser.add_argument("-n", default=100, help="Number of games to simulate, default=100")
-    parser.add_argument("--stockfish_path", default=stockfish_default,
-                        help=f"Path for engine executable, default='{stockfish_default}'")
-    parser.add_argument("--stockfish_elo", default=1500, help="Elo for stockfish engine, default=1500")
-    parser.add_argument("--lc0_path", default=lc0_default,
-                        help=f"Path for engine executable, default='{stockfish_default}'")
     parser.add_argument("--engine1", "--e1", help="Engine A for the simulation", choices=engines.keys(), required=True)
     parser.add_argument("--engine2", "--e2", help="Engine B for the simulation", choices=engines.keys(), required=True)
     parser.add_argument("--strategy1", "--s1", default=list(strategies.keys())[0],
@@ -43,6 +34,15 @@ def read_arguments() -> tuple[EngineEnum, EngineEnum, StrategyEnum, StrategyEnum
     parser.add_argument("--strategy2", "--s2", default=list(strategies.keys())[0],
                         help="Strategy for engine B for the rollout",
                         choices=strategies.keys())
+    parser.add_argument("--proc", default=1, help="Number of processors to use for simulation, default=1", type=int, choices=range(1,os.cpu_count()+1))
+    parser.add_argument("--time", default=-1, help="Time limit for each simulation step, default=-1")
+    parser.add_argument("--nodes", default=-1, help="Node limit for each simulation step, default=-1")
+    parser.add_argument("-n", default=100, help="Number of games to simulate, default=100")
+    parser.add_argument("--stockfish_path", default=stockfish_default,
+                        help=f"Path for stockfish engine executable, default='{stockfish_default}'")
+    parser.add_argument("--stockfish_elo", default=1500, help="Elo for stockfish engine, default=1500")
+    parser.add_argument("--lc0_path", default=lc0_default,
+                        help=f"Path for lc0 engine executable, default='{lc0_default}'")
     args = parser.parse_args()
 
     engine1: EngineEnum = engines[args.engine1]
