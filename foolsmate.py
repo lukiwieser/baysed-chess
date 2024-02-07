@@ -5,6 +5,8 @@ import time
 import chess
 from chess.engine import SimpleEngine
 
+from chesspp.board_evaluations.evaluate_lc0 import score_lc0
+from chesspp.board_evaluations.evaluate_stockfish import score_stockfish
 from chesspp.mcts.baysian_mcts import BayesianMcts
 from chesspp.mcts.classic_mcts import ClassicMcts
 from chesspp.strategies.random_strategy import RandomStrategy
@@ -19,9 +21,25 @@ def analyze_stockfish(fen):
         path = "stockfish/stockfish-ubuntu-x86-64-avx2"
 
     stockfish = SimpleEngine.popen_uci(path)
+    score = score_stockfish(board, stockfish)
+    print(score)
     result = stockfish.play(board, limit=chess.engine.Limit(depth=4))
     print(result.move)
     stockfish.quit()
+
+
+def analyze_lc0(fen):
+    board = chess.Board(fen)
+
+    if os.name == 'nt':
+        path = "lc0/lc0"
+    else:
+        path = "lc0/lc0"
+
+    lc0 = SimpleEngine.popen_uci(path)
+    score = score_lc0(board, lc0)
+    print(score)
+    lc0.quit()
 
 
 def analyze_classic_mcts(fen):
@@ -50,11 +68,18 @@ def analyze_bayes_mcts(fen):
 
 def main():
     # foolsmate in fen notation
-    fools_mate = "rnbqkbnr/pppp1ppp/4p3/8/5PP1/8/PPPPP2P/RNBQKBNR b KQkq f3 0 2"
+    board = "rnbqkbnr/pppp1ppp/4p3/8/5PP1/8/PPPPP2P/RNBQKBNR b KQkq f3 0 2"
 
-    analyze_stockfish(fools_mate)
-    analyze_classic_mcts(fools_mate)
-    analyze_bayes_mcts(fools_mate)
+    # EXAMPLE BOARDS
+    # board = "2r5/pN1k4/b1pp2B1/Bp5p/2P5/P3PQ1P/P2N1PP1/R2K3R w - - 1 23" # whites turn, best move yields checkmate
+    # board = "2r5/pN1k1Q2/b1pp2B1/Bp5p/2P5/P3P2P/P2N1PP1/R2K3R b - - 2 23" # checkmate, white has won
+    # board = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" # blacks turn, best move yields checkmate
+    # board = "rnb1kbnr/pppp1ppp/4p3/8/5PPq/8/PPPPP2P/RNBQKBNR w KQkq - 1 3" # black has won
+
+    analyze_stockfish(board)
+    # analyze_classic_mcts(fools_mate)
+    # analyze_bayes_mcts(fools_mate)
+    analyze_lc0(board)
 
 
 if __name__ == '__main__':

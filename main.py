@@ -21,7 +21,7 @@ def read_arguments() -> tuple[EngineEnum, EngineEnum, StrategyEnum, StrategyEnum
 
     if os.name == 'nt':
         stockfish_default = "stockfish/stockfish-windows-x86-64-avx2"
-        lc0_default = "lc0/lc0.exe"
+        lc0_default = "lc0/lc0"
     else:
         stockfish_default = "stockfish/stockfish-ubuntu-x86-64-avx2"
         lc0_default = "lc0/lc0"

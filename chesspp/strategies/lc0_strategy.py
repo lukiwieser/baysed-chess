@@ -1,19 +1,16 @@
 import chess
-import chess.engine
-import os
-
 from chesspp.strategies.i_strategy import IStrategy
 from chesspp.board_evaluations.evaluate_lc0 import score_lc0
-
-_DIR = os.path.abspath(os.path.dirname(__file__))
+import chess.engine
 
 
 class Lc0Strategy(IStrategy):
-    def __init__(self, path: str, rollout_depth: int = 4, limit = chess.engine.Limit(depth=4)):
+
+    def __init__(self, path: str, rollout_depth: int = 4):
         super().__init__(rollout_depth)
         self._lc0 = None
         self.path = path
-        self.limit = limit
+        self.limit = chess.engine.Limit(depth=4)
 
     def __del__(self):
         if self._lc0 is not None:
@@ -33,5 +30,4 @@ class Lc0Strategy(IStrategy):
         return self.lc0.play(board, self.limit).move
 
     def analyze_board(self, board: chess.Board) -> int:
-        score = score_lc0(board, self.lc0)
-        return score
+        return score_lc0(board, self.lc0)
