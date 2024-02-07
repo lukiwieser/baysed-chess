@@ -7,13 +7,13 @@ import chess
 import chess.engine
 import chess.pgn
 
+import chesspp.board_evaluations.evaluate_stockfish
 import chesspp.engine.bayes_mcts_engine
 import chesspp.engine.random_engine
-import chesspp.board_evaluations.evaluate_stockfish
 import chesspp.limit
-from chesspp import simulation
 from chesspp import util
 from chesspp.engine_factory import EngineEnum, StrategyEnum
+from chesspp.matchmaker import Matchmaker, Winner
 from chesspp.mcts.baysian_mcts import BayesianMcts
 from chesspp.mcts.classic_mcts import ClassicMcts
 from chesspp.strategies.random_strategy import RandomStrategy
@@ -26,7 +26,7 @@ def test_simulate():
     strategy = StockFishStrategy()
     white = chesspp.engine.bayes_mcts_engine.BayesMctsEngine(board.copy(), chess.WHITE, strategy)
     black = chesspp.engine.random_engine.RandomEngine(board.copy(), chess.BLACK, RandomStrategy(random.Random()))
-    game = simulation.simulate_game(white, black, chesspp.limit.Limit(time=0.5), board)
+    game = Matchmaker.simulate_game(white, black, chesspp.limit.Limit(time=0.5), board)
     print(game)
 
 
@@ -96,8 +96,8 @@ def test_evaluation():
     a, b, s1, s2, n, limit, stockfish_path, lc0_path, proc, nodes, stockfish_elo = read_arguments()
     limit = chesspp.limit.Limit(time=limit) if limit != -1 else chesspp.limit.Limit(nodes=nodes)
 
-    evaluator = simulation.Evaluation(a, s1, b, s2, limit, stockfish_path, lc0_path, stockfish_elo)
-    results = evaluator.run(n, proc)
+    m = Matchmaker(a, s1, b, s2, limit, stockfish_path, lc0_path, stockfish_elo)
+    results = m.run(n, proc)
 
     for r in results:
         stats = r.statistics
@@ -114,9 +114,9 @@ def test_evaluation():
         print()
 
     games_played = len(results)
-    a_wins = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_A, results)))
-    b_wins = len(list(filter(lambda x: x.winner == simulation.Winner.Engine_B, results)))
-    draws = len(list(filter(lambda x: x.winner == simulation.Winner.Draw, results)))
+    a_wins = len(list(filter(lambda x: x.winner == Winner.Engine_A, results)))
+    b_wins = len(list(filter(lambda x: x.winner == Winner.Engine_B, results)))
+    draws = len(list(filter(lambda x: x.winner == Winner.Draw, results)))
 
     alpha = 0.001
     test_result = hypothesis_test(a_wins, draws, b_wins)
