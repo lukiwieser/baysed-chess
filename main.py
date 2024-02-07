@@ -9,8 +9,9 @@ import chess.pgn
 
 import chesspp.engine.bayes_mcts_engine
 import chesspp.engine.random_engine
+import chesspp.board_evaluations.evaluate_stockfish
 import chesspp.limit
-from chesspp import simulation, eval
+from chesspp import simulation
 from chesspp import util
 from chesspp.engine_factory import EngineEnum, StrategyEnum
 from chesspp.mcts.baysian_mcts import BayesianMcts
@@ -87,7 +88,7 @@ def test_stockfish_prob():
 def analyze_results(moves: dict):
     for m, b in moves.items():
         manual_score = eval.score_manual(b)
-        engine_score = eval.score_stockfish(b).white().score(mate_score=100_000)
+        engine_score = chesspp.board_evaluations.evaluate_stockfish.score_stockfish(b).white().score(mate_score=100_000)
         print(f"score for move {m}: manual_score={manual_score}, engine_score={engine_score}")
 
 

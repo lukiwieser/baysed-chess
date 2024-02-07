@@ -1,6 +1,6 @@
 import chess
 from chesspp.strategies.i_strategy import IStrategy
-from chesspp.eval import score_stockfish
+from chesspp.board_evaluations.evaluate_stockfish import score_stockfish
 import chess.engine
 
 

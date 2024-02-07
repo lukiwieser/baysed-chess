@@ -1,4 +1,7 @@
+import random
 from enum import Enum
+
+import chess
 
 from chesspp.engine.bayes_mcts_engine import BayesMctsEngine
 from chesspp.engine.classic_mcts_engine import ClassicMctsEngine
@@ -6,13 +9,12 @@ from chesspp.engine.classic_mcts_engine_v2 import ClassicMctsEngineV2
 from chesspp.engine.i_engine import IEngine
 from chesspp.engine.lc0_engine import Lc0Engine
 from chesspp.engine.stockfish_engine import StockfishEngine
+from chesspp.strategies.i_strategy import IStrategy
 from chesspp.strategies.lc0_strategy import Lc0Strategy
+from chesspp.strategies.pesto_strategy import PestoStrategy
+from chesspp.strategies.random_stockfish_strategy import RandomStockfishStrategy
 from chesspp.strategies.random_strategy import RandomStrategy
 from chesspp.strategies.stockfish_strategy import StockFishStrategy
-from chesspp.strategies.random_stockfish_strategy import RandomStockfishStrategy
-from chesspp.strategies.pesto_strategy import PestoStrategy
-from chesspp.strategies.i_strategy import IStrategy
-import chess
 
 
 class EngineEnum(Enum):

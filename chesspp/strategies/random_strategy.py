@@ -1,7 +1,7 @@
 import chess
 import random
 from chesspp.strategies.i_strategy import IStrategy
-from chesspp.eval import score_manual
+from chesspp.board_evaluations.evaluate_michniewsk import score_michniewsk
 
 
 class RandomStrategy(IStrategy):
@@ -15,4 +15,4 @@ class RandomStrategy(IStrategy):
         return self.random_state.choice(list(board.legal_moves))
 
     def analyze_board(self, board: chess.Board) -> int:
-        return score_manual(board)
+        return score_michniewsk(board)

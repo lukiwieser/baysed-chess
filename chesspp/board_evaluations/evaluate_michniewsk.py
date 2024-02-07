@@ -1,6 +1,5 @@
 import chess
 import chess.engine
-import sys
 
 # Eval constants for scoring chess boards
 # Evaluation metric inspired by Tomasz Michniewski: https://www.chessprogramming.org/Simplified_Evaluation_Function
@@ -138,7 +137,7 @@ def check_endgame(board: chess.Board) -> bool:
             queens_white >= 1 >= minors_white))
 
 
-def score_manual(board: chess.Board) -> int:
+def score_michniewsk(board: chess.Board) -> int:
     """
     Calculate the score of a given board.
     Positive scores indicate an advantage for WHITE, negative scores indicate and advantage for BLACK.
@@ -171,40 +170,3 @@ def score_manual(board: chess.Board) -> int:
                 score -= PIECE_VALUES[piece.piece_type] * PIECE_TABLES[chess.BLACK][piece.piece_type][s]
 
     return score
-
-
-def score_stockfish(board: chess.Board, stockfish: chess.engine.SimpleEngine | None = None,
-                    limit: chess.engine.Limit = chess.engine.Limit(depth=0)) -> int:
-    """
-    Calculate the score of the given board using stockfish
-    :param board:
-    :param stockfish:
-    :param limit:
-    :return:
-    """
-    if stockfish is None:
-        engine = chess.engine.SimpleEngine.popen_uci(
-            "/home/luke/projects/pp-project/chess-engine-pp/stockfish/stockfish-ubuntu-x86-64-avx2")
-        info = engine.analyse(board, limit)
-        engine.quit()
-        return info['score'].white().score(mate_score=100_000)
-    else:
-        info = stockfish.analyse(board, limit)
-        return info['score'].white().score(mate_score=100_000)
-
-
-def score_lc0(board: chess.Board, lc0: chess.engine.SimpleEngine | None = None,
-              limit: chess.engine.Limit= chess.engine.Limit(depth=0)) -> int:
-    """
-    Calculate the score of the given board using lc0
-    :param board:
-    :return:
-    """
-    if lc0 is None:
-        engine = chess.engine.SimpleEngine.popen_uci("/home/luke/projects/pp-project/chess-engine-pp/lc0/lc0")
-        info = engine.analyse(board, limit)
-        engine.quit()
-        return info["score"]
-    else:
-        info = lc0.analyse(board, limit)
-        return info['score'].white().score(mate_score=100_000)
