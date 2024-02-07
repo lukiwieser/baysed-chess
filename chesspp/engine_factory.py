@@ -14,7 +14,7 @@ from chesspp.strategies.lc0_strategy import Lc0Strategy
 from chesspp.strategies.pesto_strategy import PestoStrategy
 from chesspp.strategies.random_stockfish_strategy import RandomStockfishStrategy
 from chesspp.strategies.random_strategy import RandomStrategy
-from chesspp.strategies.stockfish_strategy import StockFishStrategy
+from chesspp.strategies.stockfish_strategy import StockfishStrategy
 
 
 class EngineEnum(Enum):
@@ -93,7 +93,7 @@ class EngineFactory:
 
     @staticmethod
     def _get_stockfish_strategy(engine_path: str, rollout_depth: int) -> IStrategy:
-        return StockFishStrategy(engine_path, rollout_depth)
+        return StockfishStrategy(engine_path, rollout_depth)
 
     @staticmethod
     def _get_random_stockfish_strategy(engine_path: str, rollout_depth: int) -> IStrategy:

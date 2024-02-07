@@ -4,14 +4,13 @@ from chesspp.board_evaluations.evaluate_stockfish import score_stockfish
 import chess.engine
 
 
-class StockFishStrategy(IStrategy):
+class StockfishStrategy(IStrategy):
 
-    def __init__(self, path="../stockfish/stockfish-windows-x86-64-avx2", rollout_depth: int = 4,
-                 limit: chess.engine.Limit = chess.engine.Limit(depth=4)):
+    def __init__(self, path: str, rollout_depth: int = 4):
         super().__init__(rollout_depth)
         self._stockfish = None
         self.path = path
-        self.limit = limit
+        self.limit = chess.engine.Limit(depth=4)
 
     def __del__(self):
         if self._stockfish is not None:

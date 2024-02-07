@@ -8,8 +8,7 @@ from chesspp.board_evaluations.evaluate_stockfish import score_stockfish
 
 
 class RandomStockfishStrategy(IStrategy):
-    def __init__(self, rollout_depth: int, path="../stockfish/stockfish-windows-x86-64-avx2",
-                 random_seed: random.Random = random.Random()) -> None:
+    def __init__(self, rollout_depth: int, path: str, random_seed: random.Random = random.Random()):
         super().__init__(rollout_depth)
         self._stockfish = None
         self.path = path

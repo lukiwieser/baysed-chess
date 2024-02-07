@@ -9,8 +9,7 @@ _DIR = os.path.abspath(os.path.dirname(__file__))
 
 
 class Lc0Strategy(IStrategy):
-    def __init__(self, path="lc0/lc0", rollout_depth: int = 4,
-                 limit: chess.engine.Limit = chess.engine.Limit(depth=4)):
+    def __init__(self, path: str, rollout_depth: int = 4, limit = chess.engine.Limit(depth=4)):
         super().__init__(rollout_depth)
         self._lc0 = None
         self.path = path

@@ -7,8 +7,7 @@ from chesspp.engine.i_engine import IEngine
 
 
 class StockfishEngine(IEngine):
-    def __init__(self, board: chess.Board, color: chess, stockfish_elo: int | None,
-                 path="../stockfish/stockfish-ubuntu-x86-64-avx2"):
+    def __init__(self, board: chess.Board, color: chess, stockfish_elo: int | None, path: str):
         super().__init__(board, color, None)
         self.stockfish = Stockfish(path)
         if stockfish_elo is not None:

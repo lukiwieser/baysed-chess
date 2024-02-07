@@ -6,7 +6,7 @@ from chesspp.engine.i_engine import IEngine
 
 
 class Lc0Engine(IEngine):
-    def __init__(self, board: chess.Board, color: chess, path="../lc0/lc0"):
+    def __init__(self, board: chess.Board, color: chess, path: str):
         super().__init__(board, color, None)
         self.lc0 = chess.engine.SimpleEngine.popen_uci(path)
 
