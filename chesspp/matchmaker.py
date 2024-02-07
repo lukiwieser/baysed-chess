@@ -37,7 +37,7 @@ class MatchResult:
 
 
 class Matchmaker:
-    def __init__(self, engine_a: EngineEnum, strategy_a, engine_b: EngineEnum, strategy_b, limit: Limit,
+    def __init__(self, engine_a: EngineEnum, strategy_a: StrategyEnum, engine_b: EngineEnum, strategy_b: StrategyEnum, limit: Limit,
                  stockfish_path: str, lc0_path: str, stockfish_elo: int):
         self.engine_a = engine_a
         self.strategy_a = strategy_a
