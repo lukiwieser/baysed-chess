@@ -15,7 +15,7 @@ To set up the project, follow these steps:
 
     Install Python dependencies with:
     
-    ```
+    ```console
     pip install -r requirements.txt
     ```
 
@@ -29,7 +29,7 @@ Optionally, if you also want to set up the lichess bot, follow these steps:
 1. **Install local python package**
 
    Install the code in `chesspp` as a local package, so we can use it in the lichess bot:
-    ```
+    ```console
     pip install -e .
     ```
    
@@ -40,7 +40,7 @@ Optionally, if you also want to set up the lichess bot, follow these steps:
 3. **Install Lichess specific Dependencies:**
 
    Install the Python dependencies of the lichess bot by executing in the folder `/lichess_bot`:
-    ```
+    ```console
     pip install -r requirements.txt
     ```
 
@@ -50,7 +50,7 @@ Optionally, if you also want to set up the lichess bot, follow these steps:
 
 Let two engines play against each other and collect statistics.
 
-```
+```console
 python main.py --e1 BayesianMCTS --s1 Stockfish --e2 ClassicMCTS --s2 Stockfish -n 24 --proc 12 --time=1 
 ```
 
@@ -102,7 +102,7 @@ You can customize with the following command-line arguments:
 
 A web interface for watching two chess engines play against each other.
 
-```
+```console
 python web.py --e1 BayesianMCTS --s1 Stockfish --e2 ClassicMCTS --s2 Stockfish
 ```
 
@@ -117,7 +117,7 @@ Our bot implementation is defined in `/lichess_bot/lib/strategies.py`.
 
 Start the bot by running the following in `/lichess_bot`:
 
-```
+```console
 python lichess-bot.py
 ```
 
