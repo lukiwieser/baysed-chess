@@ -51,7 +51,7 @@ Optionally, if you also want to set up the lichess bot, follow these steps:
 Let two engines play against each other and collect statistics.
 
 ```console
-python main.py --e1 BayesianMCTS --s1 Stockfish --e2 ClassicMCTS --s2 Stockfish -n 24 --proc 12 --time=1 
+python scripts/main.py --e1 BayesianMCTS --s1 Stockfish --e2 ClassicMCTS --s2 Stockfish -n 24 --proc 12 --time=1 
 ```
 
 You can customize with the following command-line arguments:
@@ -103,10 +103,19 @@ You can customize with the following command-line arguments:
 A web interface for watching two chess engines play against each other.
 
 ```console
-python web.py --e1 BayesianMCTS --s1 Stockfish --e2 ClassicMCTS --s2 Stockfish
+python scripts/web.py --e1 BayesianMCTS --s1 Stockfish --e2 ClassicMCTS --s2 Stockfish
 ```
 
 You can customize with the same command-line arguments as `main.py`.
+
+### Board Analyzer
+
+Compare what different engines would do with a given board position.
+This is quite helpful for analyzing what our implementations do.
+
+```console
+python scripts/board-analyzer.py 
+```
 
 ### Lichess Bot
 
