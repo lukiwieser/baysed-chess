@@ -136,9 +136,11 @@ For more information look at the GitHub from the [lichess-bot](https://github.co
 
 ### Interactive Geogebra File
 
-A Geogebra file `min_max_of_gaussians.gbb` for exploring how to get the minimum and maximum of two gaussian distributions.
+A Geogebra file for exploring how to get the minimum and maximum of two gaussian distributions.
 
-These two papers have been quite helpful for this part:
+You can simply upload the file `min_max_of_gaussians.gbb` to [geogebra](https://www.geogebra.org/calculator) and try it out. 
+
+The following two papers have been quite helpful for this part:
 
 * *Exact Distribution of the Max/Min of Two Gaussian Random Variables* by *Saralees Nadarajah and Samuel Kotz*
 * *Speeding up Computation of the max/min of a set of Gaussians for Statistical Timing Analysis and Optimization* by *Kuruvilla et al.*
