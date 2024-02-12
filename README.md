@@ -22,13 +22,13 @@ To set up the project, follow these steps:
 2. **Download Chess Engines**
 
    Download [stockfish](https://stockfishchess.org/) and unpack it to `/stockfish`. 
-   Download [lc0](https://lczero.org/play/download/) and unpack it to `/lc0` (We used the DNNL BLAS version).
+   Download [lc0](https://lczero.org/play/download/) and unpack it to `/lc0` (We use the DNNL BLAS version).
 
 Optionally, if you also want to set up the lichess bot, follow these steps:
 
-1. **Install local python package**
+1. **Install Local Python Package**
 
-   Install the code in `chesspp` as a local package, so we can use it in the lichess bot:
+   Install the code in `baysed_chess` as a local package, so we can use it in the lichess bot files:
     ```console
     pip install -e .
     ```
@@ -37,7 +37,7 @@ Optionally, if you also want to set up the lichess bot, follow these steps:
 
    Get an API key from [lichess](https://lichess.org/). And set the `token` in `lichess_bot/config.yml` to this API key.
 
-3. **Install Lichess specific Dependencies:**
+3. **Install Lichess Specific Dependencies:**
 
    Install the Python dependencies of the lichess bot by executing in the folder `/lichess_bot`:
     ```console
