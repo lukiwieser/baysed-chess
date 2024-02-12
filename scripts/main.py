@@ -1,10 +1,10 @@
 import argparse
 import os
 
-from chesspp.engine_factory import EngineEnum, StrategyEnum
-from chesspp.hypothesis_test import hypothesis_test
-from chesspp.limit import Limit
-from chesspp.matchmaker import Matchmaker, Winner
+from baysed_chess.engine_factory import EngineEnum, StrategyEnum
+from baysed_chess.hypothesis_test import hypothesis_test
+from baysed_chess.limit import Limit
+from baysed_chess.matchmaker import Matchmaker, Winner
 
 
 def read_arguments() -> tuple[EngineEnum, EngineEnum, StrategyEnum, StrategyEnum, int, int, float, int, str, str, int]:

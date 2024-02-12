@@ -1,4 +1,4 @@
-# ChessPPT
+# Baysed Chess
 
 *A Bayesian Approach to Chessbots.*
 

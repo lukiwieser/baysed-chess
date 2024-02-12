@@ -5,11 +5,11 @@ import time
 import chess
 from chess.engine import SimpleEngine
 
-from chesspp.board_evaluations.evaluate_lc0 import score_lc0
-from chesspp.board_evaluations.evaluate_stockfish import score_stockfish
-from chesspp.mcts.baysian_mcts import BayesianMcts
-from chesspp.mcts.classic_mcts import ClassicMcts
-from chesspp.strategies.random_strategy import RandomStrategy
+from baysed_chess.board_evaluations.evaluate_lc0 import score_lc0
+from baysed_chess.board_evaluations.evaluate_stockfish import score_stockfish
+from baysed_chess.mcts.baysian_mcts import BayesianMcts
+from baysed_chess.mcts.classic_mcts import ClassicMcts
+from baysed_chess.strategies.random_strategy import RandomStrategy
 
 
 def analyze_stockfish(fen):

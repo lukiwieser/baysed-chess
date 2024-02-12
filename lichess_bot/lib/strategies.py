@@ -12,10 +12,10 @@ from lib.engine_wrapper import MinimalEngine, MOVE
 from typing import Any
 import logging
 
-import chesspp
-import chesspp.limit
-from chesspp.engine.classic_mcts_engine import ClassicMctsEngine
-from chesspp.engine_factory import EngineFactory, EngineEnum, StrategyEnum
+import baysed_chess
+import baysed_chess.limit
+from baysed_chess.engine.classic_mcts_engine import ClassicMctsEngine
+from baysed_chess.engine_factory import EngineFactory, EngineEnum, StrategyEnum
 
 # Use this logger variable to print messages to the console or log files.
 # logger.info("message") will always print "message" to the console or log file.
@@ -124,9 +124,9 @@ class MctsEngine(MinimalEngine):
                root_moves: MOVE) -> chess.engine.PlayResult:
         my_engine = ClassicMctsEngine(board.turn)
         print("Color:", board.turn)
-        print("engine play result: ", my_engine.play(board.copy(), chesspp.limit.Limit(0.5)))
+        print("engine play result: ", my_engine.play(board.copy(), baysed_chess.limit.Limit(0.5)))
         print("Engine name", my_engine)
-        return my_engine.play(board.copy(), chesspp.limit.Limit())
+        return my_engine.play(board.copy(), baysed_chess.limit.Limit())
 
 
 class MyBayesMctsEngine(MinimalEngine):
@@ -152,5 +152,5 @@ class MyBayesMctsEngine(MinimalEngine):
     def search(self, board: chess.Board, time_limit: chess.engine.Limit, ponder: bool, draw_offered: bool,
                root_moves: MOVE) -> chess.engine.PlayResult:
         my_engine = self.get_engine(board.turn)
-        r = my_engine.play(board.copy(), chesspp.limit.Limit(2))
+        r = my_engine.play(board.copy(), baysed_chess.limit.Limit(2))
         return r
