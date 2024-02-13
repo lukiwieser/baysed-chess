@@ -3,9 +3,9 @@ import random
 import chess
 import chess.engine
 
-from chesspp.limit import Limit
-from chesspp.engine.i_engine import IEngine
-from chesspp.strategies.i_strategy import IStrategy
+from baysed_chess.engine.i_engine import IEngine
+from baysed_chess.limit import Limit
+from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class RandomEngine(IEngine):

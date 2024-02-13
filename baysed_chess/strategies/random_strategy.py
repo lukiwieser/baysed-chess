@@ -1,7 +1,9 @@
-import chess
 import random
-from chesspp.strategies.i_strategy import IStrategy
-from chesspp.board_evaluations.evaluate_michniewsk import score_michniewsk
+
+import chess
+
+from baysed_chess.board_evaluations.evaluate_michniewsk import score_michniewsk
+from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class RandomStrategy(IStrategy):

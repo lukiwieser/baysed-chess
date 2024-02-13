@@ -1,8 +1,8 @@
 import chess
 import chess.engine
 
-from chesspp.board_evaluations.evaluate_pestos import score_pestos
-from chesspp.strategies.i_strategy import IStrategy
+from baysed_chess.board_evaluations.evaluate_pestos import score_pestos
+from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class PestoStrategy(IStrategy):

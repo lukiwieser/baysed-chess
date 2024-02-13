@@ -1,9 +1,10 @@
 import math
+import random
 
 import chess
-import random
 import numpy as np
-from chesspp.strategies.i_strategy import IStrategy
+
+from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class ClassicMcts:

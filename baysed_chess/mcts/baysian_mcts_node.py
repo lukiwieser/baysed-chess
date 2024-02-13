@@ -4,9 +4,9 @@ from typing import Self
 
 import chess
 
-from chesspp.strategies.i_strategy import IStrategy
-from chesspp.mcts.i_mcts_node import IMctsNode
-from chesspp.mcts.gaussian_utils import gaussian_ucb1, max_gaussian, min_gaussian
+from baysed_chess.mcts.gaussian_utils import gaussian_ucb1, max_gaussian, min_gaussian
+from baysed_chess.mcts.i_mcts_node import IMctsNode
+from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class BayesianMctsNode(IMctsNode):

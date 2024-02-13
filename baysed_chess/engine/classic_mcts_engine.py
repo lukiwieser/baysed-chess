@@ -1,10 +1,10 @@
 import chess
 import chess.engine
 
-from chesspp.engine.i_engine import IEngine
-from chesspp.limit import Limit
-from chesspp.mcts.classic_mcts import ClassicMcts
-from chesspp.strategies.i_strategy import IStrategy
+from baysed_chess.engine.i_engine import IEngine
+from baysed_chess.limit import Limit
+from baysed_chess.mcts.classic_mcts import ClassicMcts
+from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class ClassicMctsEngine(IEngine):

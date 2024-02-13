@@ -5,8 +5,8 @@ import aiohttp
 import chess
 from aiohttp import web
 
-import chesspp.limit
-from chesspp.engine_factory import EngineFactory
+from baysed_chess.engine_factory import EngineFactory
+from baysed_chess.limit import Limit
 
 _DIR = os.path.abspath(os.path.dirname(__file__))
 _DATA_DIR = os.path.abspath(os.path.join(_DIR, "static_data"))
@@ -28,7 +28,7 @@ class Simulate:
         self.white = engine_white
         self.black = engine_black
 
-    def run(self, limit: chesspp.limit.Limit):
+    def run(self, limit: Limit):
         board = chess.Board()
 
         is_white_playing = True
@@ -40,7 +40,7 @@ class Simulate:
 
 
 class WebInterface:
-    def __init__(self, white_engine, black_engine, strategy1, strategy2, stockfish_path, lc0_path, limit: chesspp.limit.Limit,
+    def __init__(self, white_engine, black_engine, strategy1, strategy2, stockfish_path, lc0_path, limit: Limit,
                  stockfish_elo: int):
         self.white = white_engine
         self.black = black_engine

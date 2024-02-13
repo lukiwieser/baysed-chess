@@ -1,8 +1,9 @@
 import chess
-from chesspp.strategies.i_strategy import IStrategy
-from chesspp.mcts.classic_mcts_node_v2 import ClassicMctsNodeV2
-from chesspp.mcts.i_mcts import IMcts
-from chesspp.mcts.i_mcts_node import IMctsNode
+
+from baysed_chess.mcts.classic_mcts_node_v2 import ClassicMctsNodeV2
+from baysed_chess.mcts.i_mcts import IMcts
+from baysed_chess.mcts.i_mcts_node import IMctsNode
+from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class ClassicMctsV2(IMcts):

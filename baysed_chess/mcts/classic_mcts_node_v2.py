@@ -5,8 +5,8 @@ from typing import Self
 import chess
 import numpy as np
 
-from chesspp.strategies.i_strategy import IStrategy
-from chesspp.mcts.i_mcts_node import IMctsNode
+from baysed_chess.mcts.i_mcts_node import IMctsNode
+from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class ClassicMctsNodeV2(IMctsNode):

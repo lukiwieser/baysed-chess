@@ -1,11 +1,10 @@
 import random
 from abc import ABC, abstractmethod
-from typing import Dict
 
 import chess
 
-from chesspp.strategies.i_strategy import IStrategy
-from chesspp.mcts.i_mcts_node import IMctsNode
+from baysed_chess.mcts.i_mcts_node import IMctsNode
+from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class IMcts(ABC):

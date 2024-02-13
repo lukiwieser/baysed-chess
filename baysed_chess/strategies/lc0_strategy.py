@@ -1,7 +1,8 @@
 import chess
-from chesspp.strategies.i_strategy import IStrategy
-from chesspp.board_evaluations.evaluate_lc0 import score_lc0
 import chess.engine
+
+from baysed_chess.board_evaluations.evaluate_lc0 import score_lc0
+from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class Lc0Strategy(IStrategy):

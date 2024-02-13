@@ -4,10 +4,10 @@ import chess
 import chess.engine
 from torch import distributions as dist
 
-from chesspp.engine.i_engine import IEngine
-from chesspp.limit import Limit
-from chesspp.mcts.baysian_mcts import BayesianMcts
-from chesspp.strategies.i_strategy import IStrategy
+from baysed_chess.engine.i_engine import IEngine
+from baysed_chess.limit import Limit
+from baysed_chess.mcts.baysian_mcts import BayesianMcts
+from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class BayesMctsEngine(IEngine):

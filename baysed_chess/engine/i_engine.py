@@ -2,8 +2,8 @@ from abc import ABC, abstractmethod
 
 import chess.engine
 
-from chesspp.limit import Limit
-from chesspp.strategies.i_strategy import IStrategy
+from baysed_chess.limit import Limit
+from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class IEngine(ABC):

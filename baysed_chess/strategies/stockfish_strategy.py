@@ -1,7 +1,8 @@
 import chess
-from chesspp.strategies.i_strategy import IStrategy
-from chesspp.board_evaluations.evaluate_stockfish import score_stockfish
 import chess.engine
+
+from baysed_chess.board_evaluations.evaluate_stockfish import score_stockfish
+from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class StockfishStrategy(IStrategy):

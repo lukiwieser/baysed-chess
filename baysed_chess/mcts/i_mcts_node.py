@@ -4,7 +4,7 @@ from typing import Self
 
 import chess
 
-from chesspp.strategies.i_strategy import IStrategy
+from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class IMctsNode(ABC):

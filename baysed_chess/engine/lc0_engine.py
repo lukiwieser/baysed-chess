@@ -1,8 +1,8 @@
 import chess
 import chess.engine
 
-from chesspp.limit import Limit
-from chesspp.engine.i_engine import IEngine
+from baysed_chess.engine.i_engine import IEngine
+from baysed_chess.limit import Limit
 
 
 class Lc0Engine(IEngine):

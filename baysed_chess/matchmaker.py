@@ -7,9 +7,9 @@ from enum import Enum
 import chess
 import chess.pgn
 
-from chesspp.engine.i_engine import IEngine
-from chesspp.engine_factory import StrategyEnum, EngineFactory, EngineEnum
-from chesspp.limit import Limit
+from baysed_chess.engine.i_engine import IEngine
+from baysed_chess.engine_factory import StrategyEnum, EngineFactory, EngineEnum
+from baysed_chess.limit import Limit
 
 
 class Winner(Enum):

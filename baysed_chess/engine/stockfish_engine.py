@@ -2,8 +2,8 @@ import chess
 import chess.engine
 from stockfish import Stockfish
 
-from chesspp.limit import Limit
-from chesspp.engine.i_engine import IEngine
+from baysed_chess.engine.i_engine import IEngine
+from baysed_chess.limit import Limit
 
 
 class StockfishEngine(IEngine):
