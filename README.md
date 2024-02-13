@@ -100,13 +100,15 @@ You can customize with the following command-line arguments:
 
 ### Web Interface
 
-A web interface for watching two chess engines play against each other.
+A web interface for watching two chess engines play against each other:
 
 ```console
 python scripts/web.py --e1 BayesianMCTS --s1 Stockfish --e2 ClassicMCTS --s2 Stockfish
 ```
 
+The web interface should then be up and running at `http://localhost:8080`. 
 You can customize with the same command-line arguments as `main.py`.
+
 
 ### Board Analyzer
 
