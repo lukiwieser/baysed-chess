@@ -2,14 +2,14 @@
 
 *A Bayesian Approach to Chessbots.*
 
-We implement a traditional Monte-Carlo Tree Search (MCTS) and a bayesian variant inspired by the paper *Bayesian Inference in Monte-Carlo Tree Search* by *Gerald Tesauro, VT Rajan, and Richard Segal*.
-Our implementation is focused on the game chess, and is designed with flexibility in mind, allowing different strategies to be used in the rollout phase.
+We implement a traditional Monte-Carlo Tree Search (MCTS) and a Bayesian variant inspired by the paper *Bayesian Inference in Monte-Carlo Tree Search* by *Gerald Tesauro, VT Rajan, and Richard Segal*.
+Our implementation is focused on the game chess and designed with flexibility in mind, allowing different strategies to be used in the rollout phase of the MCTS.
 
 ## Installation
 
 To set up the project, follow these steps:
 
-1. **Install Dependencies:**
+1. **Install Dependencies**
     
     Ensure that Python 3.11+ is installed on your machine.
 
@@ -18,6 +18,8 @@ To set up the project, follow these steps:
     ```console
     pip install -r requirements.txt
     ```
+   
+   *Note:* If not further specified, the commands should be executed in the project's root.
 
 2. **Download Chess Engines**
 
@@ -36,11 +38,12 @@ Optionally, if you also want to set up the lichess bot, follow these steps:
 2. **Set the API Key**
 
    Get an API key from [Lichess](https://lichess.org/). 
-   Copy the file `config.yml.example`, rename it to `config.yml` and set the `token` in `lichess_bot/config.yml` to this API key.
-   
+   Create a copy of the file `config.yml.example`, located in `/lichess_bot`.
+   Rename it to `config.yml` and set the `token` to this API key.
+ 
    *Note:* Lichess requires a separate bot account for bots. More info on the [Lichess Wiki on GitHub](https://github.com/lichess-bot-devs/lichess-bot/wiki/How-to-create-a-Lichess-OAuth-token).
 
-3. **Install Lichess Specific Dependencies:**
+3. **Install Lichess Specific Dependencies**
 
    Install the Python dependencies of the lichess bot by executing in the folder `/lichess_bot`:
     ```console
@@ -51,7 +54,7 @@ Optionally, if you also want to set up the lichess bot, follow these steps:
 
 ### Engine Matches
 
-Let two engines play against each other and collect statistics.
+Let two engines play against each other and collect statistics:
 
 ```console
 python scripts/main.py --e1 BayesianMCTS --s1 Stockfish --e2 ClassicMCTS --s2 Stockfish -n 24 --proc 12 --time=1 
@@ -62,8 +65,8 @@ You can customize with the following command-line arguments:
 * `--e1`:
   * Engine 1.
   * Possible Values:
-    * `ClassicMCTS`: Our MCTS implementation .
-    * `BayesianMCTS`: Our bayesian MCTS implementation.
+    * `ClassicMCTS`: Our MCTS implementation.
+    * `BayesianMCTS`: Our Bayesian MCTS implementation.
     * `Random`: Plays completely random.
     * `Stockfish`: Plays with stockfish.
     * `Lc0`: Plays with Lc0.
@@ -73,11 +76,11 @@ You can customize with the following command-line arguments:
 * `--s1`:
   * Strategy that Engine 1 uses for the rollout, when set to `ClassicMCTS` or `BayesianMCTS`. 
   * Possible Values:
-    * `Random`: Plays the rollout randomly. Evaluates the terminal state with a simple board evaluation by Tomasz Michniewski.
-    * `Stockfish`: Plays the rollout with stockfish. Evaluates the terminal state with stockfish.
-    * `Lc0`: Plays the rollout with lc0. Evaluates the terminal state with lc0.
-    * `RandomStockfish`: Plays the rollout randomly. Evaluates the terminal state with stockfish.
-    * `PESTO`:  Plays the rollout according to PESTOs board evaluation. Evaluates the terminal state with PESTOs board evaluation.
+    * `Random`: Play the rollout randomly. Evaluate the terminal state with a simple board evaluation by Tomasz Michniewski.
+    * `Stockfish`: Play the rollout with stockfish. Evaluate the terminal state with stockfish.
+    * `Lc0`: Play the rollout with lc0. Evaluate the terminal state with lc0.
+    * `RandomStockfish`: Play the rollout randomly. Evaluate the terminal state with stockfish.
+    * `PESTO`:  Play the rollout according to PESTOs board evaluation. Evaluate the terminal state with PESTOs board evaluation.
 * `--s2`:
   * Strategy for Engine 2 for the rollout.
   * Possible Values: The same ones as Strategy 1.
@@ -86,7 +89,7 @@ You can customize with the following command-line arguments:
 * `--proc`:
   * Number of processor cores to use.
 * `--time`:
-  * Amount of second each engine has foreach turn.
+  * Amount of seconds each engine has for each turn.
 * `--nodes`:
   * Number of nodes each engine can compute each turn.
 * `--stockfish_elo`:
@@ -112,11 +115,10 @@ python scripts/web.py --e1 BayesianMCTS --s1 Stockfish --e2 ClassicMCTS --s2 Sto
 The web interface should then be up and running at `http://localhost:8080`. 
 You can customize with the same command-line arguments as `main.py`.
 
-
 ### Board Analyzer
 
 Compare what different engines would do with a given board position.
-This is quite helpful for analyzing what our implementations do.
+This is quite helpful for analyzing what our implementations do:
 
 ```console
 python scripts/board-analyzer.py 
@@ -139,14 +141,11 @@ The bot might not accept certain challenges e.g. without time constraints.
 The code is contained in `/lichess_bot`, and uses the repository from [lichess-bot](https://github.com/lichess-bot-devs/lichess-bot) as a basis.
 Our implementation is defined in `/lichess_bot/lib/strategies.py`.
 
-For more information look at the GitHub from the [lichess-bot](https://github.com/lichess-bot-devs/lichess-bot).
-
-
 ### Interactive Geogebra File
 
 A Geogebra file for exploring how to get the minimum and maximum of two gaussian distributions.
 
-You can simply upload the file `min_max_of_gaussians.gbb` to [geogebra](https://www.geogebra.org/calculator) and try it out. 
+You can simply upload the file `min_max_of_gaussians.gbb` to [Geogebra Calculator](https://www.geogebra.org/calculator) and try it out. 
 
 The following two papers have been quite helpful for this part:
 
