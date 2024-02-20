@@ -21,8 +21,8 @@ To set up the project, follow these steps:
 
 2. **Download Chess Engines**
 
-   Download [stockfish](https://stockfishchess.org/) and unpack it to `/stockfish`. 
-   Download [lc0](https://lczero.org/play/download/) and unpack it to `/lc0` (We use the DNNL BLAS version).
+   Download [stockfish](https://stockfishchess.org/) and unpack it to `/stockfish` (We use version 16 AVX2).
+   Download [lc0](https://lczero.org/play/download/) and unpack it to `/lc0` (We use version v0.30.0 DNNL BLAS).
 
 Optionally, if you also want to set up the lichess bot, follow these steps:
 
