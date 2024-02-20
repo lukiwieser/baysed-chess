@@ -21,8 +21,8 @@ To set up the project, follow these steps:
 
 2. **Download Chess Engines**
 
-   Download [stockfish](https://stockfishchess.org/) and unpack it to `/stockfish` (We use version 16 AVX2).
-   Download [lc0](https://lczero.org/play/download/) and unpack it to `/lc0` (We use version v0.30.0 DNNL BLAS).
+   Download [Stockfish](https://stockfishchess.org/) and unpack it to `/stockfish` (We use version 16 AVX2).
+   Download [Lc0](https://lczero.org/play/download/) and unpack it to `/lc0` (We use version v0.30.0 DNNL BLAS).
 
 Optionally, if you also want to set up the lichess bot, follow these steps:
 
@@ -35,7 +35,9 @@ Optionally, if you also want to set up the lichess bot, follow these steps:
    
 2. **Set the API Key**
 
-   Get an API key from [lichess](https://lichess.org/). And set the `token` in `lichess_bot/config.yml` to this API key.
+   Get an API key from [Lichess](https://lichess.org/), and set the `token` in `lichess_bot/config.yml` to this API key.
+   
+   *Note:* Lichess requires a separate bot account for bots. More info on the [Lichess Wiki on GitHub](https://github.com/lichess-bot-devs/lichess-bot/wiki/How-to-create-a-Lichess-OAuth-token).
 
 3. **Install Lichess Specific Dependencies:**
 
@@ -121,10 +123,7 @@ python scripts/board-analyzer.py
 
 ### Lichess Bot
 
-A bot you can play against on the website [lichess](https://lichess.org/). 
-
-The code for the bot is contained in `/lichess_bot`, and uses the repository from [lichess-bot](https://github.com/lichess-bot-devs/lichess-bot) as a basis.
-Our bot implementation is defined in `/lichess_bot/lib/strategies.py`.
+A bot you can play against on the website [Lichess](https://lichess.org/). 
 
 Start the bot by running the following in `/lichess_bot`:
 
@@ -132,7 +131,13 @@ Start the bot by running the following in `/lichess_bot`:
 python lichess-bot.py
 ```
 
-The bot should then be up and running. 
+The bot should then be up and running.
+You can play against it on the lichess website by searching the bot's *lichess username* and challenging it.
+The bot might not accept certain challenges e.g. without time constraints.
+
+The code is contained in `/lichess_bot`, and uses the repository from [lichess-bot](https://github.com/lichess-bot-devs/lichess-bot) as a basis.
+Our implementation is defined in `/lichess_bot/lib/strategies.py`.
+
 For more information look at the GitHub from the [lichess-bot](https://github.com/lichess-bot-devs/lichess-bot).
 
 
