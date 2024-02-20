@@ -5,6 +5,9 @@ With these classes, bot makers will not have to implement the UCI or XBoard inte
 """
 
 from __future__ import annotations
+
+import os
+
 import chess
 from chess.engine import PlayResult, Limit
 import random
@@ -142,10 +145,19 @@ class MyBayesMctsEngine(MinimalEngine):
         self._engine = None
 
     def get_engine(self, color: chess.Color) -> chess.engine:
+        # NOTE: the paths here are from the perspective of the file 'lichess-bot.py'
+        if os.name == 'nt':
+            stockfish_path = "../stockfish/stockfish-windows-x86-64-avx2"
+            lc0_path = "../lc0/lc0"
+        else:
+            stockfish_path = "../stockfish/stockfish-ubuntu-x86-64-avx2"
+            lc0_path = "../lc0/lc0"
+
         if self._engine is None:
-            self._engine = EngineFactory.create_engine(EngineEnum.BayesianMcts, StrategyEnum.Stockfish, color,
-                                                       "/home/luke/projects/pp-project/chess-engine-pp/stockfish/stockfish-ubuntu-x86-64-avx2",
-                                                       "", 1500, 4)
+            self._engine = EngineFactory.create_engine(
+                EngineEnum.BayesianMcts,
+                StrategyEnum.Stockfish,
+                color, stockfish_path, lc0_path, 1500, 4)
 
         return self._engine
 
