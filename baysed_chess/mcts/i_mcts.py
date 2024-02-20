@@ -39,13 +39,6 @@ class IMcts(ABC):
         """
         pass
 
-    #@abstractmethod
-    #def get_moves(self) -> Dict[chess.Move, int]:
-    #    """
-    #    Return all legal moves from this node with respective scores
-    #    :return: dictionary with moves as key and scores as values
-    #    """
-    #    pass
 
 """
 TODO: add score class:

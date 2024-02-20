@@ -1,5 +1,3 @@
-from typing import Dict
-
 import chess
 import chess.engine
 from torch import distributions as dist
@@ -41,7 +39,7 @@ class BayesMctsEngine(IEngine):
         return chess.engine.PlayResult(move=best_move, ponder=None)
 
     @staticmethod
-    def get_best_move(possible_moves: Dict[chess.Move, dist.Normal], color: chess.Color) -> chess.Move:
+    def get_best_move(possible_moves: dict[chess.Move, dist.Normal], color: chess.Color) -> chess.Move:
         moves = {}
         for m, d in possible_moves.items():
             moves[m] = d.sample()
