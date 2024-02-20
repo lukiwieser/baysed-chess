@@ -35,7 +35,8 @@ Optionally, if you also want to set up the lichess bot, follow these steps:
    
 2. **Set the API Key**
 
-   Get an API key from [Lichess](https://lichess.org/), and set the `token` in `lichess_bot/config.yml` to this API key.
+   Get an API key from [Lichess](https://lichess.org/). 
+   Copy the file `config.yml.example`, rename it to `config.yml` and set the `token` in `lichess_bot/config.yml` to this API key.
    
    *Note:* Lichess requires a separate bot account for bots. More info on the [Lichess Wiki on GitHub](https://github.com/lichess-bot-devs/lichess-bot/wiki/How-to-create-a-Lichess-OAuth-token).
 

@@ -10,3 +10,7 @@ __pycache__
 /stockfish/
 /lc0/
 /sunfish-master/
+
+# Lichess Bot
+/lichess_bot/config.yml
+/lichess_bot/lichess_bot_auto_logs/*
