@@ -19,7 +19,7 @@ To set up the project, follow these steps:
     pip install -r requirements.txt
     ```
    
-   *Note:* If not further specified, the commands should be executed in the project's root.
+   *Note:* If not further specified, the commands should be executed in the project's root directory.
 
 2. **Download Chess Engines**
 
@@ -30,7 +30,7 @@ Optionally, if you also want to set up the lichess bot, follow these steps:
 
 1. **Install Local Python Package**
 
-   Install the code in `baysed_chess` as a local package, so we can use it in the lichess bot files:
+   Install the code in `/baysed_chess` as a local package, so we can use it in the lichess bot files:
     ```console
     pip install -e .
     ```
@@ -39,7 +39,7 @@ Optionally, if you also want to set up the lichess bot, follow these steps:
 
    Get an API key from [Lichess](https://lichess.org/). 
    Create a copy of the file `config.yml.example`, located in `/lichess_bot`.
-   Rename it to `config.yml` and set the `token` to this API key.
+   Rename it to `config.yml` and set `token` to your API key.
  
    *Note:* Lichess requires a separate bot account for bots. More info on the [Lichess Wiki on GitHub](https://github.com/lichess-bot-devs/lichess-bot/wiki/How-to-create-a-Lichess-OAuth-token).
 
@@ -135,10 +135,10 @@ python lichess-bot.py
 ```
 
 The bot should then be up and running.
-You can play against it on the lichess website by searching the bot's *lichess username* and challenging it.
+You can play against it on the lichess website by searching the bots *lichess username* and challenging it.
 The bot might not accept certain challenges e.g. without time constraints.
 
-The code is contained in `/lichess_bot`, and uses the repository from [lichess-bot](https://github.com/lichess-bot-devs/lichess-bot) as a basis.
+The bots code is contained in `/lichess_bot` and builds upon the repository from [lichess-bot](https://github.com/lichess-bot-devs/lichess-bot).
 Our implementation is defined in `/lichess_bot/lib/strategies.py`.
 
 ### Interactive Geogebra File
