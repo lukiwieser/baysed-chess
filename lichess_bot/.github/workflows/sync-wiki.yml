@@ -10,7 +10,7 @@ on:
 
 jobs:
   sync:
-    if: github.repository == 'lichess_bot-devs/lichess_bot'
+    if: github.repository == 'lichess-bot-devs/lichess-bot'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -19,45 +19,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: "${{ github.repository }}.wiki"
-          path: "lichess_bot.wiki"
-      - name: Set path
-        uses: dorny/paths-filter@v2
-        id: changes
-        with:
-          filters: |
-            wiki:
-              - 'wiki/**'
-            home:
-              - 'wiki/Home.md'
-            readme:
-              - 'README.md'
-      - name: Prevent Conflicts
-        if: |
-          steps.changes.outputs.home == 'true' &&
-          steps.changes.outputs.readme == 'true'
-        run: |
-            echo "Error: Conflicting changes. Edit either the README.md file or the wiki/Home.md file, not both."
-            exit 1
+          path: "lichess-bot.wiki"
       - name: Set github bot global config
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "actions-user"
-      - name: Sync README.md to wiki/Home.md
-        if: steps.changes.outputs.readme == 'true'
-        run: |
-          cp -r $GITHUB_WORKSPACE/README.md $GITHUB_WORKSPACE/wiki/Home.md
-          git add wiki/Home.md
-          git commit -m "Auto update wiki/Home.md"
-          git push
-      - name: Sync wiki/Home.md to README.md
-        if: steps.changes.outputs.home == 'true'
-        run: |
-          cp -r $GITHUB_WORKSPACE/wiki/Home.md $GITHUB_WORKSPACE/README.md
-          git add README.md
-          git commit -m "Auto update README.md"
-          git push
       - name: Sync all files to wiki
         run: |
+          cp $GITHUB_WORKSPACE/README.md $GITHUB_WORKSPACE/lichess-bot.wiki/Home.md
           cp -r $GITHUB_WORKSPACE/wiki/* $GITHUB_WORKSPACE/lichess-bot.wiki
           cd $GITHUB_WORKSPACE/lichess-bot.wiki
           git add .

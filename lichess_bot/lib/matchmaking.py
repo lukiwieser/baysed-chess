@@ -1,18 +1,20 @@
 """Challenge other bots."""
 import random
 import logging
+import datetime
+import test_bot.lichess
 from lib import model
-from lib.timer import Timer, seconds, minutes, days
+from lib.timer import Timer, seconds, minutes, days, years
 from collections import defaultdict
 from collections.abc import Sequence
 from lib import lichess
-import datetime
 from lib.config import Configuration, FilterType
-from typing import Any, Optional
+from typing import Any, Optional, Union
 USER_PROFILE_TYPE = dict[str, Any]
 EVENT_TYPE = dict[str, Any]
 MULTIPROCESSING_LIST_TYPE = Sequence[model.Challenge]
 DAILY_TIMERS_TYPE = list[Timer]
+LICHESS_TYPE = Union[lichess.Lichess, test_bot.lichess.Lichess]
 
 logger = logging.getLogger(__name__)
 
@@ -43,7 +45,7 @@ def write_daily_challenges(daily_challenges: DAILY_TIMERS_TYPE) -> None:
 class Matchmaking:
     """Challenge other bots."""
 
-    def __init__(self, li: lichess.Lichess, config: Configuration, user_profile: USER_PROFILE_TYPE) -> None:
+    def __init__(self, li: LICHESS_TYPE, config: Configuration, user_profile: USER_PROFILE_TYPE) -> None:
         """Initialize values needed for matchmaking."""
         self.li = li
         self.variants = list(filter(lambda variant: variant != "fromPosition", config.challenge.variants))
@@ -53,6 +55,9 @@ class Matchmaking:
         self.last_game_ended_delay = Timer(minutes(self.matchmaking_cfg.challenge_timeout))
         self.last_user_profile_update_time = Timer(minutes(5))
         self.min_wait_time = seconds(60)  # Wait before new challenge to avoid api rate limits.
+
+        # Maximum time between challenges, even if there are active games
+        self.max_wait_time = minutes(10) if self.matchmaking_cfg.allow_during_games else years(10)
         self.challenge_id: str = ""
         self.daily_challenges: DAILY_TIMERS_TYPE = read_daily_challenges()
 
@@ -77,7 +82,7 @@ class Matchmaking:
         if challenge_expired:
             self.li.cancel(self.challenge_id)
             logger.info(f"Challenge id {self.challenge_id} cancelled.")
-            self.challenge_id = ""
+            self.discard_challenge(self.challenge_id)
             self.show_earliest_challenge_time()
         return bool(matchmaking_enabled and (time_has_passed or challenge_expired) and min_wait_time_passed)
 
@@ -239,14 +244,19 @@ class Matchmaking:
         value: str = config.lookup(parameter)
         return value if value != "random" else random.choice(choices)
 
-    def challenge(self, active_games: set[str], challenge_queue: MULTIPROCESSING_LIST_TYPE) -> None:
+    def challenge(self, active_games: set[str], challenge_queue: MULTIPROCESSING_LIST_TYPE, max_games: int) -> None:
         """
         Challenge an opponent.
 
         :param active_games: The games that the bot is playing.
         :param challenge_queue: The queue containing the challenges.
+        :param max_games: The maximum allowed number of simultaneous games.
         """
-        if active_games or challenge_queue or not self.should_create_challenge():
+        max_games_for_matchmaking = max_games if self.matchmaking_cfg.allow_during_games else 1
+        game_count = len(active_games) + len(challenge_queue)
+        if (game_count >= max_games_for_matchmaking
+                or (game_count > 0 and self.last_challenge_created_delay.time_since_reset() < self.max_wait_time)
+                or not self.should_create_challenge()):
             return
 
         logger.info("Challenging a random bot")
@@ -256,6 +266,15 @@ class Matchmaking:
         challenge_id = self.create_challenge(bot_username, base_time, increment, days, variant, mode) if bot_username else ""
         logger.info(f"Challenge id is {challenge_id if challenge_id else 'None'}.")
         self.challenge_id = challenge_id
+
+    def discard_challenge(self, challenge_id: str) -> None:
+        """
+        Clear the ID of the most recent challenge if it is no longer needed.
+
+        :param challenge_id: The ID of the challenge that is expired, accepted, or declined.
+        """
+        if self.challenge_id == challenge_id:
+            self.challenge_id = ""
 
     def game_done(self) -> None:
         """Reset the timer for when the last game ended, and prints the earliest that the next challenge will be created."""
@@ -308,8 +327,7 @@ class Matchmaking:
 
         Otherwise, we would attempt to cancel the challenge later.
         """
-        if self.challenge_id == event["game"]["id"]:
-            self.challenge_id = ""
+        self.discard_challenge(event["game"]["id"])
 
     def declined_challenge(self, event: EVENT_TYPE) -> None:
         """
@@ -321,8 +339,7 @@ class Matchmaking:
         opponent = challenge.opponent
         reason = event["challenge"]["declineReason"]
         logger.info(f"{opponent} declined {challenge}: {reason}")
-        if self.challenge_id == challenge.id:
-            self.challenge_id = ""
+        self.discard_challenge(challenge.id)
         if not challenge.from_self or self.challenge_filter == FilterType.NONE:
             return
 

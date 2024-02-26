@@ -75,7 +75,7 @@ class Lichess:
 
         :param token: The bot's token.
         :param url: The base url (lichess.org).
-        :param version: The lichess_bot version running.
+        :param version: The lichess-bot version running.
         :param logging_level: The logging level (logging.INFO or logging.DEBUG).
         :param max_retries: The maximum amount of retries for online moves (e.g. chessdb's opening book).
         """
@@ -332,7 +332,7 @@ class Lichess:
 
     def set_user_agent(self, username: str) -> None:
         """Set the user agent for communication with lichess.org."""
-        self.header.update({"User-Agent": f"lichess_bot/{self.version} user:{username}"})
+        self.header.update({"User-Agent": f"lichess-bot/{self.version} user:{username}"})
         self.session.headers.update(self.header)
 
     def get_game_pgn(self, game_id: str) -> str:

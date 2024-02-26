@@ -5,7 +5,7 @@ There are many possible options within `config.yml` for configuring lichess-bot.
 - `protocol`: Specify which protocol your engine uses. Choices are
     1. `"uci"` for the [Universal Chess Interface](http://wbec-ridderkerk.nl/html/UCIProtocol.html)
     2. `"xboard"` for the XBoard/WinBoard/[Chess Engine Communication Protocol](https://www.gnu.org/software/xboard/engine-intf.html)
-    3. `"homemade"` if you want to write your own engine in Python within lichess-bot. See [**Create a custom engine**](https://github.com/lichess-bot-devs/lichess-bot/wiki/Create-a-custom-engine).
+    3. `"homemade"` if you want to write your own engine in Python within lichess-bot. See [**Create a homemade engine**](https://github.com/lichess-bot-devs/lichess-bot/wiki/Create-a-homemade-engine).
 - `ponder`: Specify whether your bot will ponder--i.e., think while the bot's opponent is choosing a move.
 - `engine_options`: Command line options to pass to the engine on startup. For example, the `config.yml.default` has the configuration
 ```yml
@@ -210,6 +210,7 @@ will precede the `go` command to start thinking with `sd 5`. The other `go_comma
 - `fake_think_time`: Artificially slow down the engine to simulate a person thinking about a move. The amount of thinking time decreases as the game goes on.
 - `rate_limiting_delay`: For extremely fast games, the lichess.org servers may respond with an error if too many moves are played too quickly. This option avoids this problem by pausing for a specified number of milliseconds after submitting a move before making the next move.
 - `move_overhead`: To prevent losing on time due to network lag, subtract this many milliseconds from the time to think on each move.
+- `quit_after_all_games_finish`: If this is set to `true`, then pressing Ctrl-c to quit will cause lichess-bot to terminate after all in-progress games are finished. No new challenges will be sent or accepted, nor will any correspondence games be checked on. If `false` (the default), lichess-bot will terminate immediately and not wait to finish games in progress. If this value is `true` and you find that you need to quit immediately, press Ctrl-c twice.
 - `pgn_directory`: Write a record of every game played in PGN format to files in this directory. Each bot move will be annotated with the bot's calculated score and principal variation. The score is written with a tag of the form `[%eval s,d]`, where `s` is the score in pawns (positive means white has the advantage), and `d` is the depth of the search.
 - `pgn_file_grouping`: Determine how games are written to files. There are three options:
     - `game`: Every game record is written to a different file in the `pgn_directory`. The file name is `{White name} vs. {Black name} - {lichess game ID}.pgn`.
@@ -223,6 +224,7 @@ will precede the `go` command to start thinking with `sd 5`. The other `go_comma
 ## Challenging other bots
 - `matchmaking`: Challenge a random bot.
   - `allow_matchmaking`: Whether to challenge other bots.
+  - `allow_during_games`: Whether to issue new challenges while the bot is already playing games. If true, no more than 10 minutes will pass between matchmaking challenges.
   - `challenge_variant`: The variant for the challenges. If set to `random` a variant from the ones enabled in `challenge.variants` will be chosen at random.
   - `challenge_timeout`: The time (in minutes) the bot has to be idle before it creates a challenge.
   - `challenge_initial_time`: A list of initial times (in seconds and to be chosen at random) for the challenges.
@@ -258,13 +260,13 @@ matchmaking:
   allow_matchmaking: false
   challenge_variant: "random"
   challenge_timeout: 30
-  challenge_initial_time: 
+  challenge_initial_time:
     - 60
     - 120
-  challenge_increment: 
+  challenge_increment:
     - 1
     - 2
-  challenge_days: 
+  challenge_days:
      - 1
      - 2
 # opponent_min_rating: 600

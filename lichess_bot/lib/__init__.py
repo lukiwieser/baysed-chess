@@ -1,1 +1,1 @@
-"""This lib folder contains the library code necessary for running lichess_bot."""
+"""This lib folder contains the library code necessary for running lichess-bot."""

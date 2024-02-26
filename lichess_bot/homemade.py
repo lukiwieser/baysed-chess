@@ -1,24 +1,23 @@
 """
-Some example strategies for people who want to create a custom, homemade bot.
+Some example classes for people who want to create a homemade bot.
 
 With these classes, bot makers will not have to implement the UCI or XBoard interfaces themselves.
 """
 
 from __future__ import annotations
 
+import logging
 import os
+import random
+from typing import Any, Optional
 
 import chess
 from chess.engine import PlayResult, Limit
-import random
-from lib.engine_wrapper import MinimalEngine, MOVE
-from typing import Any
-import logging
 
-import baysed_chess
 import baysed_chess.limit
-from baysed_chess.engine.classic_mcts_engine import ClassicMctsEngine
 from baysed_chess.engine_factory import EngineFactory, EngineEnum, StrategyEnum
+from lib.engine_wrapper import MinimalEngine, MOVE, COMMANDS_TYPE, OPTIONS_TYPE
+from lib.config import Configuration
 
 # Use this logger variable to print messages to the console or log files.
 # logger.info("message") will always print "message" to the console or log file.
@@ -32,7 +31,7 @@ class ExampleEngine(MinimalEngine):
     pass
 
 
-# Strategy names and ideas from tom7's excellent eloWorld video
+# Bot names and ideas from tom7's excellent eloWorld video
 
 class RandomMove(ExampleEngine):
     """Get a random move."""
@@ -101,35 +100,6 @@ class ComboEngine(ExampleEngine):
             possible_moves.sort(key=str)
             move = possible_moves[0]
         return PlayResult(move, None, draw_offered=draw_offered)
-
-
-# class ProbStockfish(MinimalEngine):
-#     def search(self, board: chess.Board, time_limit: chess.engine.Limit, ponder: bool, draw_offered: bool,
-#                root_moves: MOVE) -> chess.engine.PlayResult:
-#         moves = {}
-#         untried_moves = list(board.legal_moves)
-#         for move in untried_moves:
-#             mean, std = engine.simulate_stockfish_prob(board.copy(), move, 10, 2)
-#             moves[move] = (mean, std)
-#             if mean == 100_000 and std == 0:
-#                 return chess.engine.PlayResult(move, None)
-#
-#         return self.get_best_move(moves)
-#
-#     def get_best_move(self, moves: dict) -> chess.engine.PlayResult:
-#         best_avg = max(moves.items(), key=lambda m: m[1][0])
-#         next_move = best_avg[0]
-#         return chess.engine.PlayResult(next_move, None)
-
-
-class MctsEngine(MinimalEngine):
-    def search(self, board: chess.Board, time_limit: chess.engine.Limit, ponder: bool, draw_offered: bool,
-               root_moves: MOVE) -> chess.engine.PlayResult:
-        my_engine = ClassicMctsEngine(board.turn)
-        print("Color:", board.turn)
-        print("engine play result: ", my_engine.play(board.copy(), baysed_chess.limit.Limit(0.5)))
-        print("Engine name", my_engine)
-        return my_engine.play(board.copy(), baysed_chess.limit.Limit())
 
 
 class MyBayesMctsEngine(MinimalEngine):

@@ -1,12 +1,15 @@
-"""Allows lichess_bot to send messages to the chat."""
+"""Allows lichess-bot to send messages to the chat."""
 from __future__ import annotations
 import logging
+import test_bot.lichess
 from lib import model
 from lib.engine_wrapper import EngineWrapper
-from lib.lichess import Lichess
+from lib import lichess
 from collections.abc import Sequence
 from lib.timer import seconds
+from typing import Union
 MULTIPROCESSING_LIST_TYPE = Sequence[model.Challenge]
+LICHESS_TYPE = Union[lichess.Lichess, test_bot.lichess.Lichess]
 
 logger = logging.getLogger(__name__)
 
@@ -14,15 +17,15 @@ logger = logging.getLogger(__name__)
 class Conversation:
     """Enables the bot to communicate with its opponent and the spectators."""
 
-    def __init__(self, game: model.Game, engine: EngineWrapper, li: Lichess, version: str,
+    def __init__(self, game: model.Game, engine: EngineWrapper, li: LICHESS_TYPE, version: str,
                  challenge_queue: MULTIPROCESSING_LIST_TYPE) -> None:
         """
-        Communication between lichess_bot and the game chats.
+        Communication between lichess-bot and the game chats.
 
         :param game: The game that the bot will send messages to.
         :param engine: The engine playing the game.
         :param li: A class that is used for communication with lichess.
-        :param version: The lichess_bot version.
+        :param version: The lichess-bot version.
         :param challenge_queue: The active challenges the bot has.
         """
         self.game = game
@@ -58,7 +61,7 @@ class Conversation:
             self.send_reply(line, "Waiting 60 seconds...")
         elif cmd == "name":
             name = self.game.me.name
-            self.send_reply(line, f"{name} running {self.engine.name()} (lichess_bot v{self.version})")
+            self.send_reply(line, f"{name} running {self.engine.name()} (lichess-bot v{self.version})")
         elif cmd == "howto":
             self.send_reply(line, "How to run: Check out 'Lichess Bot API'")
         elif cmd == "eval" and (from_self or line.room == "spectator"):

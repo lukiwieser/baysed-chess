@@ -6,7 +6,7 @@ on:
 
 jobs:
   versioning:
-    if: github.repository == 'lichess_bot-devs/lichess_bot'
+    if: github.repository == 'lichess-bot-devs/lichess-bot'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
