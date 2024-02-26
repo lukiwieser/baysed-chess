@@ -141,10 +141,9 @@ def score_michniewsk(board: chess.Board) -> int:
     """
     Calculate the score of a given board.
     Positive scores indicate an advantage for WHITE, negative scores indicate and advantage for BLACK.
-    The range of scores is from approx. -1.100.000 to 1.100.000
-    :param board: the chess board
-    :return: score
+    The range of scores is from approx. -1,100,000 to 1,100,000.
     """
+
     outcome = board.outcome()
     if outcome is not None:
         if outcome.termination == chess.Termination.CHECKMATE:

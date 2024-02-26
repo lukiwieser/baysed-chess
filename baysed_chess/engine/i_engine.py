@@ -7,10 +7,12 @@ from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class IEngine(ABC):
+    """Interface for Engines"""
+    
     board: chess.Board
     """The chess board"""
     color: chess.Color
-    """The side the engine plays (``chess.WHITE`` or ``chess.BLACK``)."""
+    """The side the engine plays (`chess.WHITE` or `chess.BLACK`)."""
     strategy: IStrategy
     """The strategy used to pick moves when simulating games."""
 

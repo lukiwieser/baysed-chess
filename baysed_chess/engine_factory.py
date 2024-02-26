@@ -35,6 +35,7 @@ class StrategyEnum(Enum):
 
 
 class EngineFactory:
+    """ Class to create Engines with the given parameters """
 
     @staticmethod
     def create_engine(engine_name: EngineEnum, strategy_name: StrategyEnum, color: chess.Color, stockfish_path: str,

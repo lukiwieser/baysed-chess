@@ -10,6 +10,10 @@ from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class BayesianMctsNode(IMctsNode):
+    """
+    Nodes of that our Bayesian MCTS uses internally.
+    """
+
     def __init__(self, board: chess.Board, strategy: IStrategy, color: chess.Color, parent: Self | None,
                  move: chess.Move | None,
                  random_state: random.Random, inherit_result: int | None = None, depth: int = 0, visits: int = 0):

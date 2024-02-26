@@ -7,6 +7,8 @@ from baysed_chess.limit import Limit
 
 
 class StockfishEngine(IEngine):
+    """Engine that plays using the `stockfish` engine"""
+
     def __init__(self, board: chess.Board, color: chess, stockfish_elo: int | None, path: str):
         super().__init__(board, color, None)
         self.stockfish = Stockfish(path)

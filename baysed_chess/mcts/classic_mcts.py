@@ -8,6 +8,9 @@ from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class ClassicMcts:
+    """
+    Implementation of our Classic MCTS, focused on chess.
+    """
 
     def __init__(self, board: chess.Board, color: chess.Color, strategy: IStrategy, parent=None, move: chess.Move | None = None,
                  random_state: int | None = None, depth: int = 0):

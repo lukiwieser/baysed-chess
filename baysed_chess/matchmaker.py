@@ -37,6 +37,9 @@ class MatchResult:
 
 
 class Matchmaker:
+    """
+    Class to let 2 engines playing against each other.
+    """
     def __init__(self, engine_a: EngineEnum, strategy_a: StrategyEnum, engine_b: EngineEnum, strategy_b: StrategyEnum, limit: Limit,
                  stockfish_path: str, lc0_path: str, stockfish_elo: int):
         self.engine_a = engine_a
@@ -48,7 +51,15 @@ class Matchmaker:
         self.limit = limit
         self.stockfish_elo = stockfish_elo
 
-    def run(self, n_games=100, proc=mp.cpu_count()) -> list[MatchResult]:
+    def run(self, n_games: int = 100, proc: int = mp.cpu_count()) -> list[MatchResult]:
+        """
+        Let the engines play multiple games against each other.
+        The colors are assigned randomly for each game.
+
+        :param n_games: Number of games that should be played.
+        :param proc: Number of processors that should be used. This enables to run games in parallel.
+        :returns: List of results of each game.
+        """
         proc = min(proc, mp.cpu_count())
         arg = (
             self.engine_a, self.strategy_a, self.engine_b, self.strategy_b, self.limit, self.stockfish_path,
@@ -74,7 +85,7 @@ class Matchmaker:
         # assign color randomly
         flip_engines = bool(random.getrandbits(1))
         if flip_engines:
-            black = EngineFactory.create_engine(engine_a, strategy_a, chess.BLACK,stockfish_path, lc0_path, stockfish_elo)
+            black = EngineFactory.create_engine(engine_a, strategy_a, chess.BLACK, stockfish_path, lc0_path, stockfish_elo)
             white = EngineFactory.create_engine(engine_b, strategy_b, chess.WHITE, stockfish_path, lc0_path, stockfish_elo)
         else:
             white = EngineFactory.create_engine(engine_a, strategy_a, chess.WHITE, stockfish_path, lc0_path, stockfish_elo)

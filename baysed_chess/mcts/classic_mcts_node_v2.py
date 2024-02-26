@@ -10,6 +10,10 @@ from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class ClassicMctsNodeV2(IMctsNode):
+    """
+    Nodes of that our Classic MCTS uses internally.
+    """
+
     def __init__(self, board: chess.Board, color: chess.Color, strategy: IStrategy, parent: Self | None, move: chess.Move | None,
                  random_state: random.Random, depth: int = 0):
         super().__init__(board, strategy, parent, move, random_state)
@@ -24,10 +28,6 @@ class ClassicMctsNodeV2(IMctsNode):
         self.depth = depth
 
     def expand(self) -> Self:
-        """
-        Expands the node, i.e., choose an action and apply it to the board
-        :return:
-        """
         if self.is_fully_expanded():
             return self
 
@@ -40,11 +40,6 @@ class ClassicMctsNodeV2(IMctsNode):
         return child_node
 
     def rollout(self, rollout_depth: int = 4) -> int:
-        """
-        Rolls out the node by simulating a game for a given depth.
-        Sometimes this step is called 'simulation' or 'playout'.
-        :return: the score of the rolled out game
-        """
         copied_board = self.board.copy()
         steps = self.depth
         for i in range(rollout_depth):
@@ -59,13 +54,7 @@ class ClassicMctsNodeV2(IMctsNode):
         return int(self.strategy.analyze_board(copied_board) / math.log2(steps))
 
     def backpropagate(self, score: float | None = None) -> None:
-        """
-        Backpropagates the results of the rollout
-        :param score:
-        :return:
-        """
         self.visits += 1
-        # TODO: maybe use score + num of moves together (a win in 1 move is better than a win in 20 moves)
 
         if score is not None:
             self.score += score
@@ -81,18 +70,12 @@ class ClassicMctsNodeV2(IMctsNode):
         Picks the best child according to our policy
         :return: the best child
         """
-        # NOTE: maybe clamp the score between [-1, +1] instead of [-inf, +inf]
         choices_weights = [(c.score / c.visits) + np.sqrt(((2 * np.log(self.visits)) / c.visits))
                            for c in self.children]
         best_child_index = np.argmax(choices_weights) if self.color == chess.WHITE else np.argmin(choices_weights)
         return self.children[best_child_index]
 
     def select(self) -> Self:
-        """
-        Selects a leaf node.
-        If the node is not expanded is will be expanded.
-        :return: Leaf node
-        """
         current_node = self
         while not current_node.board.is_game_over():
             if not current_node.is_fully_expanded():

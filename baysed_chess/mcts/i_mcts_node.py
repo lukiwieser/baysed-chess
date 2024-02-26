@@ -8,6 +8,8 @@ from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class IMctsNode(ABC):
+    """Interface for the nodes in our MCTS (Monte Carlo Tree Search) implementations"""
+
     def __init__(self, board: chess.Board, strategy: IStrategy, parent: Self | None, move: chess.Move | None,
                  random_state: random.Random):
         self.board = board
@@ -22,7 +24,7 @@ class IMctsNode(ABC):
     def select(self) -> Self:
         """
         Selects the next node leaf node in the tree
-        :return:
+        :return: Leaf node
         """
         pass
 
@@ -30,7 +32,7 @@ class IMctsNode(ABC):
     def expand(self) -> Self:
         """
         Expands this node creating X child leaf nodes, i.e., choose an action and apply it to the board
-        :return:
+        :return: Leaf node
         """
         pass
 
@@ -39,7 +41,7 @@ class IMctsNode(ABC):
         """
         Rolls out the node by simulating a game for a given depth.
         Sometimes this step is called 'simulation' or 'playout'.
-        :return: the score of the rolled out game
+        :return: The score of the rolled out game
         """
         pass
 
@@ -48,7 +50,6 @@ class IMctsNode(ABC):
         """
         Backpropagates the results of the rollout
         :param score:
-        :return:
         """
         pass
 

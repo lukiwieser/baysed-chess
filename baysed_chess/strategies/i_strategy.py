@@ -4,6 +4,11 @@ import chess
 
 
 class IStrategy(ABC):
+    """
+    Interface for strategies.
+    Strategies are used to customize the behaviour of engines.
+    """
+
     rollout_depth: int
 
     def __init__(self, rollout_depth: int = 4):

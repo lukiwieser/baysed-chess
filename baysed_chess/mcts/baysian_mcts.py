@@ -8,6 +8,9 @@ from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class BayesianMcts(IMcts):
+    """
+    Implementation of our Bayesian MCTS, focused on chess.
+    """
 
     def __init__(self, board: chess.Board, strategy: IStrategy, color: chess.Color, seed: int | None = None):
         super().__init__(board, strategy, seed)

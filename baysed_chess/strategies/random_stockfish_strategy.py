@@ -8,6 +8,11 @@ from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class RandomStockfishStrategy(IStrategy):
+    """
+    Play the rollout randomly.
+    Evaluate the terminal state with stockfish.
+    """
+
     def __init__(self, rollout_depth: int, path: str, random_seed: random.Random = random.Random()):
         super().__init__(rollout_depth)
         self._stockfish = None

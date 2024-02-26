@@ -6,6 +6,11 @@ from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class PestoStrategy(IStrategy):
+    """
+    Play the rollout according to PESTOs board evaluation.
+    Evaluate the terminal state with PESTOs board evaluation.
+    """
+
     def __init__(self, rollout_depth: int = 4):
         super().__init__(rollout_depth)
 

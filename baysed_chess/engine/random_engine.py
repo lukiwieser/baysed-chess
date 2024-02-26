@@ -9,6 +9,8 @@ from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class RandomEngine(IEngine):
+    """Engine that plays random moves"""
+
     def __init__(self, board: chess.Board, color: chess.Color, strategy: IStrategy):
         super().__init__(board, color, strategy)
 

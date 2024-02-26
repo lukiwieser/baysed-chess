@@ -8,6 +8,8 @@ from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class ClassicMctsEngine(IEngine):
+    """Engine that plays using our classic mcts implementation"""
+
     def __init__(self, board: chess.Board, color: chess.Color, strategy: IStrategy):
         super().__init__(board, color, strategy)
         self.node_counts = []

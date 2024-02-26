@@ -6,6 +6,10 @@ from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class Lc0Strategy(IStrategy):
+    """
+    Play the rollout with lc0.
+    Evaluate the terminal state with lc0.
+    """
 
     def __init__(self, path: str, rollout_depth: int = 4):
         super().__init__(rollout_depth)

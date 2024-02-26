@@ -7,6 +7,11 @@ from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class RandomStrategy(IStrategy):
+    """
+    Play the rollout randomly.
+    Evaluate the terminal state with a simple board evaluation by Tomasz Michniewski.
+    """
+
     def __init__(self, random_state: random.Random, rollout_depth: int = 4):
         super().__init__(rollout_depth)
         self.random_state = random_state

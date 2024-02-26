@@ -4,7 +4,6 @@ import chess.engine
 def score_stockfish(board: chess.Board, stockfish: chess.engine.SimpleEngine) -> int:
     """
     Calculate the score of the given board using stockfish
-    :return:
     """
 
     limit = chess.engine.Limit(depth=0)

@@ -6,6 +6,10 @@ from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class StockfishStrategy(IStrategy):
+    """
+    Play the rollout with stockfish.
+    Evaluate the terminal state with stockfish.
+    """
 
     def __init__(self, path: str, rollout_depth: int = 4):
         super().__init__(rollout_depth)

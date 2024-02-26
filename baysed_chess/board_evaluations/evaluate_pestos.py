@@ -315,6 +315,10 @@ def _init_tables():
 
 
 def score_pestos(board: chess.Board) -> int:
+    """
+    Calculate the score using PeSTO (Piece-Square Tables Only) board evaluations.
+    """
+
     mg = [0, 0]
     eg = [0, 0]
     game_phase = 0

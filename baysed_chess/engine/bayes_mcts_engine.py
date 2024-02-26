@@ -9,6 +9,8 @@ from baysed_chess.strategies.i_strategy import IStrategy
 
 
 class BayesMctsEngine(IEngine):
+    """Engine that plays using our bayesian mcts implementation"""
+
     mcts: BayesianMcts
     """The Bayesian MCTS"""
 

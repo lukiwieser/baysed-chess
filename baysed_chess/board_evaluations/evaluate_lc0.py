@@ -6,7 +6,8 @@ def score_lc0(board: chess.Board, lc0: chess.engine.SimpleEngine) -> int:
     """
     Calculate the score of the given board using lc0
     """
-    limit: chess.engine.Limit= chess.engine.Limit(depth=0)
+
+    limit: chess.engine.Limit = chess.engine.Limit(depth=0)
 
     # lc0 cannot calculate a score if there is already a checkmate => return score manually for this case
     outcome = board.outcome()
