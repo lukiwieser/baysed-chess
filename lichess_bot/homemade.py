@@ -25,6 +25,10 @@ from lib.config import Configuration
 logger = logging.getLogger(__name__)
 
 
+# =====================================================================
+# Example Engines from lichess
+# ======================================================================
+
 class ExampleEngine(MinimalEngine):
     """An example engine that all homemade engines inherit."""
 
@@ -102,7 +106,11 @@ class ComboEngine(ExampleEngine):
         return PlayResult(move, None, draw_offered=draw_offered)
 
 
-class MyBayesMctsEngine(MinimalEngine):
+# =====================================================================
+# Our homemade engine
+# ======================================================================
+
+class BayesianMctsEngine(MinimalEngine):
     def __init__(self, commands: COMMANDS_TYPE, options: OPTIONS_TYPE, stderr: Optional[int],
                  draw_or_resign: Configuration, name: Optional[str] = None, **popen_args: str) -> None:
         """
