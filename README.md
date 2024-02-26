@@ -137,10 +137,10 @@ python lichess-bot.py
 The bot should then be up and running.
 You can play against it on the lichess website by searching the bots *lichess username* and challenging it.
 The bot might not accept certain challenges e.g. without time constraints.
-*Note:* if it's the first time starting the bot you need to add the `-u` flag, to upgrade your account to a bot account.
+*Note:* If it's the first time starting the bot, you need to add the `-u` flag to upgrade your account to a bot account.
 
 The bots code is contained in `/lichess_bot` and builds upon the repository from [lichess-bot](https://github.com/lichess-bot-devs/lichess-bot).
-Our implementation is defined in `/lichess_bot/lib/strategies.py`.
+Our implementation is defined in `/lichess_bot/homemade.py`.
 
 ### Interactive Geogebra File
 
