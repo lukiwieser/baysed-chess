@@ -1,70 +1,22 @@
-import argparse
-import os
-
-from baysed_chess.engine_factory import EngineEnum, StrategyEnum
 from baysed_chess.hypothesis_test import hypothesis_test
 from baysed_chess.limit import Limit
 from baysed_chess.matchmaker import Matchmaker, Winner
+from utils.read_arguments import read_arguments
 
 
-def read_arguments() -> tuple[EngineEnum, EngineEnum, StrategyEnum, StrategyEnum, int, int, float, int, str, str, int]:
-    parser = argparse.ArgumentParser(
-        prog='EvaluateEngine',
-        description='Compare two engines by playing multiple games against each other'
-    )
-
-    engines = {"ClassicMCTS": EngineEnum.ClassicMcts, "BayesianMCTS": EngineEnum.BayesianMcts,
-               "Random": EngineEnum.Random, "Stockfish": EngineEnum.Stockfish, "Lc0": EngineEnum.Lc0}
-    strategies = {"Random": StrategyEnum.Random, "Stockfish": StrategyEnum.Stockfish, "Lc0": StrategyEnum.Lc0,
-                  "RandomStockfish": StrategyEnum.RandomStockfish, "PESTO": StrategyEnum.Pestos}
-
-    if os.name == 'nt':
-        stockfish_default = "stockfish/stockfish-windows-x86-64-avx2"
-        lc0_default = "lc0/lc0"
-    else:
-        stockfish_default = "stockfish/stockfish-ubuntu-x86-64-avx2"
-        lc0_default = "lc0/lc0"
-
-    parser.add_argument("--engine1", "--e1", help="Engine A for the simulation", choices=engines.keys(), required=True)
-    parser.add_argument("--engine2", "--e2", help="Engine B for the simulation", choices=engines.keys(), required=True)
-    parser.add_argument("--strategy1", "--s1", default=list(strategies.keys())[0],
-                        help="Strategy for engine A for the rollout",
-                        choices=strategies.keys())
-    parser.add_argument("--strategy2", "--s2", default=list(strategies.keys())[0],
-                        help="Strategy for engine B for the rollout",
-                        choices=strategies.keys())
-    parser.add_argument("--proc", default=1, help="Number of processors to use for simulation, default=1", type=int, choices=range(1,os.cpu_count()+1))
-    parser.add_argument("--time", default=-1, help="Time limit for each simulation step, default=-1")
-    parser.add_argument("--nodes", default=-1, help="Node limit for each simulation step, default=-1")
-    parser.add_argument("-n", default=100, help="Number of games to simulate, default=100")
-    parser.add_argument("--stockfish_path", default=stockfish_default,
-                        help=f"Path for stockfish engine executable, default='{stockfish_default}'")
-    parser.add_argument("--stockfish_elo", default=1500, help="Elo for stockfish engine, default=1500")
-    parser.add_argument("--lc0_path", default=lc0_default,
-                        help=f"Path for lc0 engine executable, default='{lc0_default}'")
-    args = parser.parse_args()
-
-    engine1: EngineEnum = engines[args.engine1]
-    engine2: EngineEnum = engines[args.engine2]
-    strategy1: StrategyEnum = strategies[args.strategy1]
-    strategy2: StrategyEnum = strategies[args.strategy2]
-    n = int(args.n)
-    proc = int(args.proc)
-    time_limit = float(args.time)
-    nodes_limit = int(args.nodes)
-    stockfish_path: str = args.stockfish_path
-    lc0_path: str = args.lc0_path
-    stockfish_elo = int(args.stockfish_elo)
-
-    print(engine1, engine2, strategy1, strategy2, n, proc, time_limit, nodes_limit, stockfish_path, lc0_path,
-          stockfish_elo)
-    return (
-        engine1, engine2, strategy1, strategy2, n, proc, time_limit, nodes_limit, stockfish_path, lc0_path,
-        stockfish_elo)
-
-
-def run_matches(args: tuple[EngineEnum, EngineEnum, StrategyEnum, StrategyEnum, int, int, float, int, str, str, int]):
-    a, b, s1, s2, n, proc, time_limit, nodes_limit, stockfish_path, lc0_path, stockfish_elo = args
+def main():
+    args = read_arguments()
+    a = args.get("engine1")
+    b = args.get("engine2")
+    s1 = args.get("strategy1")
+    s2 = args.get("strategy2")
+    n = args.get("n")
+    proc = args.get("proc")
+    time_limit = args.get("time_limit")
+    nodes_limit = args.get("nodes_limit")
+    stockfish_path = args.get("stockfish_path")
+    lc0_path = args.get("lc0_path")
+    stockfish_elo = args.get("stockfish_elo")
 
     limit = Limit(time=time_limit) if time_limit != -1 else Limit(nodes=nodes_limit)
 
@@ -100,11 +52,6 @@ def run_matches(args: tuple[EngineEnum, EngineEnum, StrategyEnum, StrategyEnum, 
     print(f"{draws} games ({draws / games_played:.2%}) resulted in a draw")
     print(f"Hypothesis test: trials={test_result['trials']}, pvalue={test_result['pvalue']:2.10f}, "
           f"statistic={test_result['statistic']:2.4f}, reject_h0={reject_h0}")
-
-
-def main():
-    args = read_arguments()
-    run_matches(args)
 
 
 if __name__ == '__main__':
