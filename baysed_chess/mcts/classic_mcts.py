@@ -20,7 +20,7 @@ class ClassicMcts(IMcts):
         # TODO: Add implementation for apply move, and benchmark the changes, to see if they make a difference.
         pass
 
-    def get_children(self) -> list[IMctsNode]:
+    def get_children(self) -> list[ClassicMctsNode]:
         return self.root.children
 
     def sample(self, samples: int = 1000):

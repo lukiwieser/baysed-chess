@@ -43,7 +43,7 @@ class BayesianMcts(IMcts):
         # if no child node contains the move, initialize a new tree.
         self.root = BayesianMctsNode(self.board, self.root.strategy, self.color, None, None, self.random_state, visits=1)
 
-    def get_children(self) -> list[IMctsNode]:
+    def get_children(self) -> list[BayesianMctsNode]:
         return self.root.children
 
     def get_moves(self) -> dict[chess.Move, dist.Normal]:

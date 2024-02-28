@@ -47,7 +47,6 @@ def analyze_classic_mcts(fen):
     strategy = RandomStrategy(random.Random())
     mcts = ClassicMcts(board, chess.BLACK, strategy)
     mcts.sample()
-    # TODO: return correct type-hint depending on which class mcts is
     sorted_moves = sorted(mcts.get_children(), key=lambda x: x.move.uci())
     for c in sorted_moves:
         print("move (mcts):", c.move, " with score:", c.score)
