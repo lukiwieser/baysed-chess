@@ -5,7 +5,6 @@ import chess
 
 from baysed_chess.engine.bayes_mcts_engine import BayesMctsEngine
 from baysed_chess.engine.classic_mcts_engine import ClassicMctsEngine
-from baysed_chess.engine.classic_mcts_engine_v2 import ClassicMctsEngineV2
 from baysed_chess.engine.i_engine import IEngine
 from baysed_chess.engine.lc0_engine import Lc0Engine
 from baysed_chess.engine.stockfish_engine import StockfishEngine
@@ -23,7 +22,6 @@ class EngineEnum(Enum):
     Stockfish = 2
     Lc0 = 3
     Random = 4
-    ClassicMctsV2 = 5
 
 
 class StrategyEnum(Enum):
@@ -56,9 +54,6 @@ class EngineFactory:
             case EngineEnum.ClassicMcts:
                 return EngineFactory.classic_mcts(color, strategy)
 
-            case EngineEnum.ClassicMctsV2:
-                return EngineFactory.classic_mcts_v2(color, strategy)
-
             case EngineEnum.BayesianMcts:
                 return EngineFactory.bayesian_mcts(color, strategy)
 
@@ -83,10 +78,6 @@ class EngineFactory:
     @staticmethod
     def classic_mcts(color: chess.Color, strategy: IStrategy) -> IEngine:
         return ClassicMctsEngine(chess.Board(), color, strategy)
-
-    @staticmethod
-    def classic_mcts_v2(color: chess.Color, strategy: IStrategy) -> IEngine:
-        return ClassicMctsEngineV2(chess.Board(), color, strategy)
 
     @staticmethod
     def _get_random_strategy(rollout_depth: int) -> IStrategy:

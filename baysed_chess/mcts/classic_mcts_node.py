@@ -9,7 +9,7 @@ from baysed_chess.mcts.i_mcts_node import IMctsNode
 from baysed_chess.strategies.i_strategy import IStrategy
 
 
-class ClassicMctsNodeV2(IMctsNode):
+class ClassicMctsNode(IMctsNode):
     """
     Nodes of that our Classic MCTS uses internally.
     """
@@ -35,7 +35,7 @@ class ClassicMctsNodeV2(IMctsNode):
         self.untried_actions.remove(move)
         next_board = self.board.copy()
         next_board.push(move)
-        child_node = ClassicMctsNodeV2(next_board, color=not self.color, strategy=self.strategy, parent=self, move=move, depth=self.depth+1, random_state=self.random_state)
+        child_node = ClassicMctsNode(next_board, color=not self.color, strategy=self.strategy, parent=self, move=move, depth=self.depth + 1, random_state=self.random_state)
         self.children.append(child_node)
         return child_node
 

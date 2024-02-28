@@ -14,7 +14,6 @@ def read_arguments() -> tuple[EngineEnum, EngineEnum, StrategyEnum, StrategyEnum
     )
 
     engines = {"ClassicMCTS": EngineEnum.ClassicMcts, "BayesianMCTS": EngineEnum.BayesianMcts,
-               "ClassicMCTSV2": EngineEnum.ClassicMctsV2,
                "Random": EngineEnum.Random, "Stockfish": EngineEnum.Stockfish, "Lc0": EngineEnum.Lc0}
     strategies = {"Random": StrategyEnum.Random, "Stockfish": StrategyEnum.Stockfish, "Lc0": StrategyEnum.Lc0,
                   "RandomStockfish": StrategyEnum.RandomStockfish, "PESTO": StrategyEnum.Pestos}
