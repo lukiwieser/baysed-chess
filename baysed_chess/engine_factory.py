@@ -49,34 +49,33 @@ class EngineFactory:
                 strategy = EngineFactory._get_random_stockfish_strategy(stockfish_path, rollout_depth)
             case StrategyEnum.Pestos:
                 strategy = EngineFactory._get_pesto_strategy(rollout_depth)
+            case _:
+                raise ValueError(f"strategy_name={strategy_name} not supported")
 
         match engine_name:
             case EngineEnum.ClassicMcts:
-                return EngineFactory.classic_mcts(color, strategy)
-
+                return EngineFactory._get_classic_mcts_engine(color, strategy)
             case EngineEnum.BayesianMcts:
-                return EngineFactory.bayesian_mcts(color, strategy)
-
+                return EngineFactory._get_bayesian_mcts_engine(color, strategy)
             case EngineEnum.Stockfish:
-                return EngineFactory.stockfish_engine(color, stockfish_path, stockfish_elo)
-
+                return EngineFactory._get_stockfish_engine(color, stockfish_path, stockfish_elo)
             case EngineEnum.Lc0:
-                return EngineFactory.lc0_engine(color, lc0_path)
+                return EngineFactory._get_lc0_engine(color, lc0_path)
 
     @staticmethod
-    def stockfish_engine(color: chess.Color, engine_path: str, stockfish_elo: int) -> IEngine:
+    def _get_stockfish_engine(color: chess.Color, engine_path: str, stockfish_elo: int) -> IEngine:
         return StockfishEngine(chess.Board(), color, stockfish_elo, engine_path)
 
     @staticmethod
-    def lc0_engine(color: chess.Color, engine_path: str) -> IEngine:
+    def _get_lc0_engine(color: chess.Color, engine_path: str) -> IEngine:
         return Lc0Engine(chess.Board(), color, engine_path)
 
     @staticmethod
-    def bayesian_mcts(color: chess.Color, strategy: IStrategy) -> IEngine:
+    def _get_bayesian_mcts_engine(color: chess.Color, strategy: IStrategy) -> IEngine:
         return BayesMctsEngine(chess.Board(), color, strategy)
 
     @staticmethod
-    def classic_mcts(color: chess.Color, strategy: IStrategy) -> IEngine:
+    def _get_classic_mcts_engine(color: chess.Color, strategy: IStrategy) -> IEngine:
         return ClassicMctsEngine(chess.Board(), color, strategy)
 
     @staticmethod
