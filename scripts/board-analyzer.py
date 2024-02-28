@@ -77,9 +77,9 @@ def main():
     # board = "rnb1kbnr/pppp1ppp/4p3/8/5PPq/8/PPPPP2P/RNBQKBNR w KQkq - 1 3" # black has won
 
     analyze_stockfish(board)
-    # analyze_classic_mcts(fools_mate)
-    # analyze_bayes_mcts(fools_mate)
     analyze_lc0(board)
+    analyze_classic_mcts(board)
+    analyze_bayes_mcts(board)
 
 
 if __name__ == '__main__':
